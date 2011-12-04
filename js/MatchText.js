@@ -2,10 +2,12 @@
  * Handle a match text
  *
  * @author Georg Limbach <georf@dev.mgvmedia.com>
+ *
+ * @param UIMatchField observer
  */
-function MatchText() {
+function MatchText(observer) {
 
-
+	this.observer = observer;
 	this.text = "";
 
 	/**
@@ -34,6 +36,6 @@ function MatchText() {
 			return;
 		}
 
-		// TODO: implementation
+		return RegHex.getRegularExpression().parse(this.text);
 	}
 }

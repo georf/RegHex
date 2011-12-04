@@ -51,6 +51,14 @@ var RegHex = new function () {
 		// TODO Implement
 	}
 
+	/**
+	 * Updates the reg. exp. parser.
+	 * @param string e.g. "parser-javascript"
+	 */
+	this.updateRegularExpressionParser = function(parser) {
+		// TODO Implement
+	}
+
 	// old code...
     this.addMatchingBlock = function(block) {
         log('add block', block);
