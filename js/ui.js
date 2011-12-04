@@ -53,7 +53,7 @@ $(function() {
 	// Register existing match text fields
 	$('.matchtext').each(function() {
 		registerMatchTextField($(this));
-	}
+	});
 
 	// Create and register a message service
 	RegHex.registerMessageService(new UIMessageService);
