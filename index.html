@@ -1,0 +1,103 @@
+<!doctype html>
+<!--[if lt IE 7]> <html class="no-js ie6 oldie" lang="en"> <![endif]-->
+<!--[if IE 7]>    <html class="no-js ie7 oldie" lang="en"> <![endif]-->
+<!--[if IE 8]>    <html class="no-js ie8 oldie" lang="en"> <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en"> <!--<![endif]-->
+<head>
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+<title>reg[h]?ex</title>
+<meta name="description" content="">
+<meta name="author" content="">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<link href='http://fonts.googleapis.com/css?family=Droid+Sans+Mono' rel='stylesheet' type='text/css'>
+<link rel="stylesheet" href="css/style.css">
+<script src="js/libs/modernizr-2.0.6.min.js"></script>
+</head>
+
+<body>
+
+<div id="container">
+	<header>
+		<h1 class="appname">reg<strong>[h]?</strong>ex</h1>
+		<p id="no-js-warning">This service is based on Javascript.<br>Please enable it in your browser settings to go on.</p>
+	</header>
+	<div class="clearfix" id="main" role="main">
+		<section id="regex-section">
+			<div class="clearfix">
+			<label for="regex">your regular expression</label>
+			<textarea tabindex="1" type="text" id="regex" class="inputWidget" rows="2" cols="20"></textarea>
+			</div>
+			<p id="regex-error" class="overlay"></p>
+			<ul id="regex-options">
+			<li><label for="option-i"><input type="checkbox" name="option-i" id="option-i"><strong>i</strong>case-insensitive</label></li>
+			<li><label for="option-m"><input type="checkbox" name="option-m" id="option-m"><strong>m</strong>multiple lines</label></li>
+			<li><label for="option-s"><input type="checkbox" name="option-s" id="option-s"><strong>s</strong>single line</label></li>
+			<li><label for="option-g"><input type="checkbox" name="option-g" id="option-g"><strong>g</strong>replace globally</label></li>
+			</ul>
+		</section>
+		<section id="matching-section">
+			<div id="matching-blocks">
+			<div class="matchtext-block clearfix">
+				<label for="matchtext">string to match</label>
+				<!--<textarea style="display:none;" type="text" id="matchtext" class="matchtext inputWidget" rows="2" cols="20"></textarea>-->
+				<div tabindex="2" class="matchtext textarea" contenteditable="true">&nbsp;</div>
+				<div class="navigate-match-section">
+				<span class="match-more-info" style="float:left;display:none;"><a href="#">subexpressions</a></span>
+				<span class="match-info"></span><button type="button" class="previous-match arrow-button">«</button><button type="button" class="next-match arrow-button">»</button>
+				</div>
+				<div class="more-information overlay" style="display:none;">
+				<div class="less-information close-button">x</div>
+				<div class="more-information-content"></div>
+				</div>
+			</div>
+			</div>
+			<p id="add-matchtext-section" class="clearfix"><a id="add-matchtext" title="add another text for matching">+</a></p>
+		</section>
+	</div>
+
+
+
+<!-- only for testing -->
+<div id="ajax-testing">
+<textarea id="test-text" style="width:400px; height:200px;"></textarea>
+<textarea id="test-expression" style="width:400px; height:200px;"></textarea>
+<div id="ajax-output">
+</div>
+<ul>
+	<li><input type="radio" value="javascript" id="parser-javascript" name="parser-type"/><label for="parser-javascript">javascript</label></li>
+	<li><input type="radio" value="sun-java" id="parser-sun-java" name="parser-type"/><label for="parser-sun-java">sun-java</label></li>
+	<li><input type="radio" value="php" id="parser-php" name="parser-type"/><label for="parser-php">php</label></li>
+</ul>
+
+<button>Probieren</button>
+</div>
+<!-- /only for testing -->
+
+
+
+	<footer>
+		<p><span class="appname">Application reg<strong>[h]?</strong>ex</span>, © 2011 <a href="http://www.mgvmedia.com">MGVmedia.com</a> | <a href="http://www.mgvmedia.com/impressum">Impressum</a></p>
+	</footer>
+</div> <!--! end of #container -->
+
+<!-- Grab Google CDN's jQuery, with a protocol relative URL; fall back to local if offline -->
+<script src="//ajax.googleapis.com/ajax/libs/jquery/1.6.2/jquery.min.js"></script>
+<script>window.jQuery || document.write('<script src="js/libs/jquery-1.6.2.min.js"><\/script>')</script>
+<script src="js/libs/jquery.json-2.3.min.js"></script>
+
+
+<!-- scripts concatenated and minified via ant build script-->
+<script defer src="js/plugins.js"></script>
+<script defer src="js/script.js"></script>
+<script defer src="js/ui.js"></script>
+<script defer src="js/RegularExpressionParser.js"></script>
+<!-- end scripts-->
+
+<!--[if lt IE 7 ]>
+<script src="//ajax.googleapis.com/ajax/libs/chrome-frame/1.0.3/CFInstall.min.js"></script>
+<script>window.attachEvent('onload',function(){CFInstall.check({mode:'overlay'})})</script>
+<![endif]-->
+
+</body>
+</html>
