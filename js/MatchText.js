@@ -14,28 +14,29 @@ function MatchText(observer) {
 	 * Sets the current text
 	 *
 	 * @param string
-	 * @return boolean true is value changed
+	 * @return this
 	 */
 	this.setText = function (text) {
-		var ret = (text != this.text);
 		this.text = text;
-		return ret;
+		return this;
 	}
 
 	/**
 	 * Implements the Observer pattern
 	 *
 	 * @param UIMatchField
+	 * @return this;
 	 */
 	this.notify = function (matchTextField) {
 
 		// set new value
-		if (!this.setText(matchTextField.getText())) {
+		this.setText(matchTextField.getText());
 
-			// value not changed
-			return;
-		}
+		// parse expression
+		RegHex.getRegularExpression().parse(this.text, function(data) {
+			matchTextField.notify(data);
+		});
 
-		return RegHex.getRegularExpression().parse(this.text);
+		return this;
 	}
 }

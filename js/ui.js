@@ -21,6 +21,9 @@ function registerMatchTextField(newMatchTextField) {
 		},
 		getText: function() {
 			return $this.text();
+		},
+		getObject: function() {
+			return $this;
 		}
 	}
 
@@ -28,24 +31,9 @@ function registerMatchTextField(newMatchTextField) {
 	var matchText = RegHex.addMatchText(uiMatchText, $this.text());
 
 	// Tell the registered match text about changes
-	$this.bind('change', function() {
+	$this.bind('change keyup', function() {
 		matchText.notify(uiMatchText);
 	});
-}
-
-/**
- * Accepts and handles incoming messages
- */
-UIMessageService = new function () {
-
-	/**
-	 * Handle incoming message
-	 * @param UserMessage
-	 */
-	this.notify = function(message) {
-		// TODO Implement
-		console.debug(message.message);
-	}
 }
 
 $(function() {
@@ -67,10 +55,6 @@ $(function() {
 	// Old code here... ================================================
 
 
-	$('.matchtext-block').each(function(i) {
-		RegHex.addMatchingBlock($(this));
-	});
-
 	$('#add-matchtext').click(function(){
 
 		// generate new id
@@ -78,11 +62,11 @@ $(function() {
 
 		var block = $('#matching-blocks').find('.matchtext-block').first().clone();
 		block.find('label').html('&nbsp;').attr('for', 'newid' + newid);
-		block.find('textarea').val('').attr('id', 'newid' + newid);
+		block.find('.textarea').val('').attr('id', 'newid' + newid);
 		block.find('.matchtext-div').html('&nbsp;');
 
 		// Add to RegHex
-		RegHex.addMatchingBlock(block);
+		registerMatchTextField(block.find('.textarea'));
 
 		var btn = $('<button type="button" class="arrow-button"/>');
 		btn.text('-');
@@ -134,12 +118,12 @@ $(function() {
 	});
 	$('#option-g').bind('change', function() {
 		RegHex.update();
-	});
+	});*/
 
 });
 
 
-var UI = new function() {
+var RegHexUI = new function() {
 	this.regexError = function (message) {
 		if (typeof message == 'undefined') {
 			$('#regex-error').slideUp(function() {
