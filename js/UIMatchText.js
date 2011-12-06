@@ -33,7 +33,7 @@ function UIMatchText(jQueryObject) {
 
 	this.highlight = function() {
 		var div = document.getElementById (this.$this.attr('id'));
-		this.removeChildren(div);
+		this.makeFlat(div);
 
 
 		// get selected position
@@ -78,76 +78,43 @@ function UIMatchText(jQueryObject) {
             }
 
 		return;
-		var text = this.lastResponse.matchText;
-		var help = this.help();
-		/*
-
-        if (this.error) {
-            return text;
-        }*/
+	}
 
 
-        if (this.lastResponse.matchings.length == 0) {
-            // no matches
-            return '<span class="unmatched">' + this.escapeHtml(text) + '</span>';
-        }
+	this.makeFlat = function (element) {
 
-        var length = this.matches[this.currentMatching].text.length;
-        var pos = this.matches[this.currentMatching].absIndex;
-
-        if (length <= 0) {
-            return '<span class="unmatched">' + this.escapeHtml(text) + '</span>';
-        }
-
-        var output = '';
-
-        if (pos != 0) {
-            output += '<span class="unmatched">' + this.escapeHtml(text.substring(0, pos)) + '</span>';
-        }
-
-        output += '<span class="matched">' + this.escapeHtml(text.substring(pos, pos + length)) + '</span>';
-
-        if (text.length != pos + length) {
-            output += '<span class="unmatched">' + this.escapeHtml(text.substring(pos + length)) + '</span>';
-        }
-
-        return output;
-    }
-
-
-	this.removeChildren = function (element, internal) {
-		console.debug(element);
-
-		// this is a text node
-		if (element.nodeType == 3 && typeof internal != 'undefined') {
-			return;
-		}
-
-		// this is a element with only one child
-		// e.g. <span>text</span>
-		if (element.childNodes.length == 1 && typeof internal != 'undefined') {
-			var child = element.firstChild;
-			var parent = element.parentNode;
-			parent.insertBefore(child, parent);
-			parent.removeChild(element);
-
-			this.removeChildren(child, true);
-
-			return;
-		}
-
-		// this is a element without a child
-		// e.g. <br/>
-		if (element.childNodes.length == 0 && typeof internal != 'undefined') {
-			var parent = element.parentNode;
-			parent.removeChild(element, true);
-
-			return;
-		}
-
+		var children = new Array();
 		for (var i = 0; i < element.childNodes.length; i++) {
-			this.removeChildren(element.childNodes[i], true);
+			children[i] = element.childNodes[i];
 		}
+
+		for (var i = 0; i < children.length; i++) {
+			while (children[i].hasChildNodes()) {
+				var node = this.getFirstTextNode(children[i].childNodes[0]);
+				if (node != null) {
+					element.insertBefore(node, children[i]);
+				}
+			}
+			if (children[i].nodeType != 3) {
+				element.removeChild(children[i]);
+			}
+
+		}
+	}
+
+	this.getFirstTextNode = function (element) {
+
+		if (element.nodeType == 3) {
+			element.parentNode.removeChild(element);
+			return element;
+		}
+
+		if (element.childNodes.length == 0) {
+			element.parentNode.removeChild(element);
+			return null;
+		}
+
+		return this.getFirstTextNode(element.childNodes[0]);
 	}
 
 
