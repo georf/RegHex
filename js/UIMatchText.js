@@ -14,6 +14,7 @@ function UIMatchText(jQueryObject) {
 	catch (e) {}
 
 	this.lastResponse = null;
+	this.selected = 0;
 
 	this.notify = function(response) {
 
@@ -32,21 +33,38 @@ function UIMatchText(jQueryObject) {
 
 	this.highlight = function() {
 		var div = document.getElementById (this.$this.attr('id'));
-
-		if (document.createRange) {     // all browsers, except IE before version 9
-			var textNode = div.firstChild;      // the text node inside the div
-			if (textNode.data.length > 1) {
-				var rangeObj = document.createRange ();
-					// aligns the range to the second character
-				rangeObj.setStart (textNode, 1);
-				rangeObj.setEnd (textNode, 2);
+		this.removeChildren(div);
 
 
+		// get selected position
+		var offsetStart = null, offsetEnd = null;
 
-				document.execCommand (this.highlightCommand, rangeObj, '#ff0000');
+		if (this.lastResponse.matchings.length > 0) {
+			offsetStart = this.lastResponse.matchings[this.selected].index;
+			offsetEnd = offsetStart + this.lastResponse.matchings[this.selected].text.length;
+		}
+
+		// all browsers, except IE before version 9
+		if (document.createRange) {
+
+			var rangeObj = document.createRange();
+
+			// first delete all background colors
+			rangeObj.selectNodeContents(div);
+
+			document.execCommand ('removeFormat', false, null);
+
+			// highlight selected part
+			if (offsetStart != null) {
+				rangeObj = document.createRange();
+				rangeObj.setStart (div.firstChild, offsetStart);
+				rangeObj.setEnd (div.firstChild, offsetEnd);
+
+				document.execCommand (this.highlightCommand, false, '#ff0000');
 			}
 		}
             else {      // Internet Explorer before version 9
+            //TODO
                 var rangeObj = document.body.createTextRange ();
                 rangeObj.moveToElementText (div);
                     // aligns the range to the second character
@@ -95,6 +113,41 @@ function UIMatchText(jQueryObject) {
 
         return output;
     }
+
+
+	this.removeChildren = function (element, internal) {
+		// this is a text node
+		if (element.nodeType == 3 && typeof internal != 'undefined') {
+			return;
+		}
+
+		// this is a element with only one child
+		// e.g. <span>text</span>
+		if (element.childNodes.length == 1 && typeof internal != 'undefined') {
+			var child = element.firstChild;
+			var parent = element.parentNode;
+			parent.insertBefore(child, parent);
+			parent.removeChild(element);
+
+			this.removeChildren(child, true);
+
+			return;
+		}
+
+		// this is a element without a child
+		// e.g. <br/>
+		if (element.childNodes.length == 0 && typeof internal != 'undefined') {
+			var parent = element.parentNode;
+			parent.removeChild(element, true);
+
+			return;
+		}
+
+		for (var i = 0; i < element.childNodes; i++) {
+			this.removeChildren(element.childNodes[i], true);
+		}
+	}
+
 
 	this.getText = function() {
 			return this.$this.text();
