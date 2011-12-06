@@ -33,51 +33,30 @@ function UIMatchText(jQueryObject) {
 
 	this.highlight = function() {
 		var div = document.getElementById (this.$this.attr('id'));
-		this.makeFlat(div);
 
+		// clean html
+		this.makeFlat(div);
 
 		// get selected position
 		var offsetStart = null, offsetEnd = null;
 
 		if (this.lastResponse.matchings.length > 0) {
+
 			offsetStart = this.lastResponse.matchings[this.selected].index;
 			offsetEnd = offsetStart + this.lastResponse.matchings[this.selected].text.length;
-		}
 
-		// all browsers, except IE before version 9
-		if (document.createRange) {
-
-			var rangeObj = document.createRange();
-
-			// first delete all background colors
-			rangeObj.selectNodeContents(div);
-
-			document.execCommand ('removeFormat', false, null);
-
-			// highlight selected part
-			if (offsetStart != null) {
-				rangeObj = document.createRange();
-				rangeObj.setStart (div.firstChild, offsetStart);
-				rangeObj.setEnd (div.firstChild, offsetEnd);
-
-				document.execCommand (this.highlightCommand, false, '#ff0000');
+			for (var i = offsetStart; i < offsetEnd; i++) {
+				this.createHighlightSpan(div.childNodes[i]);
 			}
 		}
-            else {      // Internet Explorer before version 9
-            //TODO
-                var rangeObj = document.body.createTextRange ();
-                rangeObj.moveToElementText (div);
-                    // aligns the range to the second character
-                rangeObj.moveStart ("character", 1);
-                rangeObj.collapse (true);
-                rangeObj.moveEnd ("character", 1);
+	}
 
-                    // deletes the character
-                rangeObj.select ();
-				rangeObj.execCommand (this.highlightCommand, false, '#ff0000');
-            }
-
-		return;
+	this.createHighlightSpan = function (textNode) {
+		var span = document.createElement('span');
+		span.className = 'matched';
+		span.appendChild(document.createTextNode(textNode.data));
+		textNode.parentNode.insertBefore(span, textNode);
+		textNode.parentNode.removeChild(textNode);
 	}
 
 
@@ -92,7 +71,7 @@ function UIMatchText(jQueryObject) {
 			while (children[i].hasChildNodes()) {
 				var node = this.getFirstTextNode(children[i].childNodes[0]);
 				if (node != null) {
-					element.insertBefore(node, children[i]);
+					this.insertBeforeSeparately(element, node, children[i]);
 				}
 			}
 			if (children[i].nodeType != 3) {
@@ -117,6 +96,20 @@ function UIMatchText(jQueryObject) {
 		return this.getFirstTextNode(element.childNodes[0]);
 	}
 
+	this.insertBeforeSeparately = function (element, node, child) {
+		if (!node.data || node.data.length == 0) {
+			return;
+		}
+
+		if (node.data.length == 1) {
+			element.insertBefore(node, child);
+			return;
+		}
+
+		for (var i = 0; i < node.data.length; i++) {
+			this.insertBeforeSeparately(element, document.createTextNode(node.data.substr(i, 1)), child);
+		}
+	}
 
 	this.getText = function() {
 			return this.$this.text();
