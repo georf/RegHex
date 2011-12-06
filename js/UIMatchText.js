@@ -116,6 +116,8 @@ function UIMatchText(jQueryObject) {
 
 
 	this.removeChildren = function (element, internal) {
+		console.debug(element);
+
 		// this is a text node
 		if (element.nodeType == 3 && typeof internal != 'undefined') {
 			return;
@@ -143,7 +145,7 @@ function UIMatchText(jQueryObject) {
 			return;
 		}
 
-		for (var i = 0; i < element.childNodes; i++) {
+		for (var i = 0; i < element.childNodes.length; i++) {
 			this.removeChildren(element.childNodes[i], true);
 		}
 	}
