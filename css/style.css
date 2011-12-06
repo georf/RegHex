@@ -34,7 +34,7 @@ html { font-size: 100%; overflow-y: scroll; -webkit-text-size-adjust: 100%; -ms-
 
 body { margin: 0; font-size: 13px; line-height: 1.231; }
 
-body, button, input, select, textarea { font-family: 'Droid Sans Mono', monospace; color: #222; }
+body, button, input, select, textarea, .textarea { font-family: 'Droid Sans Mono', monospace; color: #222; }
 
 /*
  * Remove text-shadow in selection highlight: h5bp.com/i
@@ -151,7 +151,7 @@ legend { border: 0; *margin-left: -7px; padding: 0; }
  * 3. Define consistent vertical alignment display in all browsers
  */
 
-button, input, select, textarea { font-size: 100%; margin: 0; vertical-align: baseline; *vertical-align: middle; }
+button, input, select, textarea, .textarea { font-size: 100%; margin: 0; vertical-align: baseline; *vertical-align: middle; }
 
 /*
  * 1. Define line-height as normal to match FF3/4 (set using !important in the UA stylesheet)
@@ -192,13 +192,13 @@ button::-moz-focus-inner, input::-moz-focus-inner { border: 0; padding: 0; }
  * 2. Allow only vertical resizing
  */
 
-textarea { overflow: auto; vertical-align: top; resize: vertical; }
+textarea, .textarea { overflow: auto; vertical-align: top; resize: vertical; }
 
 /* Colors for form validity */
 input:valid, textarea:valid {  }
 input:invalid, textarea:invalid { background-color: #f0dddd; }
 
-input, textarea, button, .matchtext-div {
+input, textarea, button, .matchtext-div, .textarea {
     background: #fff;
     border: 1px solid;
     border-color: #dddddd #bbbbbb #999999;
@@ -216,7 +216,8 @@ button[disabled] {
 button:focus,
 input:focus,
 select:focus,
-textarea:focus {
+textarea:focus,
+.textarea:focus {
   -moz-box-shadow: #E04F3D 0 0 7px 0;
   -webkit-box-shadow: #E04F3D 0 0 7px 0;
   -o-box-shadow: #E04F3D 0 0 7px 0;

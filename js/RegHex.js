@@ -41,8 +41,13 @@ var RegHex = new function () {
 				// remove from array
 				this.matchTexts.splice(i, 1);
 
-				// delete inter
-
+				// delete internal
+				current.finalize();
+				break;
+			}
+		}
+		return this;
+	}
 
 	/**
 	 * Registers a message service which accepts and handles messages

@@ -18,3 +18,10 @@ window.log = function(){
 
 // place any jQuery/helper plugins in here, instead of separate, slower script files.
 
+Object.prototype.finalize = function () {
+	for(var key in this) {
+		if (typeof this[key] != 'function') {
+			delete(this[key]);
+		}
+	}
+}

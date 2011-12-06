@@ -14,18 +14,7 @@ var matchingBlockId = 1;
 function registerMatchTextField(newMatchTextField) {
 	var $this = newMatchTextField;
 
-	// Create a UIMatchText Object for observer tasks
-	var uiMatchText = {
-		notify: function(response) {
-			$this.html(response.matchText);
-		},
-		getText: function() {
-			return $this.text();
-		},
-		getObject: function() {
-			return $this;
-		}
-	}
+	var uiMatchText = new UIMatchText($this);
 
 	// Register the new MatchTextField
 	var matchText = RegHex.addMatchText(uiMatchText, $this.text());
@@ -90,23 +79,6 @@ $(function() {
 		//~ });
 	//~ });
 
-	$('.matchtext').live('blur', function(){
-		var block = $(this).hide().parent();
-
-		var value = '';
-		if (typeof RegHex != 'undefined') {
-			value = RegHex.getMatchingBlock(block).getHighlightedHtml();
-		} else {
-			value = $(this).val();
-		}
-
-		block.find('.matchtext-div').html(value).show();
-		log(value);
-	}).blur();
-
-
-
-
 	$('#option-i').bind('change', function() {
 		RegHex.update();
 	});
@@ -118,7 +90,7 @@ $(function() {
 	});
 	$('#option-g').bind('change', function() {
 		RegHex.update();
-	});*/
+	});
 
 });
 
