@@ -29,6 +29,10 @@ function MatchText(observer) {
 	 */
 	this.notify = function (matchTextField) {
 
+		if (typeof matchTextField == 'undefined') {
+			matchTextField = this.observer;
+		}
+
 		// set new value
 		this.setText(matchTextField.getText());
 

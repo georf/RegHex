@@ -1,19 +1,47 @@
 /**
  *
  * @author Georg Limbach <georf@dev.mgvmedia.com>
+ * @param jQuery selection - the matchtext block
+ * @param boolean create "delete" button
  */
-function UIMatchText(jQueryObject) {
-	this.$this = jQueryObject;
+function UIMatchText(block, deleteButton) {
+	// set pointer to special areas
+	this.block = block;
+	this.area = block.find('.textarea');
+	this.infoBox = block.find('.match-info');
+
+	// generate model
+	var matchText = RegHex.addMatchText(this, this.area.text());
+
+	// Tell the registered match text about changes
+	this.area.bind('change keyup paste cut', function() {
+		matchText.notify();
+	});
+
+	if (deleteButton) {
+		// reset area content
+		this.area.text('');
+
+		var btn = $('<button type="button" class="arrow-button"/>');
+		btn.text('-');
+		btn.attr('title', 'remove field');
+		btn.click(function() {
+			$(this).closest('.matchtext-block').slideUp(function() {
+				// remove from RegHex
+				RegHex.removeMatchText($(this).find('.textarea'));
+				$(this).remove();
+			});
+		});
+		this.block.find('.navigate-match-section').prepend('&nbsp;').prepend(btn);
+		this.block.hide();
+		$('#matching-blocks').append(this.block);
+		this.block.show();
+	}
+
+
 	this.cursorPosition = 0;
 	this.charCount = 0;
 
-	this.highlightCommand = 'backColor';
-	try {
-		if (document.queryCommandEnabled ('hiliteColor')) {
-			this.highlightCommand = 'hiliteColor';
-		}
-	}
-	catch (e) {}
 
 	this.lastResponse = null;
 	this.selected = 0;
@@ -21,7 +49,7 @@ function UIMatchText(jQueryObject) {
 	this.notify = function(response) {
 
 		// its the same text?
-		if (this.$this.text() == response.matchText) {
+		if (this.area.text() == response.matchText) {
 
 			// TODO check for new response
 			this.lastResponse = response;
@@ -29,13 +57,11 @@ function UIMatchText(jQueryObject) {
 			// highlight the value by selected part
 			this.highlight();
 		}
-
-		//this.$this.html(response.matchText);
 	}
 
 	this.highlight = function() {
 //TODO caching
-		var div = document.getElementById (this.$this.attr('id'));
+		var div = document.getElementById (this.area.attr('id'));
 
 		this.cursorPosition = this.getCursorPosition();
 		this.charCount = 0;
@@ -141,11 +167,11 @@ console.debug("cursor", this.cursorPosition);
 	}
 
 	this.getText = function() {
-			return this.$this.text();
+			return this.area.text();
 	};
 
 	this.getObject = function() {
-			return this.$this;
+			return this.area;
 	}
 
 	this.getCursorPosition = function() {
@@ -171,4 +197,54 @@ console.debug("cursor", this.cursorPosition);
 		}
 		return cursorPos;
 	}
+
+
+	this.updateInfobox = function() {
+        var help = this.block.find('.match-info');
+
+        var moreInfo;
+        if (this.moreInformation) {
+            moreInfo = this.block.find('.more-information');
+            this.block.find('.match-more-info').slideUp();
+        } else {
+            moreInfo = this.block.find('.match-more-info');
+            this.block.find('.more-information').slideUp();
+        }
+
+        if (this.error) {
+            help.html('');
+            moreInfo.slideUp();
+        } else if (this.matches.length == 0) {
+            help.html('no matches');
+            moreInfo.slideUp();
+        } else {
+            help.html('match ' + (this.currentMatching+1) + ' of ' + this.matches.length);
+            moreInfo.slideDown();
+        }
+    };
+
+    this.getmoreInformation = function() {
+        this.updateMatches();
+
+        if (this.error || this.matches.length == 0) {
+            return '';
+        }
+
+        var results = this.matches[this.currentMatching].results;
+
+        if (results.length <= 0) {
+            return 'no subexpressions given.';
+        }
+
+        var output = 'subexpressions <small>(expression parts in brackets)</small>:<ul>';
+        for (var i=0; i<results.length; i++) {
+            output += '<li>$'+i+' = ' + results[i] + '</li>';
+        }
+        output += '</ul>';
+
+        return output;
+    }
+
+
+
 }

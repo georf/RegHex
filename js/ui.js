@@ -7,32 +7,11 @@
 
 var matchingBlockId = 1;
 
-/**
- * Registers a new Match Text Field
- * @param jQuery Selection
- * @return UIMatchText
- */
-function registerMatchTextField(newMatchTextField) {
-	var $this = newMatchTextField;
-
-	var uiMatchText = new UIMatchText($this);
-
-	// Register the new MatchTextField
-	var matchText = RegHex.addMatchText(uiMatchText, $this.text());
-
-	// Tell the registered match text about changes
-	$this.bind('change keyup', function() {
-		matchText.notify(uiMatchText);
-	});
-
-	return uiMatchText;
-}
-
 $(function() {
 
 	// Register existing match text fields
-	$('.matchtext').each(function() {
-		registerMatchTextField($(this));
+	$('.matchtext-block').each(function() {
+		new UIMatchText($(this), false);
 	});
 
 	// Create and register a message service
@@ -57,23 +36,7 @@ $(function() {
 		block.find('.textarea').val('').attr('id', 'newid' + newid);
 		block.find('.matchtext-div').html('&nbsp;');
 
-		// Add to RegHex
-		var uiMatchText = registerMatchTextField(block.find('.textarea'));
-
-		var btn = $('<button type="button" class="arrow-button"/>');
-		btn.text('-');
-		btn.attr('title', 'remove field');
-		btn.click(function() {
-			$(this).closest('.matchtext-block').slideUp(function() {
-				// remove from RegHex
-				RegHex.removeMatchText($(this).find('.textarea'));
-				$(this).remove();
-			});
-		});
-		block.find('.navigate-match-section').prepend('&nbsp;').prepend(btn);
-		block.hide();
-		$('#matching-blocks').append(block);
-		block.show();
+		new UIMatchText(block, true);
 	});
 
 	//~ $('.matchtext-div').live('click focus', function(){
