@@ -171,4 +171,12 @@ console.debug("cursor", this.cursorPosition);
 		}
 		return cursorPos;
 	}
+
+	this.remove = function() {
+		this.$this.parent().slideUp(function() {
+			// remove from RegHex
+			RegHex.removeMatchingBlock($this);
+			$this.remove();
+		});
+	}
 }
