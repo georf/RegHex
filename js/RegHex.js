@@ -35,7 +35,7 @@ var RegHex = new function () {
 	 */
 	this.removeMatchText = function(textarea) {
 		for (var i = 0; i < this.matchTexts.length; i++) {
-			if (this.matchTexts[i].getObject().attr('id') == textarea.attr('id')) {
+			if (this.matchTexts[i].observer.getObject().attr('id') == textarea.attr('id')) {
 				var current = this.matchTexts[i];
 
 				// remove from array

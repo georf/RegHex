@@ -63,7 +63,13 @@ $(function() {
 		var btn = $('<button type="button" class="arrow-button"/>');
 		btn.text('-');
 		btn.attr('title', 'remove field');
-		btn.click(function() { uiMatchText.remove() });
+		btn.click(function() {
+			$(this).closest('.matchtext-block').slideUp(function() {
+				// remove from RegHex
+				RegHex.removeMatchText($(this).find('.textarea'));
+				$(this).remove();
+			});
+		});
 		block.find('.navigate-match-section').prepend('&nbsp;').prepend(btn);
 		block.hide();
 		$('#matching-blocks').append(block);
