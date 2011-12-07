@@ -214,12 +214,29 @@ console.debug("cursor", this.cursorPosition);
 	}
 
 	this.updateInfobox = function() {
-		if (this.response.error) {
+		if (!this.response || this.response.error) {
 			this.infoBox.html('');
+			this.next.attr('disabled', 'disabled');
+			this.previous.attr('disabled', 'disabled');
 		} else if (this.response.matchings.length == 0) {
 			this.infoBox.html('no matches');
+			this.next.attr('disabled', 'disabled');
+			this.previous.attr('disabled', 'disabled');
 		} else {
 			this.infoBox.html('match ' + (this.selectedMatch+1) + ' of ' + this.response.matchings.length);
+
+			// disable/enable match buttons
+			if (this.selectedMatch == 0 || this.response.error) {
+				this.previous.attr('disabled', 'disabled');
+			} else {
+				this.previous.removeAttr('disabled');
+			}
+
+			if (this.selectedMatch >= this.response.matchings.length -1 || this.response.error) {
+				this.next.attr('disabled', 'disabled');
+			} else {
+				this.next.removeAttr('disabled');
+			}
 		}
 	};
 
@@ -246,8 +263,8 @@ console.debug("cursor", this.cursorPosition);
     }
 
 	this.update = function() {
-		console.log('update');
 		this.highlight();
+		this.updateInfobox();
 	}
 
 	this.nextMatch = function() {
