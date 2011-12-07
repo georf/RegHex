@@ -5,10 +5,14 @@
  * @param boolean create "delete" button
  */
 function UIMatchText(block, deleteButton) {
+	var $this = this;
+
 	// set pointer to special areas
 	this.block = block;
 	this.area = block.find('.textarea');
 	this.infoBox = block.find('.match-info');
+	this.next = block.find('.next-match');
+	this.previous = block.find('.previous-match');
 
 	// generate model
 	var matchText = RegHex.addMatchText(this, this.area.text());
@@ -19,9 +23,8 @@ function UIMatchText(block, deleteButton) {
 	});
 
 	if (deleteButton) {
-		// reset area content
-		this.area.text('');
 
+		// generate delete button
 		var btn = $('<button type="button" class="arrow-button"/>');
 		btn.text('-');
 		btn.attr('title', 'remove field');
@@ -32,6 +35,8 @@ function UIMatchText(block, deleteButton) {
 				$(this).remove();
 			});
 		});
+
+		// add to block
 		this.block.find('.navigate-match-section').prepend('&nbsp;').prepend(btn);
 		this.block.hide();
 		$('#matching-blocks').append(this.block);
@@ -43,19 +48,29 @@ function UIMatchText(block, deleteButton) {
 	this.charCount = 0;
 
 
-	this.lastResponse = null;
-	this.selected = 0;
+	this.response = null;
+	this.selectedMatch = 0;
 
 	this.notify = function(response) {
 
 		// its the same text?
 		if (this.area.text() == response.matchText) {
 
-			// TODO check for new response
-			this.lastResponse = response;
+			// is it a new response?
+			if (this.response != response) {
 
-			// highlight the value by selected part
-			this.highlight();
+				// set new response
+				this.response = response;
+
+				// set match to 0
+				this.selectedMatch = 0;
+
+				// highlight the value by selected part
+				this.highlight();
+
+				// update the info box
+				this.updateInfobox();
+			}
 		}
 	}
 
@@ -74,10 +89,10 @@ console.debug("cursor", this.cursorPosition);
 		// get selected position
 		var offsetStart = null, offsetEnd = null;
 
-		if (this.lastResponse.matchings.length > 0) {
+		if (this.response.matchings.length > 0) {
 
-			offsetStart = this.lastResponse.matchings[this.selected].index;
-			offsetEnd = offsetStart + this.lastResponse.matchings[this.selected].text.length;
+			offsetStart = this.response.matchings[this.selectedMatch].index;
+			offsetEnd = offsetStart + this.response.matchings[this.selectedMatch].text.length;
 
 			for (var i = offsetStart; i < offsetEnd; i++) {
 				this.charCount = i;
@@ -198,30 +213,15 @@ console.debug("cursor", this.cursorPosition);
 		return cursorPos;
 	}
 
-
 	this.updateInfobox = function() {
-        var help = this.block.find('.match-info');
-
-        var moreInfo;
-        if (this.moreInformation) {
-            moreInfo = this.block.find('.more-information');
-            this.block.find('.match-more-info').slideUp();
-        } else {
-            moreInfo = this.block.find('.match-more-info');
-            this.block.find('.more-information').slideUp();
-        }
-
-        if (this.error) {
-            help.html('');
-            moreInfo.slideUp();
-        } else if (this.matches.length == 0) {
-            help.html('no matches');
-            moreInfo.slideUp();
-        } else {
-            help.html('match ' + (this.currentMatching+1) + ' of ' + this.matches.length);
-            moreInfo.slideDown();
-        }
-    };
+		if (this.response.error) {
+			this.infoBox.html('');
+		} else if (this.response.matchings.length == 0) {
+			this.infoBox.html('no matches');
+		} else {
+			this.infoBox.html('match ' + (this.selectedMatch+1) + ' of ' + this.response.matchings.length);
+		}
+	};
 
     this.getmoreInformation = function() {
         this.updateMatches();
@@ -245,6 +245,39 @@ console.debug("cursor", this.cursorPosition);
         return output;
     }
 
+	this.update = function() {
+		console.log('update');
+		this.highlight();
+	}
 
+	this.nextMatch = function() {
+		if (this.response && this.selectedMatch < this.response.matchings.length - 1) {
+			this.selectedMatch++;
+		}
+		this.update();
+	}
 
+	this.previousMatch = function() {
+		if (this.selectedMatch > 0) {
+			this.selectedMatch--;
+		}
+		this.update();
+	}
+
+	// set button handler
+	this.next.click(function () {
+		$this.nextMatch()
+	});
+	this.previous.click(function () {
+		$this.previousMatch();
+	});
+	/*
+	this.block.find('.match-more-info').find('a').click(function() {
+		RegHex.getMatchingBlock($(this).closest('.matchtext-block')).moreInfo();
+		return false;
+	});
+	this.block.find('.less-information').click(function() {
+		RegHex.getMatchingBlock($(this).closest('.matchtext-block')).lessInfo();
+		return false;
+	});*/
 }

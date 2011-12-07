@@ -31,19 +31,15 @@ $(function() {
 		// generate new id
 		var newid = matchingBlockId++;
 
+		// clone block
 		var block = $('#matching-blocks').find('.matchtext-block').first().clone();
 		block.find('label').html('&nbsp;').attr('for', 'newid' + newid);
-		block.find('.textarea').val('').attr('id', 'newid' + newid);
+		block.find('.textarea').text('').attr('id', 'newid' + newid);
 		block.find('.matchtext-div').html('&nbsp;');
 
+		// handle events with object
 		new UIMatchText(block, true);
 	});
-
-	//~ $('.matchtext-div').live('click focus', function(){
-		//~ $(this).hide().parent().find('.matchtext').show(0, function(){
-			//~ $(this).focus();
-		//~ });
-	//~ });
 
 	$('#option-i').bind('change', function() {
 		RegHex.update();
@@ -59,17 +55,3 @@ $(function() {
 	});
 
 });
-
-
-var RegHexUI = new function() {
-	this.regexError = function (message) {
-		if (typeof message == 'undefined') {
-			$('#regex-error').slideUp(function() {
-				$(this).html('');
-			});
-		} else {
-			$('#regex-error').html(message);
-			$('#regex-error').slideDown();
-		}
-	}
-}
