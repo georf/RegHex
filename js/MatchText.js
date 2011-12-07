@@ -39,4 +39,15 @@ function MatchText(observer) {
 
 		return this;
 	}
+
+	/**
+	 * Set all pointer counts to zero
+	 */
+	this.finalize = function () {
+		for(var key in this) {
+			if (typeof this[key] != 'function') {
+				delete(this[key]);
+			}
+		}
+	}
 }
