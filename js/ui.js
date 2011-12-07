@@ -67,7 +67,7 @@ $(function() {
 		block.find('.navigate-match-section').prepend('&nbsp;').prepend(btn);
 		block.hide();
 		$('#matching-blocks').append(block);
-		block.slideDown();
+		block.show();
 	});
 
 	//~ $('.matchtext-div').live('click focus', function(){
