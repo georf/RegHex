@@ -250,7 +250,7 @@ textarea:focus,
 	width: 25px;
 }
 
-label {
+label.matchtext-label {
 	display: block;
 }
 
