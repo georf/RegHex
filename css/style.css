@@ -199,18 +199,18 @@ input:valid, textarea:valid {  }
 input:invalid, textarea:invalid { background-color: #f0dddd; }
 
 input, textarea, button, .matchtext-div, .textarea {
-    background: #fff;
-    border: 1px solid;
-    border-color: #dddddd #bbbbbb #999999;
-    padding: 2px 4px;
-    resize: none;
-    box-sizing: border-box; -moz-box-sizing: border-box; -webkit-box-sizing: border-box; -ms-box-sizing: border-box; -o-box-sizing: border-box;
+	background: #fff;
+	border: 1px solid;
+	border-color: #dddddd #bbbbbb #999999;
+	padding: 2px 4px;
+	resize: none;
+	box-sizing: border-box; -moz-box-sizing: border-box; -webkit-box-sizing: border-box; -ms-box-sizing: border-box; -o-box-sizing: border-box;
 }
 
 button[disabled] {
-    background: #fff !important;
-    border: 1px solid #ddd;
-    color: #ddd;
+	background: #fff !important;
+	border: 1px solid #ddd;
+	color: #ddd;
 }
 
 button:focus,
@@ -218,33 +218,53 @@ input:focus,
 select:focus,
 textarea:focus,
 .textarea:focus {
-  -moz-box-shadow: #E04F3D 0 0 7px 0;
-  -webkit-box-shadow: #E04F3D 0 0 7px 0;
-  -o-box-shadow: #E04F3D 0 0 7px 0;
-  box-shadow: #E04F3D 0 0 7px 0;
-  border-color: #C1847C;
-  z-index: 1;
-  outline: 0;
+	-moz-box-shadow: #E04F3D 0 0 7px 0;
+	-webkit-box-shadow: #E04F3D 0 0 7px 0;
+	-o-box-shadow: #E04F3D 0 0 7px 0;
+	box-shadow: #E04F3D 0 0 7px 0;
+	border-color: #C1847C;
+	z-index: 1;
+	outline: 0;
 }
 
 .inputWidget, .matchtext-div {
-    font-size: 1.5em;
-    font-family: 'Droid Sans Mono', monospace;
-    height: 80px;
-    margin: 3px 0 0;
-    outline: 0;
-    width: 100%;
+	font-size: 1.5em;
+	font-family: 'Droid Sans Mono', monospace;
+	height: 80px;
+	margin: 3px 0 0;
+	outline: 0;
+	width: 400px;
+}
+
+.matchtext-div {
+	overflow: auto;
+}
+.matchtext {
+	background: transparent;
+	position: absolute;
+	z-index: 10;
 }
 
 .arrow-button {
-    margin-left: 1px;
-    width: 25px;
+	margin-left: 1px;
+	width: 25px;
 }
 
-
-.textarea {
-min-height: 100px;
+label {
+	display: block;
 }
+
+.unmatched{
+	background-color:#FFC6C6;
+}
+.matched{
+	background-color:#90EE90;
+}
+
+button[disabled]{
+	background-color:grey;
+}
+
 
 /* =============================================================================
    Tables
@@ -259,137 +279,133 @@ td { vertical-align: top; }
    ========================================================================== */
 
 #container {
-    margin: 20px auto;
-    width: 960px;
+	margin: 20px auto;
+	width: 960px;
 }
 
 .overlay {
-    border-radius: 5px; -moz-border-radius: 5px; -webkit-border-radius: 5px;
-    box-shadow: 0 1px 10px #444; -moz-box-shadow: 0 1px 10px #444; -webkit-box-shadow: 0 1px 10px #444;
-    padding: 5px 10px;
-    position: absolute;
-    width: 450px;
+	border-radius: 5px; -moz-border-radius: 5px; -webkit-border-radius: 5px;
+	box-shadow: 0 1px 10px #444; -moz-box-shadow: 0 1px 10px #444; -webkit-box-shadow: 0 1px 10px #444;
+	padding: 5px 10px;
+	position: absolute;
+	width: 450px;
 }
 .no-boxshadow .overlay {
-    border: 1px solid #999;
-    width: 448px;
+	border: 1px solid #999;
+	width: 448px;
 }
 .close-button {
-    cursor: pointer;
-    float: right;
-    font-weight: bold;
+	cursor: pointer;
+	float: right;
+	font-weight: bold;
 }
 
 #regex-section, #matching-section {
-    float: left;
-    width: 470px;
+	float: left;
+	width: 470px;
 }
 
 #regex-section {
-    margin-right: 20px;
+	margin-right: 20px;
 }
 
 header h1 {
-    font-size: 3em;
-    font-weight: normal;
+	font-size: 3em;
+	font-weight: normal;
 }
 .appname strong {
-    color: #E04F3D;
+	color: #E04F3D;
 }
 .js #no-js-warning {
-    display: none;
+	display: none;
 }
 .no-js #no-js-warning {
-    background-color: #C64738;
-    border-radius: 5px;
-    color: #fff;
-    font-size: 1.5em;
-    padding: 3px 5px;
+	background-color: #C64738;
+	border-radius: 5px;
+	color: #fff;
+	font-size: 1.5em;
+	padding: 3px 5px;
 }
 .no-js #regex-section, .no-js #matching-section {
-    display: none;
+	display: none;
 }
 
 #regex-error {
-    background-color: #C64738;
-    color: #fff;
-    display: none;
-    margin-top: 3px;
-    z-index: 100;
+	background-color: #C64738;
+	color: #fff;
+	display: none;
+	margin-top: 3px;
+	z-index: 100;
 }
 
 #regex-options {
-    color: #666;
-    list-style-type: none;
-    margin-left: 0;
-    padding-left: 0;
+	color: #666;
+	list-style-type: none;
+	margin-left: 0;
+	padding-left: 0;
 }
 #regex-options li {
-    margin-left: 0;
+	margin-left: 0;
 }
 #regex-options input[type="checkbox"] {
-    width: 13px;
-    height: 13px;
-    padding: 0;
-    margin:0;
-    vertical-align: bottom;
-    position: relative;
-    top: -1px;
-    *overflow: hidden;
+	width: 13px;
+	height: 13px;
+	padding: 0;
+	margin:0;
+	vertical-align: bottom;
+	position: relative;
+	top: -1px;
+	*overflow: hidden;
 }
 #regex-options strong {
-    color: #000;
-    padding: 0 10px;
+	color: #000;
+	padding: 0 10px;
 }
 
 #add-matchtext-section {
-    margin-top: 0;
-    text-align: right;
+	margin-top: 0;
+	text-align: right;
 }
 #add-matchtext {
-    color: #999;
-    cursor: pointer;
-    font-size: 2em;
-    font-weight: bold;
-}
-
-.matchtext-div {
-    overflow: auto;
+	color: #999;
+	cursor: pointer;
+	font-size: 2em;
+	font-weight: bold;
 }
 
 .navigate-match-section {
-    margin-top: 1px;
-    text-align: right;
+	margin-top: 1px;
+	text-align: right;
 }
 
 .match-info {
-    padding-right: 1em;
+	padding-right: 1em;
 }
 
 .more-information {
-    background: #fff;
-    margin-top: 3px;
+	background: #fff;
+	margin-top: 3px;
 }
 .more-information ul {
-    list-style-type: none;
-    margin-left: -10px;
-    margin-right: -10px;
-    padding-left: 0;
+	list-style-type: none;
+	margin-left: -10px;
+	margin-right: -10px;
+	padding-left: 0;
 }
 .more-information li {
-    background: #eee;
-    padding: 2px 15px;
+	background: #eee;
+	padding: 2px 15px;
 }
 .more-information li:nth-child(2n) {
-    background: #fff;
+	background: #fff;
 }
 
 
 
 
 footer {
-    font-size: 12px;
-    padding-top: 40px;
+	font-size: 12px;
+	padding-top: 40px;
 }
 
 
@@ -458,16 +474,3 @@ footer {
   p, h2, h3 { orphans: 3; widows: 3; }
   h2, h3 { page-break-after: avoid; }
 }
-
-
-.unmatched{
-background-color:#FFC6C6;
-}
-.matched{
-background-color:#90EE90;
-}
-
-button[disabled]{
-background-color:grey;
-}
-
