@@ -10,12 +10,13 @@ function UIMatchText(block, deleteButton) {
 	// set pointer to special areas
 	this.block = block;
 	this.area = block.find('.textarea');
+	this.highlightArea = block.find('.matchtext-div');
 	this.infoBox = block.find('.match-info');
 	this.next = block.find('.next-match');
 	this.previous = block.find('.previous-match');
 
 	// generate model
-	var matchText = RegHex.addMatchText(this, this.area.text());
+	var matchText = RegHex.addMatchText(this, this.area.val());
 
 	// Tell the registered match text about changes
 	this.area.bind('change keyup paste cut', function() {
@@ -29,7 +30,7 @@ function UIMatchText(block, deleteButton) {
 		btn.text('-');
 		btn.attr('title', 'remove field');
 		btn.click(function() {
-			$(this).closest('.matchtext-block').slideUp(function() {
+			block.slideUp(function() {
 				// remove from RegHex
 				RegHex.removeMatchText($(this).find('.textarea'));
 				$(this).remove();
@@ -54,7 +55,7 @@ function UIMatchText(block, deleteButton) {
 	this.notify = function(response) {
 
 		// its the same text?
-		if (this.area.text() == response.matchText) {
+		if (this.area.val() == response.matchText) {
 
 			// is it a new response?
 			if (this.response != response) {
@@ -75,6 +76,55 @@ function UIMatchText(block, deleteButton) {
 	}
 
 	this.highlight = function() {
+		if (this.response.error) {
+			this.highlightArea.html('');
+		} else {
+			this.highlightArea.html(this.getHighlightedHtml(this.response.matchText));
+		}
+	}
+
+	this.escapeHtml = function(text) {
+		text = this.replaceAll(text, '<', '&lt;');
+		text = this.replaceAll(text, '>', '&gt;');
+		text = this.replaceAll(text, '\n', '<br>');
+		return text;
+	}
+	this.replaceAll = function(value, find, replace) {
+        while (value.indexOf(find) != -1) {
+            value = value.replace(find, replace);
+        }
+        return value;
+    }
+
+	this.getHighlightedHtml = function(text) {
+		if (this.response.matchings.length == 0) {
+			// no matches
+			return '<span class="unmatched">' + this.escapeHtml(text) + '</span>';
+		}
+
+		var length = this.response.matchings[this.selectedMatch].text.length;
+		var pos = this.response.matchings[this.selectedMatch].index;
+
+		if (length <= 0) {
+			return '<span class="unmatched">' + this.escapeHtml(text) + '</span>';
+		}
+
+		var output = '';
+
+		if (pos != 0) {
+			output += '<span class="unmatched">' + this.escapeHtml(text.substring(0, pos)) + '</span>';
+		}
+
+		output += '<span class="matched">' + this.escapeHtml(text.substring(pos, pos + length)) + '</span>';
+
+		if (text.length != pos + length) {
+			output += '<span class="unmatched">' + this.escapeHtml(text.substring(pos + length)) + '</span>';
+		}
+
+		return output;
+    }
+
+	this.highlight2 = function() {
 //TODO caching
 		var div = document.getElementById (this.area.attr('id'));
 
@@ -182,8 +232,8 @@ console.debug("cursor", this.cursorPosition);
 	}
 
 	this.getText = function() {
-			return this.area.text();
-	};
+			return this.area.val();
+	}
 
 	this.getObject = function() {
 			return this.area;

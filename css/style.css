@@ -238,6 +238,7 @@ textarea:focus,
 
 .matchtext-div {
 	overflow: auto;
+	color: transparent;
 }
 .matchtext {
 	background: transparent;
