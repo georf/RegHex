@@ -237,8 +237,10 @@ textarea:focus,
 }
 
 .matchtext-div {
-	overflow: auto;
 	color: transparent;
+	overflow: auto;
+	white-space: pre;
+	word-wrap: break-word;
 }
 .matchtext {
 	background: transparent;
