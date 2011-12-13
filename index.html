@@ -19,7 +19,11 @@
 
 <div id="container">
 	<header>
-		<h1 class="appname">reg<strong>[h]?</strong>ex</h1>
+		<h1 class="appname">reg<strong>[h]?</strong>ex <small>regex testing tool for <select name="parser-type">
+				<option value="javascript">javascript</option>
+				<option value="sun-java">sun-java</option>
+				<option value="php">php</option>
+			</select></small></h1>
 		<p id="no-js-warning">This service is based on Javascript.<br>Please enable it in your browser settings to go on.</p>
 	</header>
 	<div class="clearfix" id="main" role="main">
@@ -29,6 +33,7 @@
 			<textarea tabindex="1" type="text" id="regex" class="inputWidget" rows="2" cols="20"></textarea>
 			</div>
 			<p id="regex-error" class="overlay"></p>
+
 			<ul id="regex-options">
 			<li><label for="option-i"><input type="checkbox" name="option-i" id="option-i"><strong>i</strong>case-insensitive</label></li>
 			<li><label for="option-m"><input type="checkbox" name="option-m" id="option-m"><strong>m</strong>multiple lines</label></li>
@@ -55,15 +60,6 @@
 			<p id="add-matchtext-section" class="clearfix"><a id="add-matchtext" title="add another text for matching">+</a></p>
 		</section>
 	</div>
-
-<ul>
-	<li><input type="radio" value="javascript" id="parser-javascript" name="parser-type"/><label for="parser-javascript">javascript</label></li>
-	<li><input type="radio" value="sun-java" id="parser-sun-java" name="parser-type"/><label for="parser-sun-java">sun-java</label></li>
-	<li><input type="radio" value="php" id="parser-php" name="parser-type"/><label for="parser-php">php</label></li>
-</ul>
-
-
-
 
 
 	<footer>
