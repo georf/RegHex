@@ -20,6 +20,10 @@ function UIMatchText(block, deleteButton) {
 	this.jMoreInformation = block.find('.more-information');
 	this.jMoreInformationContent = this.jMoreInformation.find('.more-information-content');
 
+	// hide boxes
+	this.jMatchMoreInfo.hide();
+	this.jMoreInformation.hide();
+	
 	// generate model
 	var matchText = RegHex.addMatchText(this, this.jTextarea.val());
 
@@ -32,28 +36,6 @@ function UIMatchText(block, deleteButton) {
 	this.jTextarea.scroll(function() {
 		$this.updateScrollPosition();
 	});
-
-	if (deleteButton) {
-
-		// generate delete button
-		var btn = $('<button type="button" class="arrow-button"/>');
-		btn.text('-');
-		btn.attr('title', 'remove field');
-		btn.click(function() {
-			block.slideUp(function() {
-				// remove from RegHex
-					RegHex.removeMatchText($(this).find('.textarea'));
-					$(this).remove();
-				});
-		});
-
-		// add to block
-		this.jBlock.find('.navigate-match-section').prepend('&nbsp;').prepend(
-				btn);
-		this.jBlock.hide();
-		$('#matching-blocks').append(this.jBlock);
-		this.jBlock.show();
-	}
 
 	this.cursorPosition = 0;
 	this.charCount = 0;
@@ -178,10 +160,6 @@ function UIMatchText(block, deleteButton) {
 		return this.jTextarea.val();
 	};
 
-	this.getObject = function() {
-		return this.jTextarea;
-	};
-
 	/**
 	 * Updates the infobox
 	 * 
@@ -276,7 +254,7 @@ function UIMatchText(block, deleteButton) {
 		this.jMatchtextDiv.scrollLeft(this.jTextarea.scrollLeft());
 
 		return this;
-	}
+	};
 
 	/**
 	 * Select next match if possible
@@ -291,7 +269,7 @@ function UIMatchText(block, deleteButton) {
 		this.update();
 
 		return this;
-	}
+	};
 
 	/**
 	 * Select previous match if possible
@@ -305,7 +283,7 @@ function UIMatchText(block, deleteButton) {
 		this.update();
 
 		return this;
-	}
+	};
 
 	/**
 	 * Open and close the information box
@@ -341,4 +319,26 @@ function UIMatchText(block, deleteButton) {
 
 	// update all informations after first creation
 	this.update();
+	
+	if (deleteButton) {
+
+		// generate delete button
+		var btn = $('<button type="button" class="arrow-button"/>');
+		btn.text('-');
+		btn.attr('title', 'remove field');
+		btn.click(function() {
+			block.slideUp(function() {
+				// remove from RegHex
+					RegHex.removeMatchText(matchText);
+					$(this).remove();
+				});
+		});
+
+		// add to block
+		this.jBlock.find('.navigate-match-section').prepend('&nbsp;').prepend(
+				btn);
+		this.jBlock.hide();
+		$('#matching-blocks').append(this.jBlock);
+		this.jBlock.show();
+	}
 }

@@ -19,7 +19,7 @@ function MatchText(observer) {
 	this.setText = function (text) {
 		this.text = text;
 		return this;
-	}
+	};
 
 	/**
 	 * Implements the Observer pattern
@@ -42,7 +42,7 @@ function MatchText(observer) {
 		});
 
 		return this;
-	}
+	};
 
 	/**
 	 * Set all pointer counts to zero
@@ -53,5 +53,5 @@ function MatchText(observer) {
 				delete(this[key]);
 			}
 		}
-	}
+	};
 }
