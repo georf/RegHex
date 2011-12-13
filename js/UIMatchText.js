@@ -24,6 +24,11 @@ function UIMatchText(block, deleteButton) {
 	this.area.bind('change keyup paste cut', function() {
 		matchText.notify();
 	});
+	
+	// get scroll events
+	this.area.scroll(function() {
+		$this.updateScrollPosition();
+	});
 
 	if (deleteButton) {
 
@@ -67,11 +72,8 @@ function UIMatchText(block, deleteButton) {
 				// set match to 0
 				this.selectedMatch = 0;
 
-				// highlight the value by selected part
-				this.highlight();
-
-				// update the info box
-				this.updateInfobox();
+				// update all information
+				this.update();
 			}
 		}
 	};
@@ -125,7 +127,7 @@ function UIMatchText(block, deleteButton) {
 			
 			// add a no-break space if last char is a new line
 			if (text.length != 0 && text.substring(text.length - 1) == "\n") {
-				output += '<span class="unmatched">&nbsp;</span>';
+				output += '<span>&nbsp;</span>';
 			}
 
 			// set spans to background area
@@ -235,16 +237,33 @@ function UIMatchText(block, deleteButton) {
 	/**
 	 * Updates all information in and around the textbox
 	 * 
-	 * <ul>
-	 * <li>highlight the text</li>
-	 * <li>update the infobox</li>
-	 * </ul>
+	 * @return this
 	 */
 	this.update = function() {
+		// update highlighting
 		this.highlight();
+		
+		// update infobox
 		this.updateInfobox();
-	}
+		
+		// update scroll position
+		this.updateScrollPosition();
+		
+		return this;
+	};
 
+	/**
+	 * Scroll the background div to the correct position
+	 * 
+	 * @return this
+	 */
+	this.updateScrollPosition = function() {
+		this.highlightArea.scrollTop(this.area.scrollTop());
+		this.highlightArea.scrollLeft(this.area.scrollLeft());
+		
+		return this;
+	}
+	
 	/**
 	 * Select next match if possible
 	 * 
