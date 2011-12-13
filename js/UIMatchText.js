@@ -18,6 +18,7 @@ function UIMatchText(block, deleteButton) {
 	this.jPreviousMatch = block.find('.previous-match');
 	this.jMatchMoreInfo = block.find('.match-more-info');
 	this.jMoreInformation = block.find('.more-information');
+	this.jMoreInformationContent = this.jMoreInformation.find('.more-information-content');
 
 	// generate model
 	var matchText = RegHex.addMatchText(this, this.jTextarea.val());
@@ -212,7 +213,7 @@ function UIMatchText(block, deleteButton) {
 			var results = this.response.matchings[this.selectedMatch].subexpressions;
 
 			if (results.length <= 0) {
-				this.jMoreInformation.html('no subexpressions given.');
+				this.jMoreInformationContent.html('no subexpressions given.');
 			} else {
 
 				var output = 'subexpressions <small>(expression parts in brackets)</small>:<ul>';
@@ -221,7 +222,7 @@ function UIMatchText(block, deleteButton) {
 				}
 				output += '</ul>';
 
-				this.jMoreInformation.html(output);
+				this.jMoreInformationContent.html(output);
 			}
 
 			// disable/enable match buttons
