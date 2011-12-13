@@ -10,23 +10,25 @@ function UIMatchText(block, deleteButton) {
 	var $this = this;
 
 	// set pointer to special areas
-	this.block = block;
-	this.area = block.find('.textarea');
-	this.highlightArea = block.find('.matchtext-div');
-	this.infoBox = block.find('.match-info');
-	this.next = block.find('.next-match');
-	this.previous = block.find('.previous-match');
+	this.jBlock = block;
+	this.jTextarea = block.find('.textarea');
+	this.jMatchtextDiv = block.find('.matchtext-div');
+	this.jMatchInfo = block.find('.match-info');
+	this.jNextMatch = block.find('.next-match');
+	this.jPreviousMatch = block.find('.previous-match');
+	this.jMatchMoreInfo = block.find('.match-more-info');
+	this.jMoreInformation = block.find('.more-information');
 
 	// generate model
-	var matchText = RegHex.addMatchText(this, this.area.val());
+	var matchText = RegHex.addMatchText(this, this.jTextarea.val());
 
 	// Tell the registered match text about changes
-	this.area.bind('change keyup paste cut', function() {
+	this.jTextarea.bind('change keyup paste cut', function() {
 		matchText.notify();
 	});
-	
+
 	// get scroll events
-	this.area.scroll(function() {
+	this.jTextarea.scroll(function() {
 		$this.updateScrollPosition();
 	});
 
@@ -45,11 +47,11 @@ function UIMatchText(block, deleteButton) {
 		});
 
 		// add to block
-		this.block.find('.navigate-match-section').prepend('&nbsp;').prepend(
+		this.jBlock.find('.navigate-match-section').prepend('&nbsp;').prepend(
 				btn);
-		this.block.hide();
-		$('#matching-blocks').append(this.block);
-		this.block.show();
+		this.jBlock.hide();
+		$('#matching-blocks').append(this.jBlock);
+		this.jBlock.show();
 	}
 
 	this.cursorPosition = 0;
@@ -57,11 +59,12 @@ function UIMatchText(block, deleteButton) {
 
 	this.response = null;
 	this.selectedMatch = 0;
-
+	this.moreInformationOpen = false;
+	
 	this.notify = function(response) {
 
 		// its the same text?
-		if (this.area.val() == response.matchText) {
+		if (this.jTextarea.val() == response.matchText) {
 
 			// is it a new response?
 			if (this.response != response) {
@@ -87,7 +90,7 @@ function UIMatchText(block, deleteButton) {
 
 		// on error highlight nothing
 		if (!this.response || this.response.error) {
-			this.highlightArea.html('');
+			this.jMatchtextDiv.html('');
 
 			// otherwise highlight selected part
 		} else {
@@ -97,10 +100,10 @@ function UIMatchText(block, deleteButton) {
 
 			// no matches
 			if (this.response.matchings.length == 0) {
-			
+
 				// all unmatching
 				output = '<span class="unmatched">' + this.escapeHtml(text) + '</span>';
-			
+
 			} else {
 
 				var length = this.response.matchings[this.selectedMatch].text.length;
@@ -124,14 +127,14 @@ function UIMatchText(block, deleteButton) {
 					}
 				}
 			}
-			
+
 			// add a no-break space if last char is a new line
 			if (text.length != 0 && text.substring(text.length - 1) == "\n") {
 				output += '<span>&nbsp;</span>';
 			}
 
 			// set spans to background area
-			this.highlightArea.html(output);
+			this.jMatchtextDiv.html(output);
 		}
 
 		return this;
@@ -171,68 +174,78 @@ function UIMatchText(block, deleteButton) {
 	};
 
 	this.getText = function() {
-		return this.area.val();
+		return this.jTextarea.val();
 	};
 
 	this.getObject = function() {
-		return this.area;
+		return this.jTextarea;
 	};
-	
+
 	/**
 	 * Updates the infobox
-	 *
+	 * 
 	 * Sets button dis/enabled and update text
 	 */
 	this.updateInfobox = function() {
+		
+		if (this.moreInformationOpen) {
+			this.jMatchMoreInfo.slideUp();
+        } else {
+        	this.jMoreInformation.slideUp();
+        }
 
 		// if its no valid response or if no matchings
-		if (!this.response || this.response.error || this.response.matchings.length == 0) {
-			this.infoBox.html('no matches');
-			this.next.attr('disabled', 'disabled');
-			this.previous.attr('disabled', 'disabled');
+		if (!this.response || this.response.error
+				|| this.response.matchings.length == 0) {
+			this.jMatchInfo.html('no matches');
+			this.jNextMatch.attr('disabled', 'disabled');
+			this.jPreviousMatch.attr('disabled', 'disabled');
+			
+			this.jMatchMoreInfo.slideUp();
+			this.jMoreInformation.slideUp();
 
 			// valid matchings
 		} else {
-			this.infoBox.html('match ' + (this.selectedMatch + 1) + ' of '
+			this.jMatchInfo.html('match ' + (this.selectedMatch + 1) + ' of '
 					+ this.response.matchings.length);
+			
+			var results = this.response.matchings[this.selectedMatch].subexpressions;
+
+			if (results.length <= 0) {
+				this.jMoreInformation.html('no subexpressions given.');
+			} else {
+
+				var output = 'subexpressions <small>(expression parts in brackets)</small>:<ul>';
+				for ( var i = 0; i < results.length; i++) {
+					output += '<li>$' + i + ' = ' + results[i] + '</li>';
+				}
+				output += '</ul>';
+
+				this.jMoreInformation.html(output);
+			}
 
 			// disable/enable match buttons
 			if (this.selectedMatch == 0 || this.response.error) {
-				this.previous.attr('disabled', 'disabled');
+				this.jPreviousMatch.attr('disabled', 'disabled');
 			} else {
-				this.previous.removeAttr('disabled');
+				this.jPreviousMatch.removeAttr('disabled');
 			}
 
 			if (this.selectedMatch >= this.response.matchings.length - 1
 					|| this.response.error) {
-				this.next.attr('disabled', 'disabled');
+				this.jNextMatch.attr('disabled', 'disabled');
 			} else {
-				this.next.removeAttr('disabled');
+				this.jNextMatch.removeAttr('disabled');
+			}
+			
+			// show more information
+			if (this.moreInformationOpen) {
+				this.jMoreInformation.slideDown();
+			} else {
+				this.jMatchMoreInfo.slideDown();
 			}
 		}
 	};
-
-	this.getmoreInformation = function() {
-		this.updateMatches();
-
-		if (this.error || this.matches.length == 0) {
-			return '';
-		}
-
-		var results = this.matches[this.currentMatching].results;
-
-		if (results.length <= 0) {
-			return 'no subexpressions given.';
-		}
-
-		var output = 'subexpressions <small>(expression parts in brackets)</small>:<ul>';
-		for ( var i = 0; i < results.length; i++) {
-			output += '<li>$' + i + ' = ' + results[i] + '</li>';
-		}
-		output += '</ul>';
-
-		return output;
-	}
 
 	/**
 	 * Updates all information in and around the textbox
@@ -242,13 +255,13 @@ function UIMatchText(block, deleteButton) {
 	this.update = function() {
 		// update highlighting
 		this.highlight();
-		
+
 		// update infobox
 		this.updateInfobox();
-		
+
 		// update scroll position
 		this.updateScrollPosition();
-		
+
 		return this;
 	};
 
@@ -258,12 +271,12 @@ function UIMatchText(block, deleteButton) {
 	 * @return this
 	 */
 	this.updateScrollPosition = function() {
-		this.highlightArea.scrollTop(this.area.scrollTop());
-		this.highlightArea.scrollLeft(this.area.scrollLeft());
-		
+		this.jMatchtextDiv.scrollTop(this.jTextarea.scrollTop());
+		this.jMatchtextDiv.scrollLeft(this.jTextarea.scrollLeft());
+
 		return this;
 	}
-	
+
 	/**
 	 * Select next match if possible
 	 * 
@@ -301,24 +314,30 @@ function UIMatchText(block, deleteButton) {
 	 * @return this
 	 */
 	this.moreInformation = function(open) {
-		// TODO
+		if (this.moreInformationOpen != open) {
+			this.moreInformationOpen = open;
+			this.update();
+		}
 		return this;
-	}
+	};
 
 	// set button handler
-	this.next.click(function() {
-		$this.nextMatch()
+	this.jNextMatch.click(function() {
+		$this.nextMatch();
 	});
-	this.previous.click(function() {
+	this.jPreviousMatch.click(function() {
 		$this.previousMatch();
 	});
-	/*
-	 * this.block.find('.match-more-info').find('a').click(function() {
-	 * RegHex.getMatchingBlock($(this).closest('.matchtext-block')).moreInfo();
-	 * return false; }); this.block.find('.less-information').click(function() {
-	 * RegHex.getMatchingBlock($(this).closest('.matchtext-block')).lessInfo();
-	 * return false; });
-	 */
 
+	this.jMatchMoreInfo.find('a').click(function() {
+		$this.moreInformation(true);
+		return false;
+	});
+	this.jMoreInformation.find('.less-information').click(function() {
+		$this.moreInformation(false);
+		return false;
+	});
+
+	// update all informations after first creation
 	this.update();
 }
