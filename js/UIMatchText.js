@@ -122,6 +122,11 @@ function UIMatchText(block, deleteButton) {
 					}
 				}
 			}
+			
+			// add a no-break space if last char is a new line
+			if (text.length != 0 && text.substring(text.length - 1) == "\n") {
+				output += '<span class="unmatched">&nbsp;</span>';
+			}
 
 			// set spans to background area
 			this.highlightArea.html(output);
