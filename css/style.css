@@ -391,6 +391,7 @@ header h1 {
 .more-information {
 	background: #fff;
 	margin-top: 3px;
+	z-index: 15;
 }
 .more-information ul {
 	list-style-type: none;
