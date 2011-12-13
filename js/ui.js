@@ -22,10 +22,6 @@ $(function() {
 		RegHex.updateRegularExpression($(this).val(), []); // TODO Options
 	});
 
-
-	// Old code here... ================================================
-
-
 	$('#add-matchtext').click(function(){
 
 		// generate new id
