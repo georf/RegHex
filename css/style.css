@@ -231,14 +231,17 @@ textarea:focus,
 	font-size: 1.5em;
 	font-family: 'Droid Sans Mono', monospace;
 	height: 80px;
+	line-height:1.2em;
 	margin: 3px 0 0;
 	outline: 0;
+	padding: 0 0 0 4px;
 	width: 470px;
 }
 
 .matchtext-div {
 	color: transparent;
 	overflow: auto;
+
 	white-space: pre;
 	word-wrap: break-word;
 }
