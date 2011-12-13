@@ -54,13 +54,4 @@ $(function() {
 		RegHex.update();
 	});
 
-// autoscroll for both div (only testing)
-// we need this for every matching div
-$(".textarea").scroll(function () {
-        $(".matchtext-div").scrollTop($(".textarea").scrollTop());
-        $(".matchtext-div").scrollLeft($(".textarea").scrollLeft());
-    });
-
-
-
 });
