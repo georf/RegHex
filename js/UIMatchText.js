@@ -190,7 +190,7 @@ function UIMatchText(block, deleteButton) {
 			
 			var results = this.response.matchings[this.selectedMatch].subexpressions;
 
-			if (!result || results.length <= 0) {
+			if (!results || results.length <= 0) {
 				this.jMoreInformationContent.html('no subexpressions given.');
 			} else {
 
