@@ -11,14 +11,19 @@ import json.JSONObject;
 import json.JSONTokener;
 
 /**
+ * This class parser accept a json input string. It's defined at the wiki page
+ * {@link https://github.com/georf/RegHex/wiki/json-exchange-format}. Output is
+ * already defined there.
  * 
  * @author Georg Limbach <georf@dev.mgvmedia.com>
- * 
  */
 public class Parser {
 
 	/**
+	 * Use this main method for reading from stdin and create a parser object.
+	 * 
 	 * @param args
+	 *            not used
 	 */
 	public static void main(String[] args) {
 
@@ -32,10 +37,12 @@ public class Parser {
 			}
 			in.close();
 
+			// create parser instance
 			new Parser(text.toString());
 		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+
+			// send error
+			simpleError(e.getMessage(), e);
 		}
 	}
 
@@ -74,29 +81,45 @@ public class Parser {
 					}
 				}
 
+				String matchText = input.getString("matchText");
+
 				// compile regex
 				Pattern regex = Pattern.compile(input
 						.getString("regularExpression"), flags);
 
-				Matcher matching = regex.matcher(input.getString("matchText"));
-
+				// output array
 				JSONArray matchings = new JSONArray();
-				while (matching.find()) {
-					JSONObject current = new JSONObject();
-					current.put("text", matching.group());
 
-					// todo index
-					current.put("index", JSONObject.NULL);
+				mainIndexLoop: for (int i = 0; i < matchText.length(); i++) {
 
-					JSONArray subexpressions = new JSONArray();
-					for (int i = 0; i <= matching.groupCount(); i++) {
-						JSONObject currentSubexpression = new JSONObject();
-						currentSubexpression.put("text", matching.group(i))
-								.put("index", JSONObject.NULL);
-						subexpressions.put(i, currentSubexpression);
+					String currentMatchText = matchText.substring(i);
+					Matcher matching = regex.matcher(currentMatchText);
+
+					if (matching.find()) {
+
+						// is it in the result?
+						for (int j = 0; j < matchings.length(); j++) {
+							if (matchings.getJSONObject(j).getString("text") == matching
+									.group()) {
+								continue mainIndexLoop;
+							}
+						}
+						JSONObject current = new JSONObject();
+						current.put("text", matching.group());
+
+						current.put("index", matchText
+								.indexOf(matching.group())
+								+ i);
+
+						JSONArray subexpressions = new JSONArray();
+						for (int n = 0; n <= matching.groupCount(); n++) {
+							subexpressions.put(n, matching.group(n));
+						}
+						current.put("subexpressions", subexpressions);
+						matchings.put(current);
+					} else {
+						break mainIndexLoop;
 					}
-					current.put("subexpressions", subexpressions);
-					matchings.put(current);
 				}
 
 				input.put("matchings", matchings);
@@ -104,16 +127,45 @@ public class Parser {
 			} catch (PatternSyntaxException e) {
 				input.put("error", e.getMessage());
 			}
-			System.out.println(input);
-		} catch (JSONException e) {
-			try {
-				JSONObject error = new JSONObject();
-				error.put("error", e.getMessage());
-				System.out.println(error);
-			} catch (JSONException e1) {
-				e1.printStackTrace();
-			}
 
+			// send json
+			System.out.println(input);
+
+		} catch (JSONException e) {
+
+			// send error
+			simpleError(e.getMessage(), e);
 		}
+	}
+
+	/**
+	 * Send a simple error in json format
+	 * 
+	 * <pre>
+	 * {
+	 *   "error":"input text"
+	 * }
+	 * </pre>
+	 * 
+	 * @param text
+	 *            input text
+	 * @param e
+	 *            Exception for stack trace
+	 */
+	public static void simpleError(String text, Exception e) {
+		StringBuffer trace = new StringBuffer("");
+		if (e != null) {
+			trace.append(",\"trace\":[");
+			StackTraceElement[] stack = e.getStackTrace();
+			for (int i = 0; i < stack.length; i++) {
+				trace.append(JSONObject.quote(stack[i].toString()));
+				if (i != stack.length - 1) {
+					trace.append(",");
+				}
+			}
+			trace.append("]");
+		}
+		System.out
+				.println("{\"error\":" + JSONObject.quote(text) + trace + "}");
 	}
 }
