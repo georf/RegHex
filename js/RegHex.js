@@ -114,6 +114,16 @@ var RegHex = new function() {
 		return this.regularExpression;
 	};
 
+	
+	this.changeParserType = function(parserType) {
+
+		// set new parser type
+		this.regularExpression.setParser(parserType);
+
+		// update match texts
+		this.updateMatchTexts();
+	}
+	
 	/**
 	 * Constructor creates a RegularExpression object
 	 */

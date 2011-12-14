@@ -49,5 +49,10 @@ $(function() {
 	$('#option-g').bind('change', function() {
 		RegHex.update();
 	});
+	
+	// bind parser type to RegHex
+	$('#parser-type').change(function() {
+		RegHex.changeParserType($('#parser-type').val())
+	});
 
 });
