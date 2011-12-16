@@ -17,7 +17,7 @@ function RegularExpression() {
 	this.setRegularExpression = function (expression) {
 		this.expression = expression;
 		return this;
-	}
+	};
 
 	/**
 	 * Sets the expression options
@@ -27,7 +27,7 @@ function RegularExpression() {
 	this.setOptions = function (options) {
 		this.options = options;
 		return this;
-	}
+	};
 
 	/**
 	 * Sets the parser type
@@ -37,7 +37,7 @@ function RegularExpression() {
 	this.setParser = function (parser) {
 		this.parser = parser;
 		return this;
-	}
+	};
 
 	/**
 	 * Parse a text and return result to callback
@@ -65,6 +65,11 @@ function RegularExpression() {
 		parser.parse(text, this.expression, this.options, function(data) {
 			console.debug('Callback (live parsed)', data);
 
+			// error handling
+			if (!data || typeof data.error == "undefined") {
+				return;
+			}
+			
 			// add value to cache
 			RegularExpressionCache.addValue(data);
 
@@ -72,5 +77,5 @@ function RegularExpression() {
 			callback(data);
 		});
 		return this;
-	}
+	};
 }
