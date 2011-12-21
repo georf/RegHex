@@ -2,6 +2,6 @@
 
 class Parser {
 	public static function getCmdline() {
-		return 'java Parser';
+		return 'java -cp '.__DIR__.' Parser';
 	}
 }
