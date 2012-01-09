@@ -64,4 +64,8 @@ $(function() {
 		RegHex.changeParserType($('#parser-type').val());
 	});
 
+	// update first time
+	RegHex.updateRegularExpression($('#regex').val(), []);
+
+
 });
