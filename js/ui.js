@@ -1,6 +1,6 @@
 /**
  * Reghex UI Package
- * 
+ *
  * @author Sebastian Gaul <sebastian@dev.mgvmedia.com>
  * @author Georg Limbach <georf@dev.mgvmedia.com>
  */
@@ -8,7 +8,6 @@
 var matchingBlockId = 1;
 
 $(function() {
-
 	// Register existing match text fields
 	$('.matchtext-block').each(function() {
 		new UIMatchText($(this), false);
@@ -17,10 +16,26 @@ $(function() {
 	// Create and register a message service
 	RegHex.registerMessageService(new UIMessageService);
 
+	// Bundle options into an array
+	var bundleOptions = function() {
+		var options = [];
+		$('#option-i,#option-d,#option-m,#option-s,#option-g').each(function(i, el) {
+			if ($(el).is(':checked')) {
+				options.push($(el).attr('name').substr(7));
+			}
+		});
+		return options;
+	};
+
+	// Trigger regex change whenever an option changes
+	$('#regex-options input[type="checkbox"]').change(function() {
+		$('#regex').trigger('keyup');
+	});
+
 	// Notify if regular expression changes
 	$('#regex').bind('keyup blur input cut paste', function() {
-		RegHex.updateRegularExpression($(this).val(), []); // TODO Options
-		});
+		RegHex.updateRegularExpression($(this).val(), bundleOptions());
+	});
 
 	$('#add-matchtext').click(function() {
 
@@ -37,19 +52,6 @@ $(function() {
 			// handle events with object
 			new UIMatchText(block, true);
 		});
-
-	$('#option-i').bind('change', function() {
-		RegHex.update();
-	});
-	$('#option-m').bind('change', function() {
-		RegHex.update();
-	});
-	$('#option-s').bind('change', function() {
-		RegHex.update();
-	});
-	$('#option-g').bind('change', function() {
-		RegHex.update();
-	});
 
 	var parserType = $('#parser-type');
 
