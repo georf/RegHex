@@ -1,16 +1,17 @@
 /**
  * Dispatches tasks and provides Reghex's component objects
- * 
+ *
  * @author Georg Limbach <georf@dev.mgvmedia.com>
  * @author Sebastian Gaul <sebastian@dev.mgvmedia.com>
  */
 var RegHex = new function() {
 
 	this.matchTexts = new Array();
+	this.messageService = { notify: function(d) {console.dir(d);} };
 
 	/**
 	 * Creates a new match text and registers a specified observer
-	 * 
+	 *
 	 * @param UIMatchText
 	 * @param string
 	 * @return MatchText The created MatchText object
@@ -30,7 +31,7 @@ var RegHex = new function() {
 
 	/**
 	 * Remove a match text
-	 * 
+	 *
 	 * @param MatchText
 	 *            to remove
 	 * @return this
@@ -53,16 +54,16 @@ var RegHex = new function() {
 
 	/**
 	 * Registers a message service which accepts and handles messages
-	 * 
+	 *
 	 * @param UIMessageService
 	 */
 	this.registerMessageService = function(messageService) {
-		// TODO Implement
+		this.messageService = messageService;
 	};
 
 	/**
 	 * Updates the reg. exp., e.g. after the user changed the related field
-	 * 
+	 *
 	 * @param string
 	 *            e.g. "ab*c"
 	 * @param string[]
@@ -81,7 +82,7 @@ var RegHex = new function() {
 
 	/**
 	 * Updates the reg. exp. parser.
-	 * 
+	 *
 	 * @param string
 	 *            e.g. "parser-javascript"
 	 */
@@ -95,26 +96,37 @@ var RegHex = new function() {
 
 	/**
 	 * Update all match texts
-	 * 
+	 *
 	 * @return this
 	 */
 	this.updateMatchTexts = function() {
+		var that = this,
+			errorOccured = false;
 		for ( var i = 0; i < this.matchTexts.length; i++) {
-			this.matchTexts[i].notify(this.matchTexts[i].observer);
+			this.matchTexts[i].notify(this.matchTexts[i].observer,
+				function(error) {
+					that.messageService.notify(error);
+					errorOccured = true;
+				});
+		}
+		// Notify message service that parsing was successful, so it
+		// can hide previous error messages
+		if (!errorOccured) {
+			this.messageService.notify();
 		}
 		return this;
 	};
 
 	/**
 	 * Returns the RegularExpression object
-	 * 
+	 *
 	 * @return RegularExpression
 	 */
 	this.getRegularExpression = function() {
 		return this.regularExpression;
 	};
 
-	
+
 	this.changeParserType = function(parserType) {
 
 		// set new parser type
@@ -123,7 +135,7 @@ var RegHex = new function() {
 		// update match texts
 		this.updateMatchTexts();
 	}
-	
+
 	/**
 	 * Constructor creates a RegularExpression object
 	 */

@@ -14,7 +14,7 @@ $(function() {
 	});
 
 	// Create and register a message service
-	RegHex.registerMessageService(new UIMessageService);
+	RegHex.registerMessageService(new UIMessageService());
 
 	// Bundle options into an array
 	var bundleOptions = function() {
