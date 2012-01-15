@@ -67,7 +67,7 @@ $(function() {
 	});
 
 	// update first time
-	RegHex.updateRegularExpression($('#regex').val(), []);
+	$('#regex').trigger('keyup');
 
 
 });
