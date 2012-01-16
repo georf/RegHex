@@ -1,7 +1,7 @@
 #!/usr/bin/php
 <?php
 
-$jsonInput = file_get_contents("php://stdin");
+$jsonInput = file_get_contents('php://stdin');
 
 $input = json_decode($jsonInput);
 
@@ -16,8 +16,9 @@ $text = $input->matchText;
 $output->error = false;
 
 
-$options = '';
-$escapeRegexp = str_replace('/', '\/',  $regexp);
+	$options = implode($input->options);
+
+$escapeRegexp = str_replace('/', '\/', $regexp);
 $fullRegexp = '/'.$escapeRegexp.'/'.$options;
 $matchingRegexp = '/('.$escapeRegexp.')/'.$options;
 
