@@ -23,11 +23,11 @@ function Help() {
 
 		new Step('Select your parser language', function() {
 			// let it blink 3 times
-			$this.highlight($('#parser-type')).focus()
+			$('#parser-type').focus()
 			.fadeOut(500).fadeIn(500)
 			.fadeOut(500).fadeIn(500)
 			.fadeOut(500).fadeIn(500);
-		}, 5000),
+		}, 5000, $('#parser-type')),
 
 		new Step('', function() {
 		}, 100),
@@ -43,17 +43,16 @@ function Help() {
 
 		new Step('Create a new match text field with the plus button', function() {
 			// let plus blink 3 times
-			$this.highlight($('#add-matchtext')).focus()
+			$('#add-matchtext').focus()
 			.fadeOut(500).fadeIn(500)
 			.fadeOut(500).fadeIn(500)
 			.fadeOut(500).fadeIn(500, function() {
 
 				$('#add-matchtext').click();
 			});
-		}, 4500),
+		}, 4500, $('#add-matchtext')),
 
 		new Step('Type your second match text', function() {
-			$this.lowlight($('#add-matchtext'));
 			// add a match text
 			new TypeInto($('#newid' + (matchingBlockId-1)).focus(), 'test abc ade', 300);
 		}, 10000),
@@ -98,6 +97,7 @@ function Help() {
 
 			$this.steps[i].timeoutId = setTimeout($this.steps[i].run, time);
 			time += $this.steps[i].time;
+			$this.steps[i].timeoutId = setTimeout($this.steps[i].terminate, time-5);
 		}
 	};
 
@@ -110,16 +110,6 @@ function Help() {
 			}
 		}
 	};
-
-	this.highlight = function(element) {
-		element.css({position: 'relative', 'z-index': '999'});
-		return element;
-	}
-
-	this.lowlight = function(element) {
-		element.css('z-index', 1);
-		return element;
-	}
 
 	// initiation
 	$this.runSteps();
@@ -146,20 +136,38 @@ function TypeInto(area, val, millisec) {
 	this.typeKey();
 }
 
-function Step(message, callback, time) {
+function Step(message, callback, time, hElements) {
 	var $this = this;
 
 	this.callback = callback;
 	this.time = time;
 	this.message = message;
+	this.highlightedElements = hElements;
 
 	this.timeoutId = null;
 
 	this.run = function() {
 		$('#help-current-task').html($this.message);
+		$this.highlight();
 
 		$this.callback();
 
 		$this.timeoutId = null;
+	};
+	
+	this.terminate = function() {
+		$this.lowlight();
+	};
+		
+	this.highlight = function() {
+		if (typeof $this.highlightedElements != 'undefined') {
+			$this.highlightedElements.css({position: 'relative', 'z-index': '999'});
+		}
+	};
+
+	this.lowlight = function() {
+		if (typeof $this.highlightedElements != 'undefined') {
+			$this.highlightedElements.css('z-index', 1);
+		}
 	};
 }
