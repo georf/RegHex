@@ -55,7 +55,7 @@ function Help() {
 		new Step('Type your second match text', function() {
 			// add a match text
 			new TypeInto($('#newid' + (matchingBlockId-1)).focus(), 'test abc ade', 300);
-		}, 10000, $('.matchtext-block:nth-child(1)')),
+		}, 10000, function() { return $('.matchtext-block:nth-child(2)'); }),
 
 		new Step('', function() {
 		}, 100),
@@ -64,10 +64,10 @@ function Help() {
 			// add a regular expression
 			$('#regex').focus();
 			new TypeInto($('#regex'), 'a([a-z]+)', 300);
-		}, 10000),
+		}, 10000, $('#regex')),
 
 		new Step('See at your match text. The green part is matching.', function() {
-		}, 10000),
+		}, 10000, function() { return $('.matchtext-block'); }),
 
 		new Step('Now we want to see the groups. Click at subexpression.', function() {
 			// let plus blink 3 times
@@ -170,6 +170,10 @@ function Step(message, callback, time, hElements) {
 	};
 		
 	this.highlight = function() {
+		if (typeof $this.highlightedElements == 'function') {
+			$this.highlightedElements = $this.highlightedElements();
+		}
+		
 		if (typeof $this.highlightedElements != 'undefined') {
 			$this.highlightedElements.css({position: 'relative', 'z-index': '999'});
 		}
