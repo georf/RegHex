@@ -36,7 +36,7 @@ function Help() {
 
 			// add a match text
 			new TypeInto($('#matchtext').focus(), 'abb', 500);
-		}, 5000),
+		}, 5000, $('.matchtext-block:nth-child(1)')),
 
 		new Step('', function() {
 		}, 100),
@@ -55,7 +55,7 @@ function Help() {
 		new Step('Type your second match text', function() {
 			// add a match text
 			new TypeInto($('#newid' + (matchingBlockId-1)).focus(), 'test abc ade', 300);
-		}, 10000),
+		}, 10000, $('.matchtext-block:nth-child(1)')),
 
 		new Step('', function() {
 		}, 100),
