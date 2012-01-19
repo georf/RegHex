@@ -70,4 +70,8 @@ $(function() {
 	$('#regex').trigger('keyup');
 
 
+	// bind Help class to link
+	$('#help-box').click(function() {
+		new Help();
+	});
 });
