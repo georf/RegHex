@@ -6,61 +6,44 @@
 
 function Help() {
 	var $this = this,
-		darkRoom = $('<div> </div>');
+		darkRoom = $('<div>press escape to exit tour</div>');
+
 	darkRoom.attr('id', 'darkRoom').appendTo('body');
 	this.lastTimeout = null;
 
-
-
 	this.close = function() {
-
 		$this.breakSteps();
-
-		$('#help-content').hide();
-		$('#help-box').show();
 		darkRoom.remove();
-
 	};
 
 
 	this.steps = new Array(
 		new Step('Welcome to the help tour', function() {
-			$('#help-start').hide();
-
-			$('#help-content').addClass("deactive");
 		}, 5000),
 
 		new Step('Select your parser language', function() {
-
-			$('#help-step1').addClass("active");
-
 			// let it blink 3 times
-			$('#parser-type').focus()
+			$this.highlight($('#parser-type')).focus()
 			.fadeOut(500).fadeIn(500)
 			.fadeOut(500).fadeIn(500)
 			.fadeOut(500).fadeIn(500);
 		}, 5000),
 
 		new Step('', function() {
-			$('#help-step1').removeClass("active");
 		}, 100),
 
 		new Step('Type your first match text', function() {
-			$('#help-step2').addClass("active");
 
 			// add a match text
 			new TypeInto($('#matchtext').focus(), 'abb', 500);
 		}, 5000),
 
 		new Step('', function() {
-			$('#help-step2').removeClass("active");
 		}, 100),
 
 		new Step('Create a new match text field with the plus button', function() {
-			$('#help-step3').addClass("active");
-
 			// let plus blink 3 times
-			$('#add-matchtext').focus()
+			$this.highlight($('#add-matchtext')).focus()
 			.fadeOut(500).fadeIn(500)
 			.fadeOut(500).fadeIn(500)
 			.fadeOut(500).fadeIn(500, function() {
@@ -70,30 +53,24 @@ function Help() {
 		}, 4500),
 
 		new Step('Type your second match text', function() {
+			$this.lowlight($('#add-matchtext'));
 			// add a match text
 			new TypeInto($('#newid' + (matchingBlockId-1)).focus(), 'test abc ade', 300);
 		}, 10000),
 
 		new Step('', function() {
-			$('#help-step3').removeClass("active");
 		}, 100),
 
 		new Step('Type your regular expression', function() {
-
-			$('#help-step4').addClass("active");
-
 			// add a regular expression
 			$('#regex').focus();
 			new TypeInto($('#regex'), 'a([a-z]+)', 300);
 		}, 10000),
 
 		new Step('See at your match text. The green part is matching.', function() {
-			$('#help-step4').removeClass("active");
 		}, 10000),
 
 		new Step('Now we want to see the groups. Click at subexpression.', function() {
-			$('#help-step5').addClass("active");
-
 			// let plus blink 3 times
 			$('#matchtext-div .match-more-info a').focus()
 			.fadeOut(300).fadeIn(300)
@@ -109,8 +86,6 @@ function Help() {
 
 		// last step!
 		new Step('', function() {
-			$('#help-content').removeClass("deactive");
-			$('#help-start').show();
 			$('#help-current-task').hide();
 		}, 100)
 	);
@@ -136,14 +111,18 @@ function Help() {
 		}
 	};
 
+	this.highlight = function(element) {
+		element.css({position: 'relative', 'z-index': '999'});
+		return element;
+	}
+
+	this.lowlight = function(element) {
+		element.css('z-index', 1);
+		return element;
+	}
+
 	// initiation
-	$('#help-box').hide();
-
-	$('#help-close').unbind().click($this.close);
-	$('#help-start').click($this.runSteps);
-	$('#help-start').show();
-
-	$('#help-content').show();
+	$this.runSteps();
 }
 
 function TypeInto(area, val, millisec) {
