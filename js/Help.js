@@ -107,12 +107,22 @@ function Help() {
 			if ($this.steps[i].timeoutId != null) {
 				clearTimeout($this.steps[i].timeoutId);
 				$this.steps[i].timeoutId = null;
+				$this.steps[i].terminate();
 			}
 		}
 	};
 
 	// initiation
 	$this.runSteps();
+	
+	// bind esc for close
+	$(document).keyup(function(e) {
+		if (e.keyCode == 27) {
+			$this.close();
+		}
+	});
+
+
 }
 
 function TypeInto(area, val, millisec) {
@@ -151,12 +161,12 @@ function Step(message, callback, time, hElements) {
 		$this.highlight();
 
 		$this.callback();
-
-		$this.timeoutId = null;
 	};
 	
 	this.terminate = function() {
 		$this.lowlight();
+
+		$this.timeoutId = null;
 	};
 		
 	this.highlight = function() {
