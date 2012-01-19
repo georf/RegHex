@@ -496,6 +496,16 @@ footer {
 #help-content {
 	display:none;
 	width:300px;
+	position:fixed;
+	bottom:10px;
+	left:20px;
+	background-color:#CBFFA7;
+	padding:10px 30px;
+	border-radius: 8px;
+	opacity: 0.95;
+	vertical-align: middle;
+	z-index: 400;
+	box-shadow: 5px 4px 2px #DDDDDD;
 }
 #help-close {
 	float:right;
@@ -505,10 +515,27 @@ footer {
 #help-start{
 	cursor:pointer;
 }
-#help-content ol.deactive{
-	color:grey;
+#help-content.deactive{
+	opacity: 0.60;
 }
 li.active{
-	color:blue;
+	background-color:#FFFFFF;
+	opacity: 1;
+}
+#help-current-task{
+	display:none;
+	position:fixed;
+	top:30px;
+	left:50px;
+	background-color:#CBFFA7;
+	padding:10px 30px;
+	min-width:300px;
+	min-height: 30px;
+	border-radius: 8px;
+	opacity: 0.95;
+	font-size:15px;
+	vertical-align: middle;
+	z-index: 400;
+	box-shadow: 5px 4px 2px #DDDDDD;
 }
 	
