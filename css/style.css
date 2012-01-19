@@ -487,3 +487,28 @@ footer {
   p, h2, h3 { orphans: 3; widows: 3; }
   h2, h3 { page-break-after: avoid; }
 }
+
+
+#help-box {
+	float:right;
+	cursor:pointer;
+}
+#help-content {
+	display:none;
+	width:300px;
+}
+#help-close {
+	float:right;
+	cursor:pointer;
+	border:1px solid grey;
+}
+#help-start{
+	cursor:pointer;
+}
+#help-content ol.deactive{
+	color:grey;
+}
+li.active{
+	color:blue;
+}
+	

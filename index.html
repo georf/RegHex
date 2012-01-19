@@ -10,7 +10,7 @@
 <meta name="description" content="">
 <meta name="author" content="">
 <meta name="viewport" content="width=device-width,initial-scale=1">
-<link href='http://fonts.googleapis.com/css?family=Droid+Sans+Mono' rel='stylesheet' type='text/css'>
+<!-- <link href='http://fonts.googleapis.com/css?family=Droid+Sans+Mono' rel='stylesheet' type='text/css'>-->
 <link rel="stylesheet" href="css/style.css">
 <script src="js/libs/modernizr-2.0.6.min.js"></script>
 </head>
@@ -19,6 +19,7 @@
 
 <div id="container">
 	<header>
+		<p id="help-box">Help</p>
 		<h1 class="appname">reg<strong>[h]?</strong>ex <small>regex testing tool for <select name="parser-type" id="parser-type">
 
 			</select></small></h1>
@@ -66,6 +67,18 @@
 	</footer>
 </div> <!--! end of #container -->
 
+<div id="help-content">
+<div id="help-close">X</div>
+<p id="help-start">Start tour</p>
+<ol>
+<li id="help-step1">Select your language</li>
+<li id="help-step2">Type a match text</li>
+<li id="help-step3">Type another match text</li>
+<li id="help-step4">Type your regular expression</li>
+<li id="help-step5">Let show the subexpressions</li>
+</ol>
+</div>
+
 <!-- Grab Google CDN's jQuery, with a protocol relative URL; fall back to local if offline -->
 <script src="//ajax.googleapis.com/ajax/libs/jquery/1.6.2/jquery.min.js"></script>
 <script>window.jQuery || document.write('<script src="js/libs/jquery-1.6.2.min.js"><\/script>')</script>
@@ -83,6 +96,7 @@
 <script defer src="js/MatchText.js"></script>
 <script defer src="js/UIMessageService.js"></script>
 <script defer src="js/RegHex.js"></script>
+<script defer src="js/Help.js"></script>
 <!-- end scripts-->
 
 <!--[if lt IE 7 ]>
