@@ -133,7 +133,9 @@ var RegHex = new function() {
 		
 		// search config in array
 		for (var i = 0; i < config.parsers.length; i++) {
-			this.currentParserConfig = config.parsers[i];
+			if (config.parsers[i].name == parserType) {
+				this.currentParserConfig = config.parsers[i];
+			}
 		}
 
 		// set new parser type

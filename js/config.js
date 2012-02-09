@@ -24,6 +24,6 @@ var config = {
 				name : "php",
 				options : "imsxu",
 				client : false,
-				infoUrl : [ "http://www.php.net/manual/en/reference.pcre.pattern.modifiers.php" ]
+				infoUrl : [ "http://www.php.net/manual/en/reference.pcre.pattern.modifiers.php", "http://www.regular-expressions.info/php.html" ]
 			} ]
 };

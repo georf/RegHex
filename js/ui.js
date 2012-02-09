@@ -69,9 +69,22 @@ $(function() {
 		// disable options
 		$('.parser-option').attr('disabled', 'disabled');
 		
+		// enable usefull options
 		var o = RegHex.currentParserConfig.options;
 		for (var i = 0; i < o.length; i++) {
 			$('#option-'+o[i]).removeAttr('disabled');
+		}
+		
+		// set new info link
+		var l = RegHex.currentParserConfig.infoUrl;
+		var ul = '';
+		for ( var i = 0; i < l.length; i++) {
+			ul += '<li><a href="' + l + '">' + l + '</a></li>';
+		}
+		if (ul != '') {
+			$('#additional-parser-info').html('<ul>' + ul + '</ul>');
+		} else {
+			$('#additional-parser-info').html(ul);
 		}
 
 	});
