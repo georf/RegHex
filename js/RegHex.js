@@ -5,6 +5,7 @@
  * @author Sebastian Gaul <sebastian@dev.mgvmedia.com>
  */
 var RegHex = new function() {
+	this.currentParserConfig = {};
 
 	this.matchTexts = new Array();
 	this.messageService = { notify: function(d) {console.dir(d);} };
@@ -87,6 +88,7 @@ var RegHex = new function() {
 	 *            e.g. "parser-javascript"
 	 */
 	this.updateRegularExpressionParser = function(parser) {
+		
 		// set new parser
 		this.regularExpression.setParser(parser);
 
@@ -128,13 +130,18 @@ var RegHex = new function() {
 
 
 	this.changeParserType = function(parserType) {
+		
+		// search config in array
+		for (var i = 0; i < config.parsers.length; i++) {
+			this.currentParserConfig = config.parsers[i];
+		}
 
 		// set new parser type
 		this.regularExpression.setParser(parserType);
 
 		// update match texts
 		this.updateMatchTexts();
-	}
+	};
 
 	/**
 	 * Constructor creates a RegularExpression object

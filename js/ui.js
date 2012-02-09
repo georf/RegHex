@@ -19,7 +19,7 @@ $(function() {
 	// Bundle options into an array
 	var bundleOptions = function() {
 		var options = [];
-		$('#option-i,#option-d,#option-m,#option-s,#option-g').each(function(i, el) {
+		$('.parser-option').each(function(i, el) {
 			if ($(el).is(':checked')) {
 				options.push($(el).attr('name').substr(7));
 			}
@@ -63,8 +63,21 @@ $(function() {
 
 	// bind parser type to RegHex
 	parserType.change(function() {
+		// update regex
 		RegHex.changeParserType($('#parser-type').val());
+		
+		// disable options
+		$('.parser-option').attr('disabled', 'disabled');
+		
+		var o = RegHex.currentParserConfig.options;
+		for (var i = 0; i < o.length; i++) {
+			$('#option-'+o[i]).removeAttr('disabled');
+		}
+
 	});
+	
+	// trigger first change
+	parserType.change();
 
 	// update first time
 	$('#regex').trigger('keyup');
