@@ -64,7 +64,7 @@ public class Parser {
 			try {
 				// compute options
 				int flags = 0;
-				JSONArray options = input.getJSONArray("options");
+				JSONArray options = input.getJSONArray("flags");
 				for (int i = 0; i < options.length(); i++) {
 					if (options.getString(i).equals("d")) {
 						flags = flags | Pattern.UNIX_LINES;
@@ -90,36 +90,20 @@ public class Parser {
 				// output array
 				JSONArray matchings = new JSONArray();
 
-				mainIndexLoop: for (int i = 0; i < matchText.length(); i++) {
+				Matcher matching = regex.matcher(matchText);
+				while (matching.find()) {
+					JSONObject current = new JSONObject();
+					current.put("text", matching.group());
 
-					String currentMatchText = matchText.substring(i);
-					Matcher matching = regex.matcher(currentMatchText);
+					current.put("index", matching.start());
 
-					if (matching.find()) {
-
-						// is it in the result?
-						for (int j = 0; j < matchings.length(); j++) {
-							if (matchings.getJSONObject(j).getString("text") == matching
-									.group()) {
-								continue mainIndexLoop;
-							}
-						}
-						JSONObject current = new JSONObject();
-						current.put("text", matching.group());
-
-						current.put("index", matchText
-								.indexOf(matching.group())
-								+ i);
-
-						JSONArray subexpressions = new JSONArray();
-						for (int n = 0; n <= matching.groupCount(); n++) {
-							subexpressions.put(n, matching.group(n));
-						}
-						current.put("subexpressions", subexpressions);
-						matchings.put(current);
-					} else {
-						break mainIndexLoop;
+					JSONArray subexpressions = new JSONArray();
+					for (int n = 0; n <= matching.groupCount(); n++) {
+						subexpressions.put(n, matching.group(n));
 					}
+					current.put("subexpressions", subexpressions);
+					matchings.put(current);
+
 				}
 
 				input.put("matchings", matchings);
@@ -129,7 +113,7 @@ public class Parser {
 			}
 
 			// send json
-			System.out.println(input);
+			System.out.println(input.toString(2));
 
 		} catch (JSONException e) {
 
