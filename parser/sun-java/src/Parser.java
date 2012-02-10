@@ -108,6 +108,8 @@ public class Parser {
 				if (pFlags.length() != 0) {
 					programming
 							.append(pFlags.substring(0, pFlags.length() - 3));
+				} else {
+					programming.append("0");
 				}
 				programming.append(");\nwhile(m.find()) {");
 				input.put("programming", programming);
@@ -144,7 +146,7 @@ public class Parser {
 			}
 
 			// send json
-			System.out.println(input.toString(2));
+			System.out.println(input);
 
 		} catch (JSONException e) {
 

@@ -25,10 +25,16 @@ var RegHex = new function() {
 	 * Object for message service
 	 *
 	 * Initialitation with console
-	 * @type Object
+	 * @type {UIMessageService}
 	 */
 	this._messageService = { notify: function(d) {console.dir(d);} };
 
+	/**
+	 * Object for presenting code
+	 *
+	 * @type {UICodeSnip}
+	 */
+	this._codeSnip = { update: function(t){console.log(t);}};
 
 	/**
 	 * Creates a new match text and registers a specified observer
@@ -83,6 +89,15 @@ var RegHex = new function() {
 	};
 
 	/**
+	 * Registers a code snip presenter
+	 *
+	 * @param {UICodeSnip} codeSnip
+	 */
+	this.registerCodeSnip = function(codeSnip) {
+		this._codeSnip = codeSnip;
+	};
+
+	/**
 	 * Updates the reg. exp., e.g. after the user changed the related field
 	 *
 	 * @param {String} expression e.g. "ab*c"
@@ -111,6 +126,11 @@ var RegHex = new function() {
 				function(error) {
 					that._messageService.notify(error);
 					errorOccured = true;
+				},
+				function(response) {
+					if (typeof response.programming != 'undefined') {
+						that._codeSnip.update(response.programming);
+					}
 				});
 		}
 		// Notify message service that parsing was successful, so it

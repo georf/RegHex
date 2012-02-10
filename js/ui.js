@@ -16,6 +16,9 @@ $(function() {
 	// Create and register a message service
 	RegHex.registerMessageService(new UIMessageService());
 
+	// Create and register a code block service
+	RegHex.registerCodeSnip(new UICodeSnip());
+
 	// Bundle flags into an array
 	var bundleFlags = function() {
 		var flags = [];
@@ -79,13 +82,16 @@ $(function() {
 		var l = RegHex.getRegularExpression().getUrls();
 		var ul = '';
 		for ( var i = 0; i < l.length; i++) {
-			ul += '<li><a href="' + l + '">' + l + '</a></li>';
+			ul += '<li><a href="' + l[i] + '">' + l[i] + '</a></li>';
 		}
 		if (ul != '') {
 			$('#additional-parser-info').html('<ul>' + ul + '</ul>');
 		} else {
 			$('#additional-parser-info').html(ul);
 		}
+
+		// trigger a new parse event
+		$('#regex').keyup();
 
 	});
 
