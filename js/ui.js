@@ -87,6 +87,9 @@ $(function() {
 			$('#additional-parser-info').html(ul);
 		}
 
+		// trigger a new parse event
+		$('#regex').keyup();
+
 	});
 
 	// trigger first change
