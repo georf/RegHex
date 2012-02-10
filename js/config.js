@@ -20,7 +20,7 @@ var config = {
 			ParserAjax
 		), new RegularExpression(
 			'php',
-			'imsxu',
+			'imsxug',
 			[ "http://www.php.net/manual/en/reference.pcre.pattern.modifiers.php", "http://www.regular-expressions.info/php.html" ],
 			ParserAjax
 		)
