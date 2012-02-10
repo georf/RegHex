@@ -5,6 +5,8 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 import java.util.regex.PatternSyntaxException;
 
+import org.apache.commons.lang3.StringEscapeUtils;
+
 import json.JSONArray;
 import json.JSONException;
 import json.JSONObject;
@@ -61,25 +63,54 @@ public class Parser {
 			// create a json object from string
 			JSONObject input = new JSONObject(new JSONTokener(text));
 
+			// generate program snip
+			StringBuffer programming = new StringBuffer(
+					"Matcher m = Pattern.compile(\""
+							+ StringEscapeUtils.escapeJava(input
+									.getString("regularExpression")) + "\", ");
+
 			try {
 				// compute options
 				int flags = 0;
+
+				StringBuffer pFlags = new StringBuffer();
+
 				JSONArray options = input.getJSONArray("flags");
 				for (int i = 0; i < options.length(); i++) {
+
 					if (options.getString(i).equals("d")) {
 						flags = flags | Pattern.UNIX_LINES;
+						pFlags.append("Pattern.UNIX_LINES | ");
+
 					} else if (options.getString(i).equals("i")) {
 						flags = flags | Pattern.CASE_INSENSITIVE;
+						pFlags.append("Pattern.CASE_INSENSITIVE | ");
+
 					} else if (options.getString(i).equals("m")) {
 						flags = flags | Pattern.MULTILINE;
+						pFlags.append("Pattern.MULTILINE | ");
+
 					} else if (options.getString(i).equals("s")) {
 						flags = flags | Pattern.DOTALL;
+						pFlags.append("Pattern.DOTALL | ");
+
 					} else if (options.getString(i).equals("u")) {
 						flags = flags | Pattern.UNICODE_CASE;
+						pFlags.append("Pattern.UNICODE_CASE | ");
+
 					} else if (options.getString(i).equals("x")) {
 						flags = flags | Pattern.COMMENTS;
+						pFlags.append("Pattern.COMMENTS | ");
+
 					}
 				}
+
+				if (pFlags.length() != 0) {
+					programming
+							.append(pFlags.substring(0, pFlags.length() - 3));
+				}
+				programming.append(");\nwhile(m.find()) {");
+				input.put("programming", programming);
 
 				String matchText = input.getString("matchText");
 
