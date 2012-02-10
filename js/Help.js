@@ -2,6 +2,8 @@
  * Generate a live help
  *
  * @author Georg Limbach <georf@dev.mgvmedia.com>
+ *
+ * @constructor
  */
 
 function Help() {
@@ -114,7 +116,7 @@ function Help() {
 
 	// initiation
 	$this.runSteps();
-	
+
 	// bind esc for close
 	$(document).keyup(function(e) {
 		if (e.keyCode == 27) {
@@ -125,6 +127,9 @@ function Help() {
 
 }
 
+/**
+ * @constructor
+ */
 function TypeInto(area, val, millisec) {
 	var $this = this;
 	this.area = area;
@@ -146,6 +151,9 @@ function TypeInto(area, val, millisec) {
 	this.typeKey();
 }
 
+/**
+ * @constructor
+ */
 function Step(message, callback, time, hElements) {
 	var $this = this;
 
@@ -162,18 +170,18 @@ function Step(message, callback, time, hElements) {
 
 		$this.callback();
 	};
-	
+
 	this.terminate = function() {
 		$this.lowlight();
 
 		$this.timeoutId = null;
 	};
-		
+
 	this.highlight = function() {
 		if (typeof $this.highlightedElements == 'function') {
 			$this.highlightedElements = $this.highlightedElements();
 		}
-		
+
 		if (typeof $this.highlightedElements != 'undefined') {
 			$this.highlightedElements.css({position: 'relative', 'z-index': '999'});
 		}

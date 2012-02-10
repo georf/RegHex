@@ -4,9 +4,11 @@
  * Internal it's a simple queue and a array.
  *
  * @author Georg Limbach <georf@dev.mgvmedia.com>
+ * @class
+ * @constructor
  */
 var RegularExpressionCache = new function() {
-	this.MAX_ELEMENTS = 100;
+	this._MAX_ELEMENTS = 100;
 
 
 	/**
@@ -17,37 +19,44 @@ var RegularExpressionCache = new function() {
 	 *         "[a-z]+" => Object
 	 *     ]
 	 * ]
+	 * @type Object
 	 */
-	this.cache = new Array();
+	this._cache = {};
 
 	/**
 	 * Count all elements in the tree
+	 * @type number
 	 */
-	this.counter = 0;
+	this._counter = 0;
 
 	/**
 	 * Every element has a pointer to his successor
+	 * @type Object
 	 */
-	this.next = null;
-	this.last = null;
+	this._next = null;
+	this._last = null;
+
 
 	/**
 	 * Checks the cache for a value
-	 * @param String
-	 * @param String
-	 * @param String[]
-	 * @param String
-	 * @return Boolean or Object
+	 * @param {String} text
+	 * @param {String} expression
+	 * @param {String[]} flags
+	 * @param {String} parser
+	 * @returns {boolean|Object}
 	 */
-	this.getValue = function (text, expression, options, parser) {
-		if (typeof this.cache[parser] == 'undefined' || typeof this.cache[parser][expression] == 'undefined') {
-			return false;
-		} else {
-			var opt = this.hashOptions(options);
+	this.getValue = function (text, expression, flags, parser) {
 
-			for (var i = 0; i < this.cache[parser][expression].length; i++) {
-				var current = this.cache[parser][expression][i];
-				if (current.matchText == text && current.optionsHash == opt) {
+		if (typeof this._cache[parser] == 'undefined' || typeof this._cache[parser][expression] == 'undefined') {
+
+			return false;
+
+		} else {
+			var opt = this._hashFlags(flags);
+
+			for (var i = 0; i < this._cache[parser][expression].length; i++) {
+				var current = this._cache[parser][expression][i];
+				if (current.matchText == text && current.flagsHash == opt) {
 					return current;
 				}
 			}
@@ -57,40 +66,41 @@ var RegularExpressionCache = new function() {
 
 	/**
 	 * Adds a value to cache
-	 * @param Object
+	 * @param {Object} data
 	 */
 	this.addValue = function (data) {
 		var parser = data.parser;
 		var expression = data.regularExpression;
-		data.optionsHash = this.hashOptions(data.options);
+
+		data.flagsHash = this._hashFlags(data.flags);
 
 		// check for structur
-		if (typeof this.cache[parser] == 'undefined') {
-			this.cache[parser] = new Array();
+		if (typeof this._cache[parser] == 'undefined') {
+			this._cache[parser] = {}
 		}
 
-		if (typeof this.cache[parser][expression] == 'undefined') {
-			this.cache[parser][expression] = new Array();
+		if (typeof this._cache[parser][expression] == 'undefined') {
+			this._cache[parser][expression] = []
 		}
 
 
 		// update pointers
 
 		// if it's the first element
-		if (this.next == null) {
-			this.next = data;
+		if (this._next == null) {
+			this._next = data;
 		} else {
-			this.last.next = data;
+			this._last._next = data;
 		}
-		this.last = data;
+		this._last = data;
 
 		// insert new element
-		var pointer = this.cache[parser][expression].length;
-		this.cache[parser][expression][pointer] = data;
-		this.counter++;
+		var pointer = this._cache[parser][expression].length;
+		this._cache[parser][expression][pointer] = data;
+		this._counter++;
 
 		// clean cache
-		this.cleanUp();
+		this._cleanUp();
 	}
 
 	/**
@@ -101,44 +111,44 @@ var RegularExpressionCache = new function() {
 	 *
 	 * Call this method periodly or in idyll time.
 	 */
-	this.cleanUp = function () {
-		while (this.counter > this.MAX_ELEMENTS) {
-			var data = this.next;
+	this._cleanUp = function () {
+		while (this._counter > this._MAX_ELEMENTS) {
+			var data = this._next;
 			var parser = data.parser;
 			var expression = data.regularExpression;
 
 			// search in the tree for the element
-			for (var i = 0; i < this.cache[parser][expression].length; i++) {
-				if (this.cache[parser][expression][i] == data) {
+			for (var i = 0; i < this._cache[parser][expression].length; i++) {
+				if (this._cache[parser][expression][i] == data) {
 
 					// delete this element in array
-					this.cache[parser][expression].splice(i, 1);
+					this._cache[parser][expression].splice(i, 1);
 
 					break;
 				}
 			}
 
 			// delete array if its empty
-			if (this.cache[parser][expression].length == 0) {
-				delete(this.cache[parser][expression]);
+			if (this._cache[parser][expression].length == 0) {
+				delete(this._cache[parser][expression]);
 			}
 
-			this.next = data.next;
-			this.counter--;
+			this._next = data._next;
+			this._counter--;
 		}
 	}
 
 
 	/**
-	 * generate a hash value for the reg. exp. options
-	 * @param String[] e.g. ["i","g"]
-	 * @return String e.g. "gi"
+	 * generate a hash value for the reg. exp. flags
+	 * @param {String[]} flags e.g. ["i","g"]
+	 * @returns {String} e.g. "gi"
 	 */
-	this.hashOptions = function (options) {
-		options.sort();
+	this._hashFlags = function (flags) {
+		flags.sort();
 		var ret = '';
-		for (var i = 0; i < options.length; i++) {
-			ret += options[i];
+		for (var i = 0; i < flags.length; i++) {
+			ret += flags[i];
 		}
 		return ret;
 	}

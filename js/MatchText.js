@@ -3,6 +3,7 @@
  *
  * @author Georg Limbach <georf@dev.mgvmedia.com>
  *
+ * @constructor
  * @param UIMatchField observer
  */
 function MatchText(observer) {

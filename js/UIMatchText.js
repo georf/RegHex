@@ -1,6 +1,8 @@
 /**
- * 
+ *
  * @author Georg Limbach <georf@dev.mgvmedia.com>
+ *
+ * @constructor
  * @param jQuery
  *            selection - the matchtext block
  * @param boolean
@@ -23,7 +25,7 @@ function UIMatchText(block, deleteButton) {
 	// hide boxes
 	this.jMatchMoreInfo.hide();
 	this.jMoreInformation.hide();
-	
+
 	// generate model
 	var matchText = RegHex.addMatchText(this, this.jTextarea.val());
 
@@ -43,7 +45,7 @@ function UIMatchText(block, deleteButton) {
 	this.response = null;
 	this.selectedMatch = 0;
 	this.moreInformationOpen = false;
-	
+
 	this.notify = function(response) {
 
 		// its the same text?
@@ -66,7 +68,7 @@ function UIMatchText(block, deleteButton) {
 
 	/**
 	 * Highlight the matches in the textarea
-	 * 
+	 *
 	 * @return this
 	 */
 	this.highlight = function() {
@@ -125,7 +127,7 @@ function UIMatchText(block, deleteButton) {
 
 	/**
 	 * Escape special chars
-	 * 
+	 *
 	 * @param String
 	 *            text to escape
 	 * @return String escaped text
@@ -140,7 +142,7 @@ function UIMatchText(block, deleteButton) {
 	/**
 	 * Replaces each substring of the value that matches the given string with
 	 * the given replacement.
-	 * 
+	 *
 	 * @param String
 	 *            value
 	 * @param String
@@ -162,11 +164,11 @@ function UIMatchText(block, deleteButton) {
 
 	/**
 	 * Updates the infobox
-	 * 
+	 *
 	 * Sets button dis/enabled and update text
 	 */
 	this.updateInfobox = function() {
-		
+
 		if (this.moreInformationOpen) {
 			this.jMatchMoreInfo.slideUp();
         } else {
@@ -179,7 +181,7 @@ function UIMatchText(block, deleteButton) {
 			this.jMatchInfo.html('no matches');
 			this.jNextMatch.attr('disabled', 'disabled');
 			this.jPreviousMatch.attr('disabled', 'disabled');
-			
+
 			this.jMatchMoreInfo.slideUp();
 			this.jMoreInformation.slideUp();
 
@@ -187,7 +189,7 @@ function UIMatchText(block, deleteButton) {
 		} else {
 			this.jMatchInfo.html('match ' + (this.selectedMatch + 1) + ' of '
 					+ this.response.matchings.length);
-			
+
 			var results = this.response.matchings[this.selectedMatch].subexpressions;
 
 			if (!results || results.length <= 0) {
@@ -216,7 +218,7 @@ function UIMatchText(block, deleteButton) {
 			} else {
 				this.jNextMatch.removeAttr('disabled');
 			}
-			
+
 			// show more information
 			if (this.moreInformationOpen) {
 				this.jMoreInformation.slideDown();
@@ -228,7 +230,7 @@ function UIMatchText(block, deleteButton) {
 
 	/**
 	 * Updates all information in and around the textbox
-	 * 
+	 *
 	 * @return this
 	 */
 	this.update = function() {
@@ -246,7 +248,7 @@ function UIMatchText(block, deleteButton) {
 
 	/**
 	 * Scroll the background div to the correct position
-	 * 
+	 *
 	 * @return this
 	 */
 	this.updateScrollPosition = function() {
@@ -258,7 +260,7 @@ function UIMatchText(block, deleteButton) {
 
 	/**
 	 * Select next match if possible
-	 * 
+	 *
 	 * @return this
 	 */
 	this.nextMatch = function() {
@@ -273,7 +275,7 @@ function UIMatchText(block, deleteButton) {
 
 	/**
 	 * Select previous match if possible
-	 * 
+	 *
 	 * @return this
 	 */
 	this.previousMatch = function() {
@@ -287,7 +289,7 @@ function UIMatchText(block, deleteButton) {
 
 	/**
 	 * Open and close the information box
-	 * 
+	 *
 	 * @param boolean
 	 *            open == true
 	 * @return this
@@ -319,7 +321,7 @@ function UIMatchText(block, deleteButton) {
 
 	// update all informations after first creation
 	this.update();
-	
+
 	if (deleteButton) {
 
 		// generate delete button

@@ -3,18 +3,39 @@
  *
  * @author Georg Limbach <georf@dev.mgvmedia.com>
  * @author Sebastian Gaul <sebastian@dev.mgvmedia.com>
+ *
+ * @class
  */
 var RegHex = new function() {
 
-	this.matchTexts = new Array();
-	this.messageService = { notify: function(d) {console.dir(d);} };
+	/**
+	 * Pointer to select regular expression
+	 * @type RegularExpression
+	 */
+	this._regularExpression;
+
+	/**
+	 * Array of MatchText
+	 * @type MatchText[]
+	 */
+	this._matchTexts = [];
+
+
+	/**
+	 * Object for message service
+	 *
+	 * Initialitation with console
+	 * @type Object
+	 */
+	this._messageService = { notify: function(d) {console.dir(d);} };
+
 
 	/**
 	 * Creates a new match text and registers a specified observer
 	 *
-	 * @param UIMatchText
-	 * @param string
-	 * @return MatchText The created MatchText object
+	 * @param {UIMatchText} observer
+	 * @param {String} initialText
+	 * @returns {MatchText} The created MatchText object
 	 */
 	this.addMatchText = function(observer, initialText) {
 		// create object
@@ -24,25 +45,25 @@ var RegHex = new function() {
 		matchText.setText(initialText);
 
 		// add to list
-		this.matchTexts[this.matchTexts.length] = matchText;
+		this._matchTexts[this._matchTexts.length] = matchText;
 
 		return matchText;
 	};
 
+
 	/**
 	 * Remove a match text
 	 *
-	 * @param MatchText
-	 *            to remove
+	 * @param {MatchText} matchText to remove
 	 * @return this
 	 */
 	this.removeMatchText = function(matchText) {
-		for ( var i = 0; i < this.matchTexts.length; i++) {
-			if (this.matchTexts[i] == matchText) {
-				var current = this.matchTexts[i];
+		for ( var i = 0; i < this._matchTexts.length; i++) {
+			if (this._matchTexts[i] == matchText) {
+				var current = this._matchTexts[i];
 
 				// remove from array
-				this.matchTexts.splice(i, 1);
+				this._matchTexts.splice(i, 1);
 
 				// delete internal
 				current.finalize();
@@ -55,67 +76,50 @@ var RegHex = new function() {
 	/**
 	 * Registers a message service which accepts and handles messages
 	 *
-	 * @param UIMessageService
+	 * @param {UIMessageService} messageService
 	 */
 	this.registerMessageService = function(messageService) {
-		this.messageService = messageService;
+		this._messageService = messageService;
 	};
 
 	/**
 	 * Updates the reg. exp., e.g. after the user changed the related field
 	 *
-	 * @param string
-	 *            e.g. "ab*c"
-	 * @param string[]
-	 *            e.g. ["i", "x", "s"]
+	 * @param {String} expression e.g. "ab*c"
+	 * @param {String[]} flags e.g. ["i", "x", "s"]
 	 */
-	this.updateRegularExpression = function(expression, options) {
+	this.updateRegularExpression = function(expression, flags) {
 		// set new expression
-		this.regularExpression.setRegularExpression(expression);
+		this._regularExpression.setRegularExpression(expression);
 
-		// set new options
-		this.regularExpression.setOptions(options);
-
-		// update match texts
-		this.updateMatchTexts();
-	};
-
-	/**
-	 * Updates the reg. exp. parser.
-	 *
-	 * @param string
-	 *            e.g. "parser-javascript"
-	 */
-	this.updateRegularExpressionParser = function(parser) {
-		// set new parser
-		this.regularExpression.setParser(parser);
+		// set new flags
+		this._regularExpression.setFlags(flags);
 
 		// update match texts
-		this.updateMatchTexts();
+		this._updateMatchTexts();
 	};
+
 
 	/**
 	 * Update all match texts
-	 *
-	 * @return this
 	 */
-	this.updateMatchTexts = function() {
+	this._updateMatchTexts = function() {
 		var that = this,
 			errorOccured = false;
-		for ( var i = 0; i < this.matchTexts.length; i++) {
-			this.matchTexts[i].notify(this.matchTexts[i].observer,
+		for ( var i = 0; i < this._matchTexts.length; i++) {
+			this._matchTexts[i].notify(this._matchTexts[i].observer,
 				function(error) {
-					that.messageService.notify(error);
+					that._messageService.notify(error);
 					errorOccured = true;
 				});
 		}
 		// Notify message service that parsing was successful, so it
 		// can hide previous error messages
 		if (!errorOccured) {
-			this.messageService.notify();
+			this._messageService.notify();
 		}
-		return this;
 	};
+
 
 	/**
 	 * Returns the RegularExpression object
@@ -123,22 +127,28 @@ var RegHex = new function() {
 	 * @return RegularExpression
 	 */
 	this.getRegularExpression = function() {
-		return this.regularExpression;
+		return this._regularExpression;
 	};
 
 
+	/**
+	 * Change the parser type e.g. the user select a other parser
+	 *
+	 * The method search the object for the new parser and set is as
+	 * current regular expression object.
+	 *
+	 * @param {String} parserType
+	 */
 	this.changeParserType = function(parserType) {
 
-		// set new parser type
-		this.regularExpression.setParser(parserType);
+		// search config in array
+		for (var i = 0; i < config.parsers.length; i++) {
+			if (config.parsers[i].getName() == parserType) {
+				this._regularExpression = config.parsers[i];
+			}
+		}
 
 		// update match texts
-		this.updateMatchTexts();
-	}
-
-	/**
-	 * Constructor creates a RegularExpression object
-	 */
-
-	this.regularExpression = new RegularExpression();
+		this._updateMatchTexts();
+	};
 };
