@@ -1,5 +1,7 @@
 /**
  * Accepts and handles incoming messages
+ *
+ * @constructor
  */
 function UIMessageService() {
 

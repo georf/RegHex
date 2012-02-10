@@ -16,15 +16,15 @@ $(function() {
 	// Create and register a message service
 	RegHex.registerMessageService(new UIMessageService());
 
-	// Bundle options into an array
-	var bundleOptions = function() {
-		var options = [];
+	// Bundle flags into an array
+	var bundleFlags = function() {
+		var flags = [];
 		$('.parser-option').each(function(i, el) {
 			if ($(el).is(':checked')) {
-				options.push($(el).attr('name').substr(7));
+				flags.push($(el).attr('name').substr(7));
 			}
 		});
-		return options;
+		return flags;
 	};
 
 	// Trigger regex change whenever an option changes
@@ -34,7 +34,7 @@ $(function() {
 
 	// Notify if regular expression changes
 	$('#regex').bind('keyup blur input cut paste', function() {
-		RegHex.updateRegularExpression($(this).val(), bundleOptions());
+		RegHex.updateRegularExpression($(this).val(), bundleFlags());
 	});
 
 	$('#add-matchtext').click(function() {
@@ -57,26 +57,26 @@ $(function() {
 
 	// Add parsers to select field
 	for ( var i = 0; i < config.parsers.length; i++) {
-		parserType.append($('<option value="' + config.parsers[i].name + '">'
-				+ config.parsers[i].name + '</option>'));
+		parserType.append($('<option value="' + config.parsers[i].getName() + '">'
+				+ config.parsers[i].getName() + '</option>'));
 	}
 
 	// bind parser type to RegHex
 	parserType.change(function() {
 		// update regex
 		RegHex.changeParserType($('#parser-type').val());
-		
+
 		// disable options
 		$('.parser-option').attr('disabled', 'disabled');
-		
+
 		// enable usefull options
-		var o = RegHex.currentParserConfig.options;
+		var o = RegHex.getRegularExpression().getFlags();
 		for (var i = 0; i < o.length; i++) {
 			$('#option-'+o[i]).removeAttr('disabled');
 		}
-		
+
 		// set new info link
-		var l = RegHex.currentParserConfig.infoUrl;
+		var l = RegHex.getRegularExpression().getUrls();
 		var ul = '';
 		for ( var i = 0; i < l.length; i++) {
 			ul += '<li><a href="' + l + '">' + l + '</a></li>';
@@ -88,7 +88,7 @@ $(function() {
 		}
 
 	});
-	
+
 	// trigger first change
 	parserType.change();
 

@@ -39,8 +39,10 @@
 			<li><label for="option-m"><input type="checkbox" name="option-m" id="option-m" class="parser-option"><strong>m</strong>multiple lines</label></li>
 			<li><label for="option-s"><input type="checkbox" name="option-s" id="option-s" class="parser-option"><strong>s</strong>single line</label></li>
 			<li><label for="option-g"><input type="checkbox" name="option-g" id="option-g" class="parser-option"><strong>g</strong>replace globally</label></li>
+			<li><label for="option-x"><input type="checkbox" name="option-x" id="option-x" class="parser-option"><strong>x</strong>comments allowed</label></li>
+			<li><label for="option-u"><input type="checkbox" name="option-u" id="option-u" class="parser-option"><strong>u</strong>unicode support</label></li>
 			</ul>
-			
+
 			<p id="additional-parser-info"></p>
 		</section>
 		<section id="matching-section">
@@ -77,19 +79,29 @@
 <script>window.jQuery || document.write('<script src="js/libs/jquery-1.6.2.min.js"><\/script>')</script>
 <script src="js/libs/jquery.json-2.3.min.js"></script>
 
-
-<!-- scripts concatenated and minified via ant build script-->
-<script defer src="js/config.js"></script>
+<!-- some stuff -->
 <script defer src="js/plugins.js"></script>
+
+<!-- parser classes -->
+<script defer src="js/parser/RegularExpression.js"></script>
+<script defer src="js/parser/Javascript.js"></script>
+<script defer src="js/parser/Ajax.js"></script>
+
+<!-- other simple classes -->
 <script defer src="js/UIMatchText.js"></script>
-<script defer src="js/ui.js"></script>
-<script defer src="js/RegularExpression.js"></script>
-<script defer src="js/RegularExpressionParser.js"></script>
-<script defer src="js/RegularExpressionCache.js"></script>
 <script defer src="js/MatchText.js"></script>
 <script defer src="js/UIMessageService.js"></script>
-<script defer src="js/RegHex.js"></script>
 <script defer src="js/Help.js"></script>
+
+<!-- config -->
+<script defer src="js/config.js"></script>
+
+<!-- singleton classes -->
+<script defer src="js/RegularExpressionCache.js"></script>
+<script defer src="js/RegHex.js"></script>
+
+<!-- start ui -->
+<script defer src="js/ui.js"></script>
 <!-- end scripts-->
 
 <!--[if lt IE 8 ]>
