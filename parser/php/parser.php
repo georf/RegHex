@@ -7,10 +7,10 @@ $input = json_decode($jsonInput);
 
 // check valid input
 $valid = array(
-    'parser' => '',
-    'regularExpression' => '',
-    'flags' => array(),
-    'matchText' => 'bluab'
+	'parser' => '',
+	'regularExpression' => '',
+	'flags' => array(),
+	'matchText' => 'bluab'
 );
 
 foreach ($valid as $key=>$value) {
@@ -55,8 +55,12 @@ $escapeRegexp = str_replace('/', '\/', $regexp);
 $fullRegexp = '/'.$escapeRegexp.'/'.$flags;
 
 $output->matchings = array();
+$output->programming = '';
 
 if ($global) {
+
+	$output->programming = 'if (preg_match_all(\''.str_replace("'", "\\'", $fullRegexp).'\', $text, $result)) ';
+
 	if (preg_match_all($fullRegexp, $text, $result)) {
 
 		$index = 0;
@@ -72,7 +76,7 @@ if ($global) {
 			$currentIndex = strpos($currentText, $match->text);
 			$index += $currentIndex;
 			$match->index = $index;
-			$index++;
+			$index += strlen($match->text);
 
 			$sub = array();
 			for ($i = 0; $i < count($result); $i++) {
@@ -85,6 +89,9 @@ if ($global) {
 		$output->error = checkError();
 	}
 } else {
+
+	$output->programming = 'if (preg_match(\''.str_replace("'", "\\'", $fullRegexp).'\', $text, $result)) ';
+
 	if (preg_match($fullRegexp, $text, $result)) {
 		$output->matchings[0] = (object) array();
 		$output->matchings[0]->text = $result[0];
