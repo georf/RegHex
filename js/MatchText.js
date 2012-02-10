@@ -28,7 +28,7 @@ function MatchText(observer) {
 	 * @param UIMatchField
 	 * @return this;
 	 */
-	this.notify = function (matchTextField, errorCallback) {
+	this.notify = function (matchTextField, errorCallback, responseCallback) {
 
 		if (typeof matchTextField == 'undefined') {
 			matchTextField = this.observer;
@@ -43,6 +43,7 @@ function MatchText(observer) {
 				errorCallback(data.error);
 			}
 			matchTextField.notify(data);
+			responseCallback(data);
 		});
 
 		return this;
