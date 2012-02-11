@@ -43,8 +43,6 @@
 			<li><label for="option-u"><input type="checkbox" name="option-u" id="option-u" class="parser-option"><strong>u</strong>unicode support</label></li>
 			</ul>
 
-			<p id="additional-parser-info"></p>
-			<pre id="codeblock"></pre>
 		</section>
 		<section id="matching-section">
 			<div id="matching-blocks">
@@ -64,8 +62,20 @@
 			</div>
 			<p id="add-matchtext-section" class="clearfix"><a id="add-matchtext" title="add another text for matching">+</a></p>
 		</section>
+
 	</div>
 
+	<div id="about-section">
+		<section id="link-section">
+			<p>about <span class="current-parser-name"></span> regular expression</p>
+			<div id="additional-parser-info"></div>
+		</section>
+		<section id="code-section">
+			<label for="codeblock">code example for <span class="current-parser-name"></span></label>
+			<textarea class="textarea inputWidget" readonly="readonly" id="codeblock" style="font-size:1.0em"></textarea>
+		</section>
+
+	</div>
 
 	<footer>
 		<p><span class="appname">Application reg<strong>[h]?</strong>ex</span>, © 2011 <a href="http://www.mgvmedia.com">MGVmedia.com</a> | <a href="http://www.mgvmedia.com/impressum">Impressum</a></p>

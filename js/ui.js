@@ -69,6 +69,9 @@ $(function() {
 		// update regex
 		RegHex.changeParserType($('#parser-type').val());
 
+		// update about window
+		$('.current-parser-name').text($('#parser-type').val());
+
 		// disable options
 		$('.parser-option').attr('disabled', 'disabled');
 
@@ -82,7 +85,7 @@ $(function() {
 		var l = RegHex.getRegularExpression().getUrls();
 		var ul = '';
 		for ( var i = 0; i < l.length; i++) {
-			ul += '<li><a href="' + l[i] + '">' + l[i] + '</a></li>';
+			ul += '<li><a href="' + l[i][0] + '">' + l[i][1] + '</a></li>';
 		}
 		if (ul != '') {
 			$('#additional-parser-info').html('<ul>' + ul + '</ul>');

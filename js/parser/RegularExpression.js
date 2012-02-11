@@ -7,7 +7,7 @@
  * @constructor
  * @param {String} name Parser name
  * @param {String} flags Allowed flags
- * @param {String[]} urls Array of info urls
+ * @param {String[][]} urls Array of info urls
  * @param {Function} parser function to parse
  */
 function RegularExpression(name, flags, urls, parser) {
@@ -26,7 +26,7 @@ function RegularExpression(name, flags, urls, parser) {
 
 	/**
 	 * Information urls
-	 * @type String[]
+	 * @type String[][]
 	 */
 	this._urls = urls;
 
@@ -67,7 +67,7 @@ function RegularExpression(name, flags, urls, parser) {
 
 	/**
 	 * Returns information urls
-	 * @returns {String[]} urls
+	 * @returns {String[][]} urls
 	 */
 	this.getUrls = function() {
 		return this._urls;

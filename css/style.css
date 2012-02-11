@@ -231,7 +231,7 @@ textarea:focus,
 }
 
 .inputWidget, .matchtext-div {
-	font-size: 1.5em;
+	font-size: 1.2em;
 	font-family: 'Droid Sans Mono', monospace;
 	height: 80px;
 	line-height:1.2em;
@@ -309,12 +309,12 @@ td { vertical-align: top; }
 	font-weight: bold;
 }
 
-#regex-section, #matching-section {
+#regex-section, #matching-section, #link-section, #code-section{
 	float: left;
 	width: 470px;
 }
 
-#regex-section {
+#regex-section, #link-section {
 	margin-right: 20px;
 }
 
@@ -532,4 +532,11 @@ li.active{
 	opacity: .7;
 	color: #fff;
 	text-align: center;
+}
+#about-section{
+	margin-top:50px;
+	opacity:0.5;
+}
+#about-section:hover{
+	opacity:1;
 }
