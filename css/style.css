@@ -239,14 +239,13 @@ textarea:focus,
 	outline: 0;
 	padding: 0 0 0 4px;
 	width: 470px;
+	white-space: pre;
+	word-wrap: break-word;
 }
 
 .matchtext-div {
 	color: transparent;
 	overflow: auto;
-
-	white-space: pre;
-	word-wrap: break-word;
 }
 .matchtext {
 	background: transparent;
