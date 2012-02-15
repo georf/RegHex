@@ -111,7 +111,8 @@ public class Parser {
 				} else {
 					programming.append("0");
 				}
-				programming.append(");\nwhile(m.find()) {");
+				programming.append(");\n" + "while(m.find()) {\n"
+						+ "  System.out.println(m.group());\n" + "}\n");
 				input.put("programming", programming);
 
 				String matchText = input.getString("matchText");
