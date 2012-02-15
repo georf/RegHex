@@ -198,7 +198,7 @@ function UIMatchText(block, deleteButton) {
 
 				var output = 'subexpressions <small>(expression parts in brackets)</small>:<ul>';
 				for ( var i = 0; i < results.length; i++) {
-					output += '<li>$' + i + ' = ' + results[i] + '</li>';
+					output += '<li>' + $('<li/>').text('$' + i + ' = ' + results[i]).html() + '</li>';
 				}
 				output += '</ul>';
 

@@ -17,7 +17,8 @@ $(function() {
 	RegHex.registerMessageService(new UIMessageService());
 
 	// Create and register a code block service
-	RegHex.registerCodeSnip(new UICodeSnip());
+	var codeSnip = new UICodeSnip();
+	RegHex.registerCodeSnip(codeSnip);
 
 	// Bundle flags into an array
 	var bundleFlags = function() {
@@ -92,6 +93,8 @@ $(function() {
 		} else {
 			$('#additional-parser-info').html(ul);
 		}
+
+		codeSnip.update('');
 
 		// trigger a new parse event
 		$('#regex').keyup();
