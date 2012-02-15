@@ -59,7 +59,10 @@ $output->programming = '';
 
 if ($global) {
 
-	$output->programming = 'if (preg_match_all(\''.str_replace("'", "\\'", $fullRegexp).'\', $text, $result)) ';
+	$output->programming =
+		'if (preg_match_all(\''.str_replace("'", "\\'", $fullRegexp).'\', $text, $result)) {'."\n".
+		'  print_r($result);'."\n".
+		'}'."\n";
 
 	if (preg_match_all($fullRegexp, $text, $result)) {
 
@@ -90,7 +93,10 @@ if ($global) {
 	}
 } else {
 
-	$output->programming = 'if (preg_match(\''.str_replace("'", "\\'", $fullRegexp).'\', $text, $result)) ';
+	$output->programming =
+		'if (preg_match(\''.str_replace("'", "\\'", $fullRegexp).'\', $text, $result)) {'."\n".
+		'  print_r($result);'."\n".
+		'}'."\n";
 
 	if (preg_match($fullRegexp, $text, $result)) {
 		$output->matchings[0] = (object) array();
