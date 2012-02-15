@@ -239,7 +239,7 @@ textarea:focus,
 	outline: 0;
 	padding: 0 0 0 4px;
 	width: 470px;
-	white-space: pre;
+	white-space:pre-wrap;
 	word-wrap: break-word;
 }
 
