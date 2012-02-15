@@ -62,7 +62,12 @@ function ParserJavascript(config, text, expression, flags, callback) {
 			"matchText": this._text,
 			"error": false,
 			"matchings": matches,
-			"programming": "var regex = new RegExp('" + this._text.replace(/'/g, "\\'") + "', '" + flags + "');"
+			"programming":
+				"var match;\n" +
+				"var regex = new RegExp('" + this._expression.replace(/'/g, "\\'") + "', '" + flags + "');\n" +
+				"while ((match = regex.exec(text)) != null) {\n" +
+				"  alert(match[0]);\n" +
+				"}\n"
 		});
 	} catch (e) {
 		callback( {
@@ -71,7 +76,8 @@ function ParserJavascript(config, text, expression, flags, callback) {
 			"flags": this._flags,
 			"matchText": this._text,
 			"error": e.message,
-			"matchings": []
+			"matchings": [],
+			"progamming": "",
 		});
 	}
 }
