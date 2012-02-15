@@ -32,6 +32,14 @@ function MatchText(observer) {
 
 		if (typeof matchTextField == 'undefined') {
 			matchTextField = this.observer;
+
+			if (typeof errorCallback == 'undefined') {
+				errorCallback = function(value) {};
+
+				if (typeof responseCallback == 'undefined') {
+					responseCallback = function(value) {};
+				}
+			}
 		}
 
 		// set new value
