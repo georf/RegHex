@@ -104,7 +104,8 @@ function Help() {
 		//~ }, 15000, function() { return $('.navigate-match-section:first, .more-information.overlay.group');}),
 
 		new SetMessageStep('Now it\'s your turn, give it a try!'),
-		new WaitStep(5000),
+		new MoveMessageStep('header', 3, 2000),
+		new WaitStep(4000),
 
 		// last step!
 		new Step(function() {
