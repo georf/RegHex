@@ -8,6 +8,10 @@
 var matchingBlockId = 1;
 
 $(function() {
+	// reset textarea and checkboxes(for firefox)
+	$('textarea').val('');
+	$('input.parser-option').removeAttr('checked');
+
 	// Register existing match text fields
 	$('.matchtext-block').each(function() {
 		new UIMatchText($(this), false);
