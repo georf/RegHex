@@ -8,7 +8,8 @@
 
 function Help() {
 	var $this = this,
-		darkRoom = $('<div>press escape to exit tour</div>');
+		darkRoom = $('<div>press escape to exit tour</div>'),
+		reghex = '<span class="appname">reg<strong>[h]?</strong>ex</span>';
 
 	darkRoom.attr('id', 'darkRoom').appendTo('body');
 	this.lastTimeout = null;
@@ -20,12 +21,12 @@ function Help() {
 
 
 	this.steps = new Array(
-		new Step('Welcome to the help tour', function() {
+		new Step('Welcome to the '+reghex+' tour', function() {
 		}, 5000),
 
-		new MoveStep('Select your parser language', '#parser-type', 100, $('#parser-type')),
+		new MoveStep('Select the language you want to use', '#parser-type', 100, $('#parser-type')),
 
-		new Step('Select your parser language', function() {
+		new Step('Select the language you want to use', function() {
 			// let it blink 3 times
 			$('#parser-type').focus()
 			.fadeOut(500).fadeIn(500)
@@ -36,12 +37,12 @@ function Help() {
 		new Step('', function() {
 		}, 500),
 
-		new MoveStep('Type your first match text', '#matchtext', 1500, $('.matchtext-block:nth-child(1)')),
+		new MoveStep('Write an example text to be matched by your regular expression', '#matchtext', 1500, $('.matchtext-block:nth-child(1)')),
 
-		new Step('Type your first match text', function() {
+		new Step('Write an example text to be matched by your regular expression', function() {
 		}, 2000, $('.matchtext-block:nth-child(1)')),
 
-		new Step('Type your first match text', function() {
+		new Step('Write an example text to be matched by your regular expression', function() {
 
 			// add a match text
 			new TypeInto($('#matchtext').focus(), 'abb', 500);
@@ -51,9 +52,9 @@ function Help() {
 		}, 1000),
 
 
-		new MoveStep('Create a new match text field with the plus button', '#add-matchtext', 3000, $('#add-matchtext')),
+		new MoveStep('Add another example area to match a different text', '#add-matchtext', 3000, $('#add-matchtext')),
 
-		new Step('Create a new match text field with the plus button', function() {
+		new Step('Add another example area to match a different text', function() {
 			// let plus blink 3 times
 			$('#add-matchtext').focus()
 			.fadeOut(500).fadeIn(500)
@@ -64,9 +65,9 @@ function Help() {
 			});
 		}, 4500, $('#add-matchtext')),
 
-		new MoveStep('Type your second match text', '.matchtext-block:nth-child(2)', 2000, $('.matchtext-block:nth-child(2)')),
+		new MoveStep('Now you can fill in another example to be matched', '.matchtext-block:nth-child(2)', 2000, $('.matchtext-block:nth-child(2)')),
 
-		new Step('Type your second match text', function() {
+		new Step('Now you can fill in another example to be matched', function() {
 			// add a match text
 			new TypeInto($('#newid' + (matchingBlockId-1)).focus(), 'test abc ade', 300);
 		}, 10000, function() { return $('.matchtext-block:nth-child(2)'); }),
@@ -74,34 +75,35 @@ function Help() {
 		new Step('', function() {
 		}, 100),
 
-		new Step('Type your regular expression', function() {
+		new Step('Here you can enter your regular expression', function() {
 			// add a regular expression
 			$('#regex').focus();
 			new TypeInto($('#regex'), 'a([a-z]+)', 300);
 		}, 10000, $('#regex')),
 
-		new Step('See at your match text. The green part is matching.', function() {
+		new Step('Look at your sample text: the green background highlights the matched text', function() {
 		}, 10000, function() { return $('.matchtext-block'); }),
 
-		new MoveStep('Now we want to see the groups. Click at subexpression.', '.navigate-match-section:first', 500, function() {return $('.matchtext-block:nth-child(1)'); }),
+		//~ new MoveStep('Subexpression show all the parts of the matched text', '.navigate-match-section:first', 500, function() {return $('.matchtext-block:nth-child(1)'); }),
+//~ 
+		//~ new Step('Subexpression show all the parts of the matched text', function() {
+			//~ // let plus blink 3 times
+			//~ $('.navigate-match-section:first .match-more-info a').focus()
+			//~ .fadeOut(300).fadeIn(300)
+			//~ .fadeOut(300).fadeIn(300)
+			//~ .fadeOut(300).fadeIn(300, function() {
+				//~ $('.navigate-match-section:first .match-more-info a').click();
+			//~ });
+//~ 
+		//~ }, 15000, function() { return $('.navigate-match-section:first, .more-information.overlay.group');}),
 
-		new Step('Now we want to see the groups. Click at subexpression.', function() {
-			// let plus blink 3 times
-			$('.navigate-match-section:first .match-more-info a').focus()
-			.fadeOut(300).fadeIn(300)
-			.fadeOut(300).fadeIn(300)
-			.fadeOut(300).fadeIn(300, function() {
-				$('.navigate-match-section:first .match-more-info a').click();
-			});
-
-		}, 15000, function() { return $('.navigate-match-section:first, .more-information.overlay.group');}),
-
-		new Step('Try it yourself!', function() {
+		new Step('Now it\'s your turn, give it a try!', function() {
 		}, 5000),
 
 		// last step!
 		new Step('', function() {
 			$('#help-current-task').hide();
+			location.reload();
 		}, 100)
 	);
 
@@ -134,7 +136,8 @@ function Help() {
 	// bind esc for close
 	$(document).keyup(function(e) {
 		if (e.keyCode == 27) {
-			$this.close();
+			//~ $this.close();
+			location.reload();
 		}
 	});
 
