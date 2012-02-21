@@ -5,7 +5,7 @@
 		<meta http-equiv="content-type" content="text/html; charset=utf-8" />
 		<meta name="generator" content="JsDoc Toolkit" />
 		
-		<title>JsDoc Reference - MatchText</title>
+		<title>JsDoc Reference - ParserJavascript</title>
 
 		<style type="text/css">
 			/* default.css */
@@ -234,7 +234,7 @@ ul.inheritsList
 <!-- ============================== class title ============================ -->
 			<h1 class="classTitle">
 				
-				Class MatchText
+				Class ParserJavascript
 			</h1>
 
 <!-- ============================== class summary ========================== -->			
@@ -242,16 +242,16 @@ ul.inheritsList
 				
 				
 			
+				ParserJavascript
 				
 				
-				
-					<br /><i>Defined in: </i> <a href="../symbols/src/js_MatchText.js.html">MatchText.js</a>.
+					<br /><i>Defined in: </i> <a href="../symbols/src/js_parser_Javascript.js.html">Javascript.js</a>.
 				
 			</p>
 
 <!-- ============================== constructor summary ==================== -->			
 			
-			<table class="summaryTable" cellspacing="0" summary="A summary of the constructor documented in the class MatchText.">
+			<table class="summaryTable" cellspacing="0" summary="A summary of the constructor documented in the class ParserJavascript.">
 				<caption>Class Summary</caption>
 				<thead>
 					<tr>
@@ -264,9 +264,9 @@ ul.inheritsList
 						<td class="attributes">&nbsp;</td>
 						<td class="nameDescription" >
 							<div class="fixedFont">
-								<b><a href="../symbols/MatchText.html#constructor">MatchText</a></b>(UIMatchField)
+								<b><a href="../symbols/ParserJavascript.html#constructor">ParserJavascript</a></b>(config, text, expression, flags, callback)
 							</div>
-							<div class="description">Handle a match text</div>
+							<div class="description">Handle the Regular Expression for Javascript</div>
 						</td>
 					</tr>
 				</tbody>
@@ -277,51 +277,6 @@ ul.inheritsList
 			
 
 <!-- ============================== methods summary ======================== -->
-			
-				
-				
-				<table class="summaryTable" cellspacing="0" summary="A summary of the methods documented in the class MatchText.">
-					<caption>Method Summary</caption>
-					<thead>
-						<tr>
-							<th scope="col">Method Attributes</th>
-							<th scope="col">Method Name and Description</th>
-						</tr>
-					</thead>
-					<tbody>
-					
-						<tr>
-							<td class="attributes">&nbsp;</td>
-							<td class="nameDescription">
-								<div class="fixedFont"><b><a href="../symbols/MatchText.html#finalize">finalize</a></b>()
-								</div>
-								<div class="description">Set all pointer counts to zero</div>
-							</td>
-						</tr>
-					
-						<tr>
-							<td class="attributes">&nbsp;</td>
-							<td class="nameDescription">
-								<div class="fixedFont"><b><a href="../symbols/MatchText.html#notify">notify</a></b>(UIMatchField, errorCallback, responseCallback)
-								</div>
-								<div class="description">Implements the Observer pattern</div>
-							</td>
-						</tr>
-					
-						<tr>
-							<td class="attributes">&nbsp;</td>
-							<td class="nameDescription">
-								<div class="fixedFont"><b><a href="../symbols/MatchText.html#setText">setText</a></b>(string)
-								</div>
-								<div class="description">Sets the current text</div>
-							</td>
-						</tr>
-					
-					</tbody>
-				</table>
-				
-				
-				
 			
 <!-- ============================== events summary ======================== -->
 			
@@ -334,11 +289,11 @@ ul.inheritsList
 				</div>
 				
 				<div class="fixedFont">
-						<b>MatchText</b>(UIMatchField)
+						<b>ParserJavascript</b>(config, text, expression, flags, callback)
 				</div>
 				
 				<div class="description">
-					Handle a match text
+					Handle the Regular Expression for Javascript
 					<br /><i>Author: </i>Georg Limbach <georf@dev.mgvmedia.com>.
 				</div>
 				
@@ -350,10 +305,34 @@ ul.inheritsList
 						<dt class="heading">Parameters:</dt>
 						
 							<dt>
-								 <b>UIMatchField</b>
+								<span class="light fixedFont">{Function}</span>  <b>config</b>
 								
 							</dt>
-								<dd>observer</dd>
+								<dd>The config RegularExpression object</dd>
+						
+							<dt>
+								<span class="light fixedFont">{String}</span>  <b>text</b>
+								
+							</dt>
+								<dd>Text to parse</dd>
+						
+							<dt>
+								<span class="light fixedFont">{String}</span>  <b>expression</b>
+								
+							</dt>
+								<dd>Regular expression</dd>
+						
+							<dt>
+								<span class="light fixedFont">{String}</span>  <b>flags</b>
+								
+							</dt>
+								<dd>Flags to use</dd>
+						
+							<dt>
+								<span class="light fixedFont">{Function}</span>  <b>callback</b>
+								
+							</dt>
+								<dd>Callback function for data result</dd>
 						
 						</dl>
 					
@@ -371,134 +350,6 @@ ul.inheritsList
 			
 
 <!-- ============================== method details ========================= -->		
-			
-				<div class="sectionTitle">
-					Method Detail
-				</div>
-				
-					<a name="finalize"> </a>
-					<div class="fixedFont">
-					
-					
-					<b>finalize</b>()
-					
-					</div>
-					<div class="description">
-						Set all pointer counts to zero
-						
-						
-					</div>
-					
-					
-					
-						
-						
-						
-						
-						
-						
-						
-
-					<hr />
-				
-					<a name="notify"> </a>
-					<div class="fixedFont">
-					
-					
-					<b>notify</b>(UIMatchField, errorCallback, responseCallback)
-					
-					</div>
-					<div class="description">
-						Implements the Observer pattern
-						
-						
-					</div>
-					
-					
-					
-						
-							<dl class="detailList">
-							<dt class="heading">Parameters:</dt>
-							
-								<dt>
-									<b>UIMatchField</b>
-									
-								</dt>
-								<dd></dd>
-							
-								<dt>
-									<b>errorCallback</b>
-									
-								</dt>
-								<dd></dd>
-							
-								<dt>
-									<b>responseCallback</b>
-									
-								</dt>
-								<dd></dd>
-							
-							</dl>
-						
-						
-						
-						
-						
-							<dl class="detailList">
-							<dt class="heading">Returns:</dt>
-							
-								<dd>this;</dd>
-							
-							</dl>
-						
-						
-						
-
-					<hr />
-				
-					<a name="setText"> </a>
-					<div class="fixedFont">
-					
-					
-					<b>setText</b>(string)
-					
-					</div>
-					<div class="description">
-						Sets the current text
-						
-						
-					</div>
-					
-					
-					
-						
-							<dl class="detailList">
-							<dt class="heading">Parameters:</dt>
-							
-								<dt>
-									<b>string</b>
-									
-								</dt>
-								<dd></dd>
-							
-							</dl>
-						
-						
-						
-						
-						
-							<dl class="detailList">
-							<dt class="heading">Returns:</dt>
-							
-								<dd>this</dd>
-							
-							</dl>
-						
-						
-						
-
-					
-				
 			
 			
 <!-- ============================== event details ========================= -->		

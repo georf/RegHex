@@ -193,11 +193,25 @@ ul.inheritsList
 	
 	<li><a href="../symbols/Help.html">Help</a></li>
 	
+	<li><a href="../symbols/HighlightStep.html">HighlightStep</a></li>
+	
+	<li><a href="../symbols/LowlightStep.html">LowlightStep</a></li>
+	
 	<li><a href="../symbols/MatchText.html">MatchText</a></li>
+	
+	<li><a href="../symbols/MoveMessageStep.html">MoveMessageStep</a></li>
+	
+	<li><a href="../symbols/ParserAjax.html">ParserAjax</a></li>
+	
+	<li><a href="../symbols/ParserJavascript.html">ParserJavascript</a></li>
 	
 	<li><a href="../symbols/RegHex.html">RegHex</a></li>
 	
+	<li><a href="../symbols/RegularExpression.html">RegularExpression</a></li>
+	
 	<li><a href="../symbols/RegularExpressionCache.html">RegularExpressionCache</a></li>
+	
+	<li><a href="../symbols/SetMessageStep.html">SetMessageStep</a></li>
 	
 	<li><a href="../symbols/Step.html">Step</a></li>
 	
@@ -208,6 +222,8 @@ ul.inheritsList
 	<li><a href="../symbols/UIMatchText.html">UIMatchText</a></li>
 	
 	<li><a href="../symbols/UIMessageService.html">UIMessageService</a></li>
+	
+	<li><a href="../symbols/WaitStep.html">WaitStep</a></li>
 	
 </ul>
 <hr />
@@ -229,7 +245,7 @@ ul.inheritsList
 				
 				
 				
-					<br /><i>Defined in: </i> <a href="../symbols/src/js_Help.js.html">Help.js</a>.
+					<br /><i>Defined in: </i> <a href="../symbols/src/js_tour_TypeInto.js.html">TypeInto.js</a>.
 				
 			</p>
 
@@ -250,7 +266,7 @@ ul.inheritsList
 							<div class="fixedFont">
 								<b><a href="../symbols/TypeInto.html#constructor">TypeInto</a></b>(area, val, millisec)
 							</div>
-							<div class="description"></div>
+							<div class="description">A helper for real time typing</div>
 						</td>
 					</tr>
 				</tbody>
@@ -259,8 +275,93 @@ ul.inheritsList
 
 <!-- ============================== properties summary ===================== -->
 			
+				
+				
+				<table class="summaryTable" cellspacing="0" summary="A summary of the fields documented in the class TypeInto.">
+					<caption>Field Summary</caption>
+					<thead>
+						<tr>
+							<th scope="col">Field Attributes</th>
+							<th scope="col">Field Name and Description</th>
+						</tr>
+					</thead>
+					<tbody>
+					
+						<tr>
+							<td class="attributes">&lt;private&gt; &nbsp;</td>
+							<td class="nameDescription">
+								<div class="fixedFont">
+								<b><a href="../symbols/TypeInto.html#_area">_area</a></b>
+								</div>
+								<div class="description">Textarea to write into</div>
+							</td>
+						</tr>
+					
+						<tr>
+							<td class="attributes">&lt;private&gt; &nbsp;</td>
+							<td class="nameDescription">
+								<div class="fixedFont">
+								<b><a href="../symbols/TypeInto.html#_millisec">_millisec</a></b>
+								</div>
+								<div class="description">Milliseconds between keys</div>
+							</td>
+						</tr>
+					
+						<tr>
+							<td class="attributes">&lt;private&gt; &nbsp;</td>
+							<td class="nameDescription">
+								<div class="fixedFont">
+								<b><a href="../symbols/TypeInto.html#_step">_step</a></b>
+								</div>
+								<div class="description">Counter for steps</div>
+							</td>
+						</tr>
+					
+						<tr>
+							<td class="attributes">&lt;private&gt; &nbsp;</td>
+							<td class="nameDescription">
+								<div class="fixedFont">
+								<b><a href="../symbols/TypeInto.html#_val">_val</a></b>
+								</div>
+								<div class="description">Value to type</div>
+							</td>
+						</tr>
+					
+					</tbody>
+				</table>
+				
+				
+				
+			
 
 <!-- ============================== methods summary ======================== -->
+			
+				
+				
+				<table class="summaryTable" cellspacing="0" summary="A summary of the methods documented in the class TypeInto.">
+					<caption>Method Summary</caption>
+					<thead>
+						<tr>
+							<th scope="col">Method Attributes</th>
+							<th scope="col">Method Name and Description</th>
+						</tr>
+					</thead>
+					<tbody>
+					
+						<tr>
+							<td class="attributes">&lt;private&gt; &nbsp;</td>
+							<td class="nameDescription">
+								<div class="fixedFont"><b><a href="../symbols/TypeInto.html#_typeKey">_typeKey</a></b>()
+								</div>
+								<div class="description">Type one key</div>
+							</td>
+						</tr>
+					
+					</tbody>
+				</table>
+				
+				
+				
 			
 <!-- ============================== events summary ======================== -->
 			
@@ -277,8 +378,8 @@ ul.inheritsList
 				</div>
 				
 				<div class="description">
-					
-					
+					A helper for real time typing
+					<br /><i>Author: </i>Georg Limbach <georf@dev.mgvmedia.com>.
 				</div>
 				
 				
@@ -289,22 +390,22 @@ ul.inheritsList
 						<dt class="heading">Parameters:</dt>
 						
 							<dt>
-								 <b>area</b>
+								<span class="light fixedFont">{jQuery}</span>  <b>area</b>
 								
 							</dt>
-								<dd></dd>
+								<dd>Textarea to write into</dd>
 						
 							<dt>
-								 <b>val</b>
+								<span class="light fixedFont">{String}</span>  <b>val</b>
 								
 							</dt>
-								<dd></dd>
+								<dd>Value to type</dd>
 						
 							<dt>
-								 <b>millisec</b>
+								<span class="light fixedFont">{int}</span>  <b>millisec</b>
 								
 							</dt>
-								<dd></dd>
+								<dd>Milliseconds between keys</dd>
 						
 						</dl>
 					
@@ -320,8 +421,131 @@ ul.inheritsList
 
 <!-- ============================== field details ========================== -->		
 			
+				<div class="sectionTitle">
+					Field Detail
+				</div>
+				
+					<a name="_area"> </a>
+					<div class="fixedFont">&lt;private&gt; 
+					
+					<span class="light">{jQuery}</span>
+					<b>_area</b>
+					
+					</div>
+					<div class="description">
+						Textarea to write into
+						
+						
+					</div>
+					
+					
+
+						
+						
+						
+						
+
+					<hr />
+				
+					<a name="_millisec"> </a>
+					<div class="fixedFont">&lt;private&gt; 
+					
+					<span class="light">{int}</span>
+					<b>_millisec</b>
+					
+					</div>
+					<div class="description">
+						Milliseconds between keys
+						
+						
+					</div>
+					
+					
+
+						
+						
+						
+						
+
+					<hr />
+				
+					<a name="_step"> </a>
+					<div class="fixedFont">&lt;private&gt; 
+					
+					<span class="light">{int}</span>
+					<b>_step</b>
+					
+					</div>
+					<div class="description">
+						Counter for steps
+						
+						
+					</div>
+					
+					
+
+						
+						
+						
+						
+
+					<hr />
+				
+					<a name="_val"> </a>
+					<div class="fixedFont">&lt;private&gt; 
+					
+					<span class="light">{String}</span>
+					<b>_val</b>
+					
+					</div>
+					<div class="description">
+						Value to type
+						
+						
+					</div>
+					
+					
+
+						
+						
+						
+						
+
+					
+				
+			
 
 <!-- ============================== method details ========================= -->		
+			
+				<div class="sectionTitle">
+					Method Detail
+				</div>
+				
+					<a name="_typeKey"> </a>
+					<div class="fixedFont">&lt;private&gt; 
+					
+					
+					<b>_typeKey</b>()
+					
+					</div>
+					<div class="description">
+						Type one key
+						
+						
+					</div>
+					
+					
+					
+						
+						
+						
+						
+						
+						
+						
+
+					
+				
 			
 			
 <!-- ============================== event details ========================= -->		
@@ -334,7 +558,7 @@ ul.inheritsList
 <!-- ============================== footer ================================= -->
 		<div class="fineprint" style="clear:both">
 			
-			Documentation generated by <a href="http://code.google.com/p/jsdoc-toolkit/" target="_blank">JsDoc Toolkit</a> 2.4.0 on Sat Feb 11 2012 09:43:26 GMT+0100 (MEZ)
+			Documentation generated by <a href="http://code.google.com/p/jsdoc-toolkit/" target="_blank">JsDoc Toolkit</a> 2.4.0 on Tue Feb 21 2012 00:59:23 GMT+0100 (MEZ)
 		</div>
 	</body>
 </html>

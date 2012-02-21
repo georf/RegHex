@@ -5,7 +5,7 @@
 		<meta http-equiv="content-type" content="text/html; charset=utf-8" />
 		<meta name="generator" content="JsDoc Toolkit" />
 		
-		<title>JsDoc Reference - MatchText</title>
+		<title>JsDoc Reference - HighlightStep</title>
 
 		<style type="text/css">
 			/* default.css */
@@ -234,7 +234,7 @@ ul.inheritsList
 <!-- ============================== class title ============================ -->
 			<h1 class="classTitle">
 				
-				Class MatchText
+				Class HighlightStep
 			</h1>
 
 <!-- ============================== class summary ========================== -->			
@@ -245,13 +245,13 @@ ul.inheritsList
 				
 				
 				
-					<br /><i>Defined in: </i> <a href="../symbols/src/js_MatchText.js.html">MatchText.js</a>.
+					<br /><i>Defined in: </i> <a href="../symbols/src/js_tour_HighlightStep.js.html">HighlightStep.js</a>.
 				
 			</p>
 
 <!-- ============================== constructor summary ==================== -->			
 			
-			<table class="summaryTable" cellspacing="0" summary="A summary of the constructor documented in the class MatchText.">
+			<table class="summaryTable" cellspacing="0" summary="A summary of the constructor documented in the class HighlightStep.">
 				<caption>Class Summary</caption>
 				<thead>
 					<tr>
@@ -264,9 +264,10 @@ ul.inheritsList
 						<td class="attributes">&nbsp;</td>
 						<td class="nameDescription" >
 							<div class="fixedFont">
-								<b><a href="../symbols/MatchText.html#constructor">MatchText</a></b>(UIMatchField)
+								<b><a href="../symbols/HighlightStep.html#constructor">HighlightStep</a></b>(element)
 							</div>
-							<div class="description">Handle a match text</div>
+							<div class="description">Generates one help step
+Highlight an element</div>
 						</td>
 					</tr>
 				</tbody>
@@ -275,12 +276,40 @@ ul.inheritsList
 
 <!-- ============================== properties summary ===================== -->
 			
+				
+				
+				<table class="summaryTable" cellspacing="0" summary="A summary of the fields documented in the class HighlightStep.">
+					<caption>Field Summary</caption>
+					<thead>
+						<tr>
+							<th scope="col">Field Attributes</th>
+							<th scope="col">Field Name and Description</th>
+						</tr>
+					</thead>
+					<tbody>
+					
+						<tr>
+							<td class="attributes">&nbsp;</td>
+							<td class="nameDescription">
+								<div class="fixedFont">
+								<b><a href="../symbols/HighlightStep.html#time">time</a></b>
+								</div>
+								<div class="description">time for this step</div>
+							</td>
+						</tr>
+					
+					</tbody>
+				</table>
+				
+				
+				
+			
 
 <!-- ============================== methods summary ======================== -->
 			
 				
 				
-				<table class="summaryTable" cellspacing="0" summary="A summary of the methods documented in the class MatchText.">
+				<table class="summaryTable" cellspacing="0" summary="A summary of the methods documented in the class HighlightStep.">
 					<caption>Method Summary</caption>
 					<thead>
 						<tr>
@@ -293,27 +322,9 @@ ul.inheritsList
 						<tr>
 							<td class="attributes">&nbsp;</td>
 							<td class="nameDescription">
-								<div class="fixedFont"><b><a href="../symbols/MatchText.html#finalize">finalize</a></b>()
+								<div class="fixedFont"><b><a href="../symbols/HighlightStep.html#run">run</a></b>()
 								</div>
-								<div class="description">Set all pointer counts to zero</div>
-							</td>
-						</tr>
-					
-						<tr>
-							<td class="attributes">&nbsp;</td>
-							<td class="nameDescription">
-								<div class="fixedFont"><b><a href="../symbols/MatchText.html#notify">notify</a></b>(UIMatchField, errorCallback, responseCallback)
-								</div>
-								<div class="description">Implements the Observer pattern</div>
-							</td>
-						</tr>
-					
-						<tr>
-							<td class="attributes">&nbsp;</td>
-							<td class="nameDescription">
-								<div class="fixedFont"><b><a href="../symbols/MatchText.html#setText">setText</a></b>(string)
-								</div>
-								<div class="description">Sets the current text</div>
+								<div class="description">run method</div>
 							</td>
 						</tr>
 					
@@ -334,11 +345,12 @@ ul.inheritsList
 				</div>
 				
 				<div class="fixedFont">
-						<b>MatchText</b>(UIMatchField)
+						<b>HighlightStep</b>(element)
 				</div>
 				
 				<div class="description">
-					Handle a match text
+					Generates one help step
+Highlight an element
 					<br /><i>Author: </i>Georg Limbach <georf@dev.mgvmedia.com>.
 				</div>
 				
@@ -350,10 +362,10 @@ ul.inheritsList
 						<dt class="heading">Parameters:</dt>
 						
 							<dt>
-								 <b>UIMatchField</b>
+								<span class="light fixedFont">{String}</span>  <b>element</b>
 								
 							</dt>
-								<dd>observer</dd>
+								<dd>jquery selector string</dd>
 						
 						</dl>
 					
@@ -369,6 +381,33 @@ ul.inheritsList
 
 <!-- ============================== field details ========================== -->		
 			
+				<div class="sectionTitle">
+					Field Detail
+				</div>
+				
+					<a name="time"> </a>
+					<div class="fixedFont">
+					
+					<span class="light">{int}</span>
+					<b>time</b>
+					
+					</div>
+					<div class="description">
+						time for this step
+						
+						
+					</div>
+					
+					
+
+						
+						
+						
+						
+
+					
+				
+			
 
 <!-- ============================== method details ========================= -->		
 			
@@ -376,15 +415,15 @@ ul.inheritsList
 					Method Detail
 				</div>
 				
-					<a name="finalize"> </a>
+					<a name="run"> </a>
 					<div class="fixedFont">
 					
-					
-					<b>finalize</b>()
+					<span class="light">{Function}</span>
+					<b>run</b>()
 					
 					</div>
 					<div class="description">
-						Set all pointer counts to zero
+						run method
 						
 						
 					</div>
@@ -395,104 +434,6 @@ ul.inheritsList
 						
 						
 						
-						
-						
-						
-
-					<hr />
-				
-					<a name="notify"> </a>
-					<div class="fixedFont">
-					
-					
-					<b>notify</b>(UIMatchField, errorCallback, responseCallback)
-					
-					</div>
-					<div class="description">
-						Implements the Observer pattern
-						
-						
-					</div>
-					
-					
-					
-						
-							<dl class="detailList">
-							<dt class="heading">Parameters:</dt>
-							
-								<dt>
-									<b>UIMatchField</b>
-									
-								</dt>
-								<dd></dd>
-							
-								<dt>
-									<b>errorCallback</b>
-									
-								</dt>
-								<dd></dd>
-							
-								<dt>
-									<b>responseCallback</b>
-									
-								</dt>
-								<dd></dd>
-							
-							</dl>
-						
-						
-						
-						
-						
-							<dl class="detailList">
-							<dt class="heading">Returns:</dt>
-							
-								<dd>this;</dd>
-							
-							</dl>
-						
-						
-						
-
-					<hr />
-				
-					<a name="setText"> </a>
-					<div class="fixedFont">
-					
-					
-					<b>setText</b>(string)
-					
-					</div>
-					<div class="description">
-						Sets the current text
-						
-						
-					</div>
-					
-					
-					
-						
-							<dl class="detailList">
-							<dt class="heading">Parameters:</dt>
-							
-								<dt>
-									<b>string</b>
-									
-								</dt>
-								<dd></dd>
-							
-							</dl>
-						
-						
-						
-						
-						
-							<dl class="detailList">
-							<dt class="heading">Returns:</dt>
-							
-								<dd>this</dd>
-							
-							</dl>
 						
 						
 						
@@ -511,7 +452,7 @@ ul.inheritsList
 <!-- ============================== footer ================================= -->
 		<div class="fineprint" style="clear:both">
 			
-			Documentation generated by <a href="http://code.google.com/p/jsdoc-toolkit/" target="_blank">JsDoc Toolkit</a> 2.4.0 on Tue Feb 21 2012 00:59:23 GMT+0100 (MEZ)
+			Documentation generated by <a href="http://code.google.com/p/jsdoc-toolkit/" target="_blank">JsDoc Toolkit</a> 2.4.0 on Tue Feb 21 2012 00:59:22 GMT+0100 (MEZ)
 		</div>
 	</body>
 </html>

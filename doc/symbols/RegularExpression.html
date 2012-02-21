@@ -5,7 +5,7 @@
 		<meta http-equiv="content-type" content="text/html; charset=utf-8" />
 		<meta name="generator" content="JsDoc Toolkit" />
 		
-		<title>JsDoc Reference - RegHex</title>
+		<title>JsDoc Reference - RegularExpression</title>
 
 		<style type="text/css">
 			/* default.css */
@@ -234,7 +234,7 @@ ul.inheritsList
 <!-- ============================== class title ============================ -->
 			<h1 class="classTitle">
 				
-				Class RegHex
+				Class RegularExpression
 			</h1>
 
 <!-- ============================== class summary ========================== -->			
@@ -242,16 +242,16 @@ ul.inheritsList
 				
 				
 			
+				RegularExpression
 				
 				
-				
-					<br /><i>Defined in: </i> <a href="../symbols/src/js_RegHex.js.html">RegHex.js</a>.
+					<br /><i>Defined in: </i> <a href="../symbols/src/js_parser_RegularExpression.js.html">RegularExpression.js</a>.
 				
 			</p>
 
 <!-- ============================== constructor summary ==================== -->			
 			
-			<table class="summaryTable" cellspacing="0" summary="A summary of the constructor documented in the class RegHex.">
+			<table class="summaryTable" cellspacing="0" summary="A summary of the constructor documented in the class RegularExpression.">
 				<caption>Class Summary</caption>
 				<thead>
 					<tr>
@@ -264,9 +264,9 @@ ul.inheritsList
 						<td class="attributes">&nbsp;</td>
 						<td class="nameDescription" >
 							<div class="fixedFont">
-								<b><a href="../symbols/RegHex.html#constructor">RegHex</a></b>()
+								<b><a href="../symbols/RegularExpression.html#constructor">RegularExpression</a></b>(name, flags, urls, parser)
 							</div>
-							<div class="description">Dispatches tasks and provides Reghex's component objects</div>
+							<div class="description">Handle Regular Expression for config</div>
 						</td>
 					</tr>
 				</tbody>
@@ -277,7 +277,7 @@ ul.inheritsList
 			
 				
 				
-				<table class="summaryTable" cellspacing="0" summary="A summary of the fields documented in the class RegHex.">
+				<table class="summaryTable" cellspacing="0" summary="A summary of the fields documented in the class RegularExpression.">
 					<caption>Field Summary</caption>
 					<thead>
 						<tr>
@@ -288,34 +288,62 @@ ul.inheritsList
 					<tbody>
 					
 						<tr>
-							<td class="attributes">&lt;private&gt; &lt;static&gt; &nbsp;</td>
+							<td class="attributes">&lt;private&gt; &nbsp;</td>
 							<td class="nameDescription">
 								<div class="fixedFont">
-								RegHex.<b><a href="../symbols/RegHex.html#._codeSnip">_codeSnip</a></b>
+								<b><a href="../symbols/RegularExpression.html#_expression">_expression</a></b>
 								</div>
-								<div class="description">Object for presenting code</div>
+								<div class="description">Regular expression to parse</div>
 							</td>
 						</tr>
 					
 						<tr>
-							<td class="attributes">&lt;private&gt; &lt;static&gt; &nbsp;</td>
+							<td class="attributes">&lt;private&gt; &nbsp;</td>
 							<td class="nameDescription">
 								<div class="fixedFont">
-								RegHex.<b><a href="../symbols/RegHex.html#._matchTexts">_matchTexts</a></b>
+								<b><a href="../symbols/RegularExpression.html#_flags">_flags</a></b>
 								</div>
-								<div class="description">Array of MatchText</div>
+								<div class="description">Allowed flags</div>
 							</td>
 						</tr>
 					
 						<tr>
-							<td class="attributes">&lt;private&gt; &lt;static&gt; &nbsp;</td>
+							<td class="attributes">&lt;private&gt; &nbsp;</td>
 							<td class="nameDescription">
 								<div class="fixedFont">
-								RegHex.<b><a href="../symbols/RegHex.html#._messageService">_messageService</a></b>
+								<b><a href="../symbols/RegularExpression.html#_name">_name</a></b>
 								</div>
-								<div class="description">Object for message service
-
-Initialitation with console</div>
+								<div class="description">Name of the parser</div>
+							</td>
+						</tr>
+					
+						<tr>
+							<td class="attributes">&lt;private&gt; &nbsp;</td>
+							<td class="nameDescription">
+								<div class="fixedFont">
+								<b><a href="../symbols/RegularExpression.html#_parser">_parser</a></b>
+								</div>
+								<div class="description">Function for parse</div>
+							</td>
+						</tr>
+					
+						<tr>
+							<td class="attributes">&lt;private&gt; &nbsp;</td>
+							<td class="nameDescription">
+								<div class="fixedFont">
+								<b><a href="../symbols/RegularExpression.html#_setFlags">_setFlags</a></b>
+								</div>
+								<div class="description">Set flags</div>
+							</td>
+						</tr>
+					
+						<tr>
+							<td class="attributes">&lt;private&gt; &nbsp;</td>
+							<td class="nameDescription">
+								<div class="fixedFont">
+								<b><a href="../symbols/RegularExpression.html#_urls">_urls</a></b>
+								</div>
+								<div class="description">Information urls</div>
 							</td>
 						</tr>
 					
@@ -330,7 +358,7 @@ Initialitation with console</div>
 			
 				
 				
-				<table class="summaryTable" cellspacing="0" summary="A summary of the methods documented in the class RegHex.">
+				<table class="summaryTable" cellspacing="0" summary="A summary of the methods documented in the class RegularExpression.">
 					<caption>Method Summary</caption>
 					<thead>
 						<tr>
@@ -341,74 +369,56 @@ Initialitation with console</div>
 					<tbody>
 					
 						<tr>
-							<td class="attributes">&lt;private&gt; &lt;static&gt; &nbsp;</td>
+							<td class="attributes">&nbsp;</td>
 							<td class="nameDescription">
-								<div class="fixedFont">RegHex.<b><a href="../symbols/RegHex.html#._updateMatchTexts">_updateMatchTexts</a></b>()
+								<div class="fixedFont"><b><a href="../symbols/RegularExpression.html#getFlags">getFlags</a></b>()
 								</div>
-								<div class="description">Update all match texts</div>
+								<div class="description">Returns the allowed flags</div>
 							</td>
 						</tr>
 					
 						<tr>
-							<td class="attributes">&lt;static&gt; &nbsp;</td>
+							<td class="attributes">&nbsp;</td>
 							<td class="nameDescription">
-								<div class="fixedFont">RegHex.<b><a href="../symbols/RegHex.html#.addMatchText">addMatchText</a></b>(observer, initialText)
+								<div class="fixedFont"><b><a href="../symbols/RegularExpression.html#getName">getName</a></b>()
 								</div>
-								<div class="description">Creates a new match text and registers a specified observer</div>
+								<div class="description">Returns the name</div>
 							</td>
 						</tr>
 					
 						<tr>
-							<td class="attributes">&lt;static&gt; &nbsp;</td>
+							<td class="attributes">&nbsp;</td>
 							<td class="nameDescription">
-								<div class="fixedFont">RegHex.<b><a href="../symbols/RegHex.html#.changeParserType">changeParserType</a></b>(parserType)
+								<div class="fixedFont"><b><a href="../symbols/RegularExpression.html#getUrls">getUrls</a></b>()
 								</div>
-								<div class="description">Change the parser type e.g.</div>
+								<div class="description">Returns information urls</div>
 							</td>
 						</tr>
 					
 						<tr>
-							<td class="attributes">&lt;static&gt; &nbsp;</td>
+							<td class="attributes">&nbsp;</td>
 							<td class="nameDescription">
-								<div class="fixedFont">RegHex.<b><a href="../symbols/RegHex.html#.getRegularExpression">getRegularExpression</a></b>()
+								<div class="fixedFont"><b><a href="../symbols/RegularExpression.html#parse">parse</a></b>(text, callback)
 								</div>
-								<div class="description">Returns the RegularExpression object</div>
+								<div class="description">Parse a text and return result to callback</div>
 							</td>
 						</tr>
 					
 						<tr>
-							<td class="attributes">&lt;static&gt; &nbsp;</td>
+							<td class="attributes">&nbsp;</td>
 							<td class="nameDescription">
-								<div class="fixedFont">RegHex.<b><a href="../symbols/RegHex.html#.registerCodeSnip">registerCodeSnip</a></b>(codeSnip)
+								<div class="fixedFont"><b><a href="../symbols/RegularExpression.html#setFlags">setFlags</a></b>(flags)
 								</div>
-								<div class="description">Registers a code snip presenter</div>
+								<div class="description">Sets the expression flags</div>
 							</td>
 						</tr>
 					
 						<tr>
-							<td class="attributes">&lt;static&gt; &nbsp;</td>
+							<td class="attributes">&nbsp;</td>
 							<td class="nameDescription">
-								<div class="fixedFont">RegHex.<b><a href="../symbols/RegHex.html#.registerMessageService">registerMessageService</a></b>(messageService)
+								<div class="fixedFont"><b><a href="../symbols/RegularExpression.html#setRegularExpression">setRegularExpression</a></b>(expression)
 								</div>
-								<div class="description">Registers a message service which accepts and handles messages</div>
-							</td>
-						</tr>
-					
-						<tr>
-							<td class="attributes">&lt;static&gt; &nbsp;</td>
-							<td class="nameDescription">
-								<div class="fixedFont">RegHex.<b><a href="../symbols/RegHex.html#.removeMatchText">removeMatchText</a></b>(matchText)
-								</div>
-								<div class="description">Remove a match text</div>
-							</td>
-						</tr>
-					
-						<tr>
-							<td class="attributes">&lt;static&gt; &nbsp;</td>
-							<td class="nameDescription">
-								<div class="fixedFont">RegHex.<b><a href="../symbols/RegHex.html#.updateRegularExpression">updateRegularExpression</a></b>(expression, flags)
-								</div>
-								<div class="description">Updates the reg.</div>
+								<div class="description">Sets a new regular expression</div>
 							</td>
 						</tr>
 					
@@ -429,17 +439,46 @@ Initialitation with console</div>
 				</div>
 				
 				<div class="fixedFont">
-						<b>RegHex</b>()
+						<b>RegularExpression</b>(name, flags, urls, parser)
 				</div>
 				
 				<div class="description">
-					Dispatches tasks and provides Reghex's component objects
-					<br /><i>Author: </i>Georg Limbach <georf@dev.mgvmedia.com>, Sebastian Gaul <sebastian@dev.mgvmedia.com>.
+					Handle Regular Expression for config
+					<br /><i>Author: </i>Georg Limbach <georf@dev.mgvmedia.com>.
 				</div>
 				
 				
 				
 				
+					
+						<dl class="detailList">
+						<dt class="heading">Parameters:</dt>
+						
+							<dt>
+								<span class="light fixedFont">{String}</span>  <b>name</b>
+								
+							</dt>
+								<dd>Parser name</dd>
+						
+							<dt>
+								<span class="light fixedFont">{String}</span>  <b>flags</b>
+								
+							</dt>
+								<dd>Allowed flags</dd>
+						
+							<dt>
+								<span class="light fixedFont">{String[][]}</span>  <b>urls</b>
+								
+							</dt>
+								<dd>Array of info urls</dd>
+						
+							<dt>
+								<span class="light fixedFont">{Function}</span>  <b>parser</b>
+								
+							</dt>
+								<dd>function to parse</dd>
+						
+						</dl>
 					
 					
 					
@@ -457,15 +496,15 @@ Initialitation with console</div>
 					Field Detail
 				</div>
 				
-					<a name="._codeSnip"> </a>
-					<div class="fixedFont">&lt;private&gt; &lt;static&gt; 
+					<a name="_expression"> </a>
+					<div class="fixedFont">&lt;private&gt; 
 					
-					
-					<span class="light">RegHex.</span><b>_codeSnip</b>
+					<span class="light">{String}</span>
+					<b>_expression</b>
 					
 					</div>
 					<div class="description">
-						Object for presenting code
+						Regular expression to parse
 						
 						
 					</div>
@@ -479,15 +518,15 @@ Initialitation with console</div>
 
 					<hr />
 				
-					<a name="._matchTexts"> </a>
-					<div class="fixedFont">&lt;private&gt; &lt;static&gt; 
+					<a name="_flags"> </a>
+					<div class="fixedFont">&lt;private&gt; 
 					
-					<span class="light">{<a href="../symbols/MatchText.html">MatchText</a>[]}</span>
-					<span class="light">RegHex.</span><b>_matchTexts</b>
+					<span class="light">{String}</span>
+					<b>_flags</b>
 					
 					</div>
 					<div class="description">
-						Array of MatchText
+						Allowed flags
 						
 						
 					</div>
@@ -501,17 +540,81 @@ Initialitation with console</div>
 
 					<hr />
 				
-					<a name="._messageService"> </a>
-					<div class="fixedFont">&lt;private&gt; &lt;static&gt; 
+					<a name="_name"> </a>
+					<div class="fixedFont">&lt;private&gt; 
 					
-					
-					<span class="light">RegHex.</span><b>_messageService</b>
+					<span class="light">{String}</span>
+					<b>_name</b>
 					
 					</div>
 					<div class="description">
-						Object for message service
+						Name of the parser
+						
+						
+					</div>
+					
+					
 
-Initialitation with console
+						
+						
+						
+						
+
+					<hr />
+				
+					<a name="_parser"> </a>
+					<div class="fixedFont">&lt;private&gt; 
+					
+					
+					<b>_parser</b>
+					
+					</div>
+					<div class="description">
+						Function for parse
+						
+						
+					</div>
+					
+					
+
+						
+						
+						
+						
+
+					<hr />
+				
+					<a name="_setFlags"> </a>
+					<div class="fixedFont">&lt;private&gt; 
+					
+					
+					<b>_setFlags</b>
+					
+					</div>
+					<div class="description">
+						Set flags
+						
+						
+					</div>
+					
+					
+
+						
+						
+						
+						
+
+					<hr />
+				
+					<a name="_urls"> </a>
+					<div class="fixedFont">&lt;private&gt; 
+					
+					<span class="light">{String[][]}</span>
+					<b>_urls</b>
+					
+					</div>
+					<div class="description">
+						Information urls
 						
 						
 					</div>
@@ -533,128 +636,15 @@ Initialitation with console
 					Method Detail
 				</div>
 				
-					<a name="._updateMatchTexts"> </a>
-					<div class="fixedFont">&lt;private&gt; &lt;static&gt; 
+					<a name="getFlags"> </a>
+					<div class="fixedFont">
 					
-					
-					<span class="light">RegHex.</span><b>_updateMatchTexts</b>()
-					
-					</div>
-					<div class="description">
-						Update all match texts
-						
-						
-					</div>
-					
-					
-					
-						
-						
-						
-						
-						
-						
-						
-
-					<hr />
-				
-					<a name=".addMatchText"> </a>
-					<div class="fixedFont">&lt;static&gt; 
-					
-					<span class="light">{<a href="../symbols/MatchText.html">MatchText</a>}</span>
-					<span class="light">RegHex.</span><b>addMatchText</b>(observer, initialText)
+					<span class="light">{String}</span>
+					<b>getFlags</b>()
 					
 					</div>
 					<div class="description">
-						Creates a new match text and registers a specified observer
-						
-						
-					</div>
-					
-					
-					
-						
-							<dl class="detailList">
-							<dt class="heading">Parameters:</dt>
-							
-								<dt>
-									<span class="light fixedFont">{<a href="../symbols/UIMatchText.html">UIMatchText</a>}</span> <b>observer</b>
-									
-								</dt>
-								<dd></dd>
-							
-								<dt>
-									<span class="light fixedFont">{String}</span> <b>initialText</b>
-									
-								</dt>
-								<dd></dd>
-							
-							</dl>
-						
-						
-						
-						
-						
-							<dl class="detailList">
-							<dt class="heading">Returns:</dt>
-							
-								<dd><span class="light fixedFont">{<a href="../symbols/MatchText.html">MatchText</a>}</span> The created MatchText object</dd>
-							
-							</dl>
-						
-						
-						
-
-					<hr />
-				
-					<a name=".changeParserType"> </a>
-					<div class="fixedFont">&lt;static&gt; 
-					
-					
-					<span class="light">RegHex.</span><b>changeParserType</b>(parserType)
-					
-					</div>
-					<div class="description">
-						Change the parser type e.g. the user select a other parser
-
-The method search the object for the new parser and set is as
-current regular expression object.
-						
-						
-					</div>
-					
-					
-					
-						
-							<dl class="detailList">
-							<dt class="heading">Parameters:</dt>
-							
-								<dt>
-									<span class="light fixedFont">{String}</span> <b>parserType</b>
-									
-								</dt>
-								<dd></dd>
-							
-							</dl>
-						
-						
-						
-						
-						
-						
-						
-
-					<hr />
-				
-					<a name=".getRegularExpression"> </a>
-					<div class="fixedFont">&lt;static&gt; 
-					
-					
-					<span class="light">RegHex.</span><b>getRegularExpression</b>()
-					
-					</div>
-					<div class="description">
-						Returns the RegularExpression object
+						Returns the allowed flags
 						
 						
 					</div>
@@ -669,7 +659,7 @@ current regular expression object.
 							<dl class="detailList">
 							<dt class="heading">Returns:</dt>
 							
-								<dd>RegularExpression</dd>
+								<dd><span class="light fixedFont">{String}</span> flags</dd>
 							
 							</dl>
 						
@@ -678,15 +668,79 @@ current regular expression object.
 
 					<hr />
 				
-					<a name=".registerCodeSnip"> </a>
-					<div class="fixedFont">&lt;static&gt; 
+					<a name="getName"> </a>
+					<div class="fixedFont">
 					
-					
-					<span class="light">RegHex.</span><b>registerCodeSnip</b>(codeSnip)
+					<span class="light">{String}</span>
+					<b>getName</b>()
 					
 					</div>
 					<div class="description">
-						Registers a code snip presenter
+						Returns the name
+						
+						
+					</div>
+					
+					
+					
+						
+						
+						
+						
+						
+							<dl class="detailList">
+							<dt class="heading">Returns:</dt>
+							
+								<dd><span class="light fixedFont">{String}</span> name</dd>
+							
+							</dl>
+						
+						
+						
+
+					<hr />
+				
+					<a name="getUrls"> </a>
+					<div class="fixedFont">
+					
+					<span class="light">{String[][]}</span>
+					<b>getUrls</b>()
+					
+					</div>
+					<div class="description">
+						Returns information urls
+						
+						
+					</div>
+					
+					
+					
+						
+						
+						
+						
+						
+							<dl class="detailList">
+							<dt class="heading">Returns:</dt>
+							
+								<dd><span class="light fixedFont">{String[][]}</span> urls</dd>
+							
+							</dl>
+						
+						
+						
+
+					<hr />
+				
+					<a name="parse"> </a>
+					<div class="fixedFont">
+					
+					
+					<b>parse</b>(text, callback)
+					
+					</div>
+					<div class="description">
+						Parse a text and return result to callback
 						
 						
 					</div>
@@ -698,82 +752,16 @@ current regular expression object.
 							<dt class="heading">Parameters:</dt>
 							
 								<dt>
-									<span class="light fixedFont">{<a href="../symbols/UICodeSnip.html">UICodeSnip</a>}</span> <b>codeSnip</b>
+									<span class="light fixedFont">{String}</span> <b>text</b>
 									
 								</dt>
-								<dd></dd>
-							
-							</dl>
-						
-						
-						
-						
-						
-						
-						
-
-					<hr />
-				
-					<a name=".registerMessageService"> </a>
-					<div class="fixedFont">&lt;static&gt; 
-					
-					
-					<span class="light">RegHex.</span><b>registerMessageService</b>(messageService)
-					
-					</div>
-					<div class="description">
-						Registers a message service which accepts and handles messages
-						
-						
-					</div>
-					
-					
-					
-						
-							<dl class="detailList">
-							<dt class="heading">Parameters:</dt>
+								<dd>text to parse</dd>
 							
 								<dt>
-									<span class="light fixedFont">{<a href="../symbols/UIMessageService.html">UIMessageService</a>}</span> <b>messageService</b>
+									<span class="light fixedFont">{Function}</span> <b>callback</b>
 									
 								</dt>
-								<dd></dd>
-							
-							</dl>
-						
-						
-						
-						
-						
-						
-						
-
-					<hr />
-				
-					<a name=".removeMatchText"> </a>
-					<div class="fixedFont">&lt;static&gt; 
-					
-					
-					<span class="light">RegHex.</span><b>removeMatchText</b>(matchText)
-					
-					</div>
-					<div class="description">
-						Remove a match text
-						
-						
-					</div>
-					
-					
-					
-						
-							<dl class="detailList">
-							<dt class="heading">Parameters:</dt>
-							
-								<dt>
-									<span class="light fixedFont">{<a href="../symbols/MatchText.html">MatchText</a>}</span> <b>matchText</b>
-									
-								</dt>
-								<dd>to remove</dd>
+								<dd>Callback for result</dd>
 							
 							</dl>
 						
@@ -793,15 +781,58 @@ current regular expression object.
 
 					<hr />
 				
-					<a name=".updateRegularExpression"> </a>
-					<div class="fixedFont">&lt;static&gt; 
+					<a name="setFlags"> </a>
+					<div class="fixedFont">
 					
 					
-					<span class="light">RegHex.</span><b>updateRegularExpression</b>(expression, flags)
+					<b>setFlags</b>(flags)
 					
 					</div>
 					<div class="description">
-						Updates the reg. exp., e.g. after the user changed the related field
+						Sets the expression flags
+						
+						
+					</div>
+					
+					
+					
+						
+							<dl class="detailList">
+							<dt class="heading">Parameters:</dt>
+							
+								<dt>
+									<span class="light fixedFont">{String[]}</span> <b>flags</b>
+									
+								</dt>
+								<dd>e.g. ["i","g"]</dd>
+							
+							</dl>
+						
+						
+						
+						
+						
+							<dl class="detailList">
+							<dt class="heading">Returns:</dt>
+							
+								<dd>this</dd>
+							
+							</dl>
+						
+						
+						
+
+					<hr />
+				
+					<a name="setRegularExpression"> </a>
+					<div class="fixedFont">
+					
+					
+					<b>setRegularExpression</b>(expression)
+					
+					</div>
+					<div class="description">
+						Sets a new regular expression
 						
 						
 					</div>
@@ -816,19 +847,20 @@ current regular expression object.
 									<span class="light fixedFont">{String}</span> <b>expression</b>
 									
 								</dt>
-								<dd>e.g. "ab*c"</dd>
-							
-								<dt>
-									<span class="light fixedFont">{String[]}</span> <b>flags</b>
-									
-								</dt>
-								<dd>e.g. ["i", "x", "s"]</dd>
+								<dd>e.g. "[a-z]+"</dd>
 							
 							</dl>
 						
 						
 						
 						
+						
+							<dl class="detailList">
+							<dt class="heading">Returns:</dt>
+							
+								<dd>this</dd>
+							
+							</dl>
 						
 						
 						
