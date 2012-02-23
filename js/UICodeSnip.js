@@ -10,11 +10,7 @@ function UICodeSnip() {
 	 */
 	this.update = function(code) {
 		var cb = $('#codeblock');
-		if (code == '') {
-			cb.hide();
-		} else {
-			cb.text(code);
-			cb.show();
-		}
+		cb.val(code);
+		cb.show();
 	}
 }
