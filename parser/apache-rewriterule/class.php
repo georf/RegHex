@@ -74,7 +74,7 @@ class InternParser {
 
 
 		$output->programming =
-			'RewriteRule '.($not?'!':'').$regexp.' '.$text.' '.$pFlags;
+			'RewriteRule '.($not?'!':'').$regexp.' /replaceUrl.php?with=$1&groups=$2 '.$pFlags;
 
 		if (preg_match($fullRegexp, $text, $result)) {
 			$output->matchings[0] = (object) array();
