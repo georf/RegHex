@@ -4,7 +4,11 @@
  * @param {String} flag e.g. "i"
  * @param {String} description
  */
-function Flag(flag, description) {
+function Flag(flag, description, flagname) {
+
+	if (typeof flagname == 'undefined') {
+		flagname = flag;
+	}
 
 	this._li = $(
 			'<li><label for="option-' +
@@ -14,7 +18,7 @@ function Flag(flag, description) {
 			'" id="option-' +
 				flag +
 			'" class="parser-option"><strong>' +
-				flag +
+				flagname +
 			'</strong>' +
 				description +
 			'</label></li>');
