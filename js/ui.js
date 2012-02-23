@@ -10,7 +10,6 @@ var matchingBlockId = 1;
 $(function() {
 	// reset textarea and checkboxes(for firefox)
 	$('textarea').val('');
-	$('input.parser-option').removeAttr('checked');
 
 	// Register existing match text fields
 	$('.matchtext-block').each(function() {
@@ -34,11 +33,6 @@ $(function() {
 		});
 		return flags;
 	};
-
-	// Trigger regex change whenever an option changes
-	$('#regex-options input[type="checkbox"]').change(function() {
-		$('#regex').trigger('keyup');
-	});
 
 	// Notify if regular expression changes
 	$('#regex').bind('keyup blur input cut paste', function() {
@@ -77,14 +71,19 @@ $(function() {
 		// update about window
 		$('.current-parser-name').text($('#parser-type').val());
 
-		// disable options
-		$('.parser-option').attr('disabled', 'disabled');
+		// delete old flags
+		$('#regex-options').html('');
 
 		// enable usefull options
 		var o = RegHex.getRegularExpression().getFlags();
 		for (var i = 0; i < o.length; i++) {
-			$('#option-'+o[i]).removeAttr('disabled');
+			$('#regex-options').append(o[i].getLi());
 		}
+
+		// Trigger regex change whenever an option changes
+		$('#regex-options input[type="checkbox"]').change(function() {
+			$('#regex').trigger('keyup');
+		});
 
 		// set new info link
 		var l = RegHex.getRegularExpression().getUrls();
