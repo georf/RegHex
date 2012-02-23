@@ -60,6 +60,17 @@ var config = {
 				['http://pubs.opengroup.org/onlinepubs/9699919799/utilities/grep.html', 'Commands & Utilities Reference'],
 			],
 			ParserAjax
+		), new RegularExpression(
+			'apache-rewriterule',
+			[
+				new Flag('i', 'ignore case', '[NC]'),
+				new Flag('N', 'not operator', '!')
+			],
+			[
+
+
+			],
+			ParserAjax
 		)
 	]
 };
