@@ -15,9 +15,9 @@ class InternParser {
 
 		foreach ($valid as $key=>$value) {
 			if (!isset($input->$key)) {
-				self::error($key.' not set');
+				self::error($key.' not set', $input);
 			} elseif (is_string($value) && !is_string($input->$key) || is_array($value) && !is_array($input->$key)) {
-				self::error($key.' has not a correct format');
+				self::error($key.' has not a correct format', $input);
 			}
 		}
 
@@ -92,8 +92,9 @@ class InternParser {
 		die(json_encode($output));
 	}
 
-	private static function error($text) {
-		die(json_encode(array('error' => $text)));
+	private static function error($text, $input) {
+		$input->error = $text;
+		die(json_encode($input));
 	}
 }
 

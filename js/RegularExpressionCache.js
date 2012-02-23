@@ -72,6 +72,10 @@ var RegularExpressionCache = new function() {
 		var parser = data.parser;
 		var expression = data.regularExpression;
 
+		if (typeof parser == 'undefined' || typeof expression == 'undefined') {
+			return;
+		}
+
 		data.flagsHash = this._hashFlags(data.flags);
 
 		// check for structur
@@ -145,6 +149,11 @@ var RegularExpressionCache = new function() {
 	 * @returns {String} e.g. "gi"
 	 */
 	this._hashFlags = function (flags) {
+
+		if (typeof flags == 'undefined') {
+			flags = [];
+		}
+
 		flags.sort();
 		var ret = '';
 		for (var i = 0; i < flags.length; i++) {
