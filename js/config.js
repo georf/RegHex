@@ -23,6 +23,11 @@ var config = {
 			'imsxug',
 			[ ['http://www.php.net/manual/en/reference.pcre.pattern.modifiers.php', 'PHP Reference'], ['http://www.regular-expressions.info/php.html', 'Usage information'] ],
 			ParserAjax
+		), new RegularExpression(
+			'gnu',
+			'',
+			[  ],
+			ParserAjax
 		)
 	]
 };

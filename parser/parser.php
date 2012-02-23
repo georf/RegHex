@@ -14,23 +14,34 @@ if (isset($_POST['json'])) {
 	}
 	closedir($vz);
 
-	if (!class_exists('Parser')) {
+	if (!class_exists('Parser') && !class_exists('InternParser')) {
 		$input->error = 'Parser not exists';
 		echo json_encode($input);
 		exit();
 	}
 
-	$cmd = Parser::getCmdLine();
 
+	if (class_exists('Parser')) {
+
+
+		$tmpFilename = getTmpPath();
+		file_put_contents($tmpFilename, $_POST['json']);
+
+		$cmd = Parser::getCmdLine();
+		passthru($cmd .' < '.$tmpFilename);
+		exit();
+	} elseif (class_exists('InternParser')) {
+		InternParser::run($_POST['json']);
+		exit();
+	}
+}
+
+function getTmpPath() {
 	$tmpFilename = '/tmp/parserregexp';
 	do {
 		$hash = md5(rand());
 	} while(is_file($tmpFilename.$hash));
 
 	$tmpFilename .= $hash;
-
-	file_put_contents($tmpFilename, $_POST['json']);
-
-	passthru($cmd .' < '.$tmpFilename);
-	exit();
+	return $tmpFilename;
 }
