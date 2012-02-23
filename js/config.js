@@ -54,7 +54,11 @@ var config = {
 				new Flag('w', 'word regexp'),
 				new Flag('x', 'line regexp')
 			],
-			[  ],
+			[
+				['http://en.wikipedia.org/wiki/Grep', 'Wikipedia'],
+				['http://www.regular-expressions.info/gnu.html', 'Usage information'],
+				['http://pubs.opengroup.org/onlinepubs/9699919799/utilities/grep.html', 'Commands & Utilities Reference'],
+			],
 			ParserAjax
 		)
 	]

@@ -36,31 +36,31 @@ class InternParser {
 
 		// check flags
 		$flags = '';
-		$global = false;
 		foreach ($input->flags as $flag) {
 			switch ($flag) {
+				case 'E':
+				case 'F':
 				case 'i':
-				case 'm':
-				case 's':
+				case 'v':
+				case 'w':
 				case 'x':
-				case 'u':
 					$flags .= $flag;
 					break;
-
-				case 'g':
-					$global = true;
-					break;
 			}
+		}
+
+		if ($flags !== '') {
+			$flags = ' -'.$flags;
 		}
 
 
 
 		$output->matchings = array();
-		$output->programming = 'grep -e '.escapeshellarg($input->regularExpression).' /path/to/file';
+		$output->programming = 'grep'.$flags.' -e '.escapeshellarg($input->regularExpression).' /path/to/file';
 
 		ob_start();
 		$filenameError = getTmpPath();
-		passthru('grep -f '.$filenameRegex.' '.$filenameMatch.' 2>'.$filenameError, $returnValue);
+		passthru('grep'.$flags.' -f '.$filenameRegex.' '.$filenameMatch.' 2>'.$filenameError, $returnValue);
 		$matching = ob_get_contents();
 		ob_end_clean();
 
