@@ -19,6 +19,12 @@ function ParserJavascript(config, text, expression, flags, callback) {
 	this._flags = flags;
 	this._callback = callback;
 
+  this._escapeString = function (text) {
+    return text.replace(/'/g, "\\'").replace(/\\/g, "\\\\");
+  };
+
+
+
 	// catch javascript exceptions from parser
 	try {
 		// check flags
@@ -63,8 +69,8 @@ function ParserJavascript(config, text, expression, flags, callback) {
 			"error": false,
 			"matchings": matches,
 			"programming":
-				"var match;\n" +
-				"var regex = new RegExp('" + this._expression.replace(/'/g, "\\'") + "', '" + flags + "');\n" +
+				"var match = '" + this._escapeString(this._text) + "';\n" +
+				"var regex = new RegExp('" + this._escapeString(this._expression) + "', '" + flags + "');\n" +
 				"while ((match = regex.exec(text)) != null) {\n" +
 				"  alert(match[0]);\n" +
 				"}\n"
