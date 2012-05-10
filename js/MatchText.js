@@ -22,6 +22,14 @@ function MatchText(observer) {
 		return this;
 	};
 
+  /**
+   * Returns the current text
+   * @returns {String}
+   */
+  this.getText = function () {
+    return this.text;
+  };
+
 	/**
 	 * Implements the Observer pattern
 	 *

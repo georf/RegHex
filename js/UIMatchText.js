@@ -162,6 +162,14 @@ function UIMatchText(block, deleteButton) {
 		return this.jTextarea.val();
 	};
 
+  /**
+   * Sets the current text
+   * @param {String}
+   */
+  this.setText = function (text) {
+    this.jTextarea.val(text).change();
+  };
+
 	/**
 	 * Updates the infobox
 	 *

@@ -56,6 +56,14 @@ var RegHex = new function() {
 		return matchText;
 	};
 
+  /**
+   * Returns the match texts as an array
+   * @returns {MatchText[]}
+   */
+  this.getMatchTexts = function () {
+    return this._matchTexts;
+  };
+
 
 	/**
 	 * Remove a match text

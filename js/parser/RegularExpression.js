@@ -94,6 +94,22 @@ function RegularExpression(name, flags, urls, parser) {
 		return this;
 	};
 
+  /**
+   * Return the set flags
+   * @returns {String[]}
+   */
+  this.getSetFlags = function () {
+    return this._setFlags;
+  };
+
+  /**
+   * Returns the set regular expression
+   * @returns {String}
+   */
+  this.getRegularExpression = function () {
+    return this._expression;
+  };
+
 	/**
 	 * Parse a text and return result to callback
 	 * @param {String} text text to parse
