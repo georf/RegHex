@@ -20,7 +20,7 @@ function ParserJavascript(config, text, expression, flags, callback) {
 	this._callback = callback;
 
   this._escapeString = function (text) {
-    return text.replace(/'/g, "\\'").replace(/\\/g, "\\\\");
+    return text.replace(/\\/g, "\\\\").replace(/'/g, "\\'");
   };
 
 
@@ -69,10 +69,10 @@ function ParserJavascript(config, text, expression, flags, callback) {
 			"error": false,
 			"matchings": matches,
 			"programming":
-				"var match = '" + this._escapeString(this._text) + "';\n" +
-				"var regex = new RegExp('" + this._escapeString(this._expression) + "', '" + flags + "');\n" +
-				"while ((match = regex.exec(text)) != null) {\n" +
-				"  alert(match[0]);\n" +
+				"var text = '" + this._escapeString(this._text) + "',\n" +
+        "  match;\n" +
+				"while ((match = text.match(/"+this._expression+"/"+flags+"))) {\n" +
+				"  console.log(match[0], match);\n" +
 				"}\n"
 		});
 	} catch (e) {
