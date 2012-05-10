@@ -65,7 +65,7 @@ public class Parser {
 
 			// generate program snip
 			StringBuffer programming = new StringBuffer(
-					"Matcher m = Pattern.compile(\""
+					"Pattern p = Pattern.compile(\""
 							+ StringEscapeUtils.escapeJava(input
 									.getString("regularExpression")) + "\", ");
 
@@ -111,7 +111,11 @@ public class Parser {
 				} else {
 					programming.append("0");
 				}
-				programming.append(");\n" + "while(m.find()) {\n"
+				programming.append(");\n" +
+						"Matcher m = p.matcher(\""
+							+ StringEscapeUtils.escapeJava(input
+									.getString("matchText")) + "\");\n" +
+								"while(m.find()) {\n"
 						+ "  System.out.println(m.group());\n" + "}\n");
 				input.put("programming", programming);
 
