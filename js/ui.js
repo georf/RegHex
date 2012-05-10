@@ -110,6 +110,7 @@ $(function() {
 	// bind Help class to link
 	$('#button-tour').click(function() {
 		new Help();
+    return false;
 	});
 
 	// permalink
@@ -184,8 +185,6 @@ $(function() {
       }
     }
   }
-
-
 
   // update first time
   $('#regex').trigger('keyup');
