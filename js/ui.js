@@ -102,6 +102,9 @@ $(function() {
 		// trigger a new parse event
 		$('#regex').keyup();
 
+    // update uri hash
+    window.location.hash = '#p-' + $('#parser-type').val();
+
 	});
 
 	// trigger first change
