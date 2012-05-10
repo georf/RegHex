@@ -175,26 +175,24 @@ function UIMatchText(block, deleteButton) {
 	 *
 	 * Sets button dis/enabled and update text
 	 */
-	this.updateInfobox = function() {
+  this.updateInfobox = function() {
 
-		if (this.moreInformationOpen) {
-			this.jMatchMoreInfo.slideUp();
-        } else {
-        	this.jMoreInformation.slideUp();
-        }
+    if (!this.moreInformationOpen) {
+      this.jMoreInformation.slideUp();
+    }
 
-		// if its no valid response or if no matchings
-		if (!this.response || this.response.error
-				|| this.response.matchings.length == 0) {
-			this.jMatchInfo.html('no matches');
-			this.jNextMatch.attr('disabled', 'disabled');
-			this.jPreviousMatch.attr('disabled', 'disabled');
+    // if its no valid response or if no matchings
+    if (!this.response || this.response.error
+        || this.response.matchings.length == 0) {
+      this.jMatchInfo.html('no matches');
+      this.jNextMatch.attr('disabled', 'disabled');
+      this.jPreviousMatch.attr('disabled', 'disabled');
 
-			this.jMatchMoreInfo.slideUp();
-			this.jMoreInformation.slideUp();
+      this.jMatchMoreInfo.slideUp();
+      this.jMoreInformation.slideUp();
 
-			// valid matchings
-		} else {
+      // valid matchings
+    } else {
 			this.jMatchInfo.html('match ' + (this.selectedMatch + 1) + ' of '
 					+ this.response.matchings.length);
 
@@ -303,6 +301,9 @@ function UIMatchText(block, deleteButton) {
 	 * @return this
 	 */
 	this.moreInformation = function(open) {
+    if (open == undefined) {
+      open = !this.moreInformationOpen;
+    }
 		if (this.moreInformationOpen != open) {
 			this.moreInformationOpen = open;
 			this.update();
@@ -319,7 +320,7 @@ function UIMatchText(block, deleteButton) {
 	});
 
 	this.jMatchMoreInfo.find('a').click(function() {
-		$this.moreInformation(true);
+		$this.moreInformation();
 		return false;
 	});
 	this.jMoreInformation.find('.less-information').click(function() {
