@@ -7,6 +7,7 @@
  * @class
  */
 var RegHex = new function() {
+  var self = this;
 
 	/**
 	 * Pointer to select regular expression
@@ -50,11 +51,24 @@ var RegHex = new function() {
 		// set text
 		matchText.setText(initialText);
 
+    // set default response callback
+    matchText.setResponseCallback(self._response);
+
 		// add to list
 		this._matchTexts[this._matchTexts.length] = matchText;
 
 		return matchText;
 	};
+
+  /**
+   * Update the code snip about response
+   * @param {Object}
+   */
+  this._response = function(response) {
+    if (typeof response.programming != 'undefined') {
+      self._codeSnip.update(response.programming);
+    }
+  };
 
   /**
    * Returns the match texts as an array
@@ -127,18 +141,12 @@ var RegHex = new function() {
 	 * Update all match texts
 	 */
 	this._updateMatchTexts = function() {
-		var that = this,
-			errorOccured = false;
+		var errorOccured = false;
 		for ( var i = 0; i < this._matchTexts.length; i++) {
 			this._matchTexts[i].notify(this._matchTexts[i].observer,
 				function(error) {
-					that._messageService.notify(error);
+					self._messageService.notify(error);
 					errorOccured = true;
-				},
-				function(response) {
-					if (typeof response.programming != 'undefined') {
-						that._codeSnip.update(response.programming);
-					}
 				});
 		}
 		// Notify message service that parsing was successful, so it

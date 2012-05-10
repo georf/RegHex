@@ -10,6 +10,15 @@ function MatchText(observer) {
 
 	this.observer = observer;
 	this.text = "";
+  this._responseCallback = function(){};
+
+  /**
+   * Sets the default response callback
+   * @param {Function}
+   */
+  this.setResponseCallback = function (callback) {
+    this._responseCallback = callback;
+  };
 
 	/**
 	 * Sets the current text
@@ -37,18 +46,24 @@ function MatchText(observer) {
 	 * @return this;
 	 */
 	this.notify = function (matchTextField, errorCallback, responseCallback) {
+    var self = this;
 
 		if (typeof matchTextField == 'undefined') {
 			matchTextField = this.observer;
+    }
 
-			if (typeof errorCallback == 'undefined') {
-				errorCallback = function(value) {};
+    if (typeof errorCallback == 'undefined') {
+      errorCallback = function(value) {};
+    }
 
-				if (typeof responseCallback == 'undefined') {
-					responseCallback = function(value) {};
-				}
-			}
-		}
+    if (typeof responseCallback == 'undefined') {
+      responseCallbackI = this._responseCallback;
+    } else {
+      responseCallbackI = function (value) {
+        self._responseCallback(value);
+        responseCallback(value);
+      }
+    }
 
 		// set new value
 		this.setText(matchTextField.getText());
@@ -59,7 +74,7 @@ function MatchText(observer) {
 				errorCallback(data.error);
 			}
 			matchTextField.notify(data);
-			responseCallback(data);
+			responseCallbackI(data);
 		});
 
 		return this;
