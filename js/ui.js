@@ -113,6 +113,12 @@ $(function() {
     return false;
 	});
 
+	$('#button-parser-information').click(function() {
+    $(this).hide();
+		$('#about-section').slideDown();
+    return false;
+	});
+
 	// permalink
 	$('#button-permalink').click(function() {
     var reg = RegHex.getRegularExpression(),

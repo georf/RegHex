@@ -533,9 +533,9 @@ li.active{
 	text-align: center;
 }
 #about-section{
+  display: none;
 	margin-top:50px;
-	opacity:0.5;
 }
-#about-section:hover{
-	opacity:1;
+#codeblock{
+  height:120px;
 }
