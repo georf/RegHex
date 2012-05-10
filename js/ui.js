@@ -115,4 +115,28 @@ $(function() {
 	$('#help-box').click(function() {
 		new Help();
 	});
+
+  // parser type from uri
+  var hash = window.location.hash,
+    match;
+  if (match = hash.match(/^#p-(.+)$/)) {
+    var correct = false;
+    for ( var i = 0; i < config.parsers.length; i++) {
+      if (config.parsers[i].getName() == match[1]) {
+        correct = true;
+        break;
+      }
+    }
+    if (correct) {
+      parserType.find('option').each(function() {
+        var self = $(this);
+        if (self.val() == match[1]) {
+          self.attr('selected', true);
+        } else {
+          self.removeAttr('selected');
+        }
+      });
+      parserType.change();
+    }
+  }
 });
