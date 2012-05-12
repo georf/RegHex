@@ -383,6 +383,12 @@ header small {
 	font-size: 2em;
 	font-weight: bold;
 }
+.remove-matchtext {
+  color: #999;
+  cursor: pointer;
+  font-weight: bold;
+  border: 0;
+}
 
 .navigate-match-section {
 	margin-top: 1px;

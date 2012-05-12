@@ -334,8 +334,8 @@ function UIMatchText(block, deleteButton) {
 	if (deleteButton) {
 
 		// generate delete button
-		var btn = $('<button type="button" class="arrow-button"/>');
-		btn.text('-');
+		var btn = $('<button type="button" class="remove-matchtext"/>');
+		btn.html('&ndash;');
 		btn.attr('title', 'remove field');
 		btn.click(function() {
 			block.slideUp(function() {
